@@ -34,7 +34,7 @@ const TooltipOverlay = ({ targetAreaEl }) => {
     <svg
       width="100%"
       height="100%"
-      viewBox={`0 0 ${window.innerWidth} ${window.innerHeight}`}
+      viewBox={`0 0 ${document.documentElement.clientWidth} ${document.documentElement.clientHeight}`}
       preserveAspectRatio="none"
       style={{
         position: "absolute",
@@ -73,7 +73,8 @@ const TooltipOverlay = ({ targetAreaEl }) => {
         x={targetAreaPos.left + targetAreaPos.width + areaOffset}
         y={targetAreaPos.top - areaOffset}
         width={Math.max(
-          window.innerWidth - (targetAreaPos.left + targetAreaPos.width),
+          document.documentElement.clientWidth -
+            (targetAreaPos.left + targetAreaPos.width),
           0
         )}
         height={Math.max(targetAreaPos.height + 2 * areaOffset, 0)}
@@ -88,7 +89,8 @@ const TooltipOverlay = ({ targetAreaEl }) => {
         y={targetAreaPos.top + targetAreaPos.height + areaOffset}
         width="100%"
         height={Math.max(
-          window.innerWidth - (targetAreaPos.top + targetAreaPos.height),
+          document.documentElement.clientHeight -
+            (targetAreaPos.top + targetAreaPos.height),
           0
         )}
         fill="black"

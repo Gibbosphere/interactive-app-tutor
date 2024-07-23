@@ -1,11 +1,11 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState } from "react";
 import { Typography, IconButton, Paper, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@mui/icons-material/Close";
 import ReplayIcon from "@mui/icons-material/Replay";
 import FastForwardIcon from "@mui/icons-material/FastForward";
-import { Box, fontSize, maxWidth, padding, width } from "@mui/system";
+import { Box } from "@mui/system";
 import "./TutorialHeader.css";
 
 const TutorialHeader = ({

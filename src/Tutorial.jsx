@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Tooltip from "./Tooltip";
-import { CssBaseline, Box, Typography, Button, TextField } from "@mui/material";
+import { CssBaseline, Box } from "@mui/material";
 import StageCompleteCard from "./StageCompleteTile";
 import TutorialProgressTile from "./TutorialProgressTile";
 import TutorialHeader from "./TutorialHeader";
