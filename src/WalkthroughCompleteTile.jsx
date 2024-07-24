@@ -33,30 +33,21 @@ const WalkthroughCompleteTile = ({
     setConfirmationAction(null);
   };
 
-  const style = {
-    position: "absolute",
-    zIndex: 1000,
-    boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
-    borderRadius: "5px",
-    overflow: "hidden",
-    opacity: isVisible ? 1 : 0,
-    transition: "opacity 0.0s ease-in-out",
-  };
-
   return (
     <>
       <Box
         sx={{
           position: "absolute",
           zIndex: 1000,
+          pointerEvents: "all",
           width: "400px",
           padding: "16px",
           boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
           borderRadius: "5px",
           overflow: "hidden",
           opacity: isVisible ? 1 : 0,
-          transition: "opacity 0.5s ease-in-out", // Changed duration to match typical transition speed
-          backgroundColor: "white", // Ensure background color is set
+          transition: "opacity 2s ease-in-out",
+          backgroundColor: "white",
         }}
       >
         <Typography
@@ -168,7 +159,11 @@ const WalkthroughCompleteTile = ({
           height="100%"
           top="0"
           left="0"
-          style={{ zIndex: 1007, backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+          style={{
+            zIndex: 1007,
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
+            pointerEvents: "all",
+          }}
         >
           <Box
             className="confirmation-container"

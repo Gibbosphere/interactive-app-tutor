@@ -9,7 +9,8 @@ import TestProgressTile from "./TestProgressTile";
 import WalkthroughCompleteTile from "./WalkthroughCompleteTile";
 
 // onActivte will handle the turning on and off of a tutorial
-const Tutorial = ({ tut, onExit }) => {
+const Tutorial = ({ tutorialContent, onExit }) => {
+  const tutorial = tutorialContent;
   const tutorialName = "iNethi Manager Tutorial";
   const [currentStage, setCurrentStage] = useState(0);
 
@@ -28,165 +29,6 @@ const Tutorial = ({ tut, onExit }) => {
   const [stageCompleteIntermission2, setStageCompleteIntermission2] =
     useState(false);
 
-  // change to const tutorial = tut; in the future
-  const tutorial = [
-    {
-      stageName: "Basic Navigation",
-      tooltips: [
-        {
-          type: "informative",
-          targetElement: "#element0",
-          targetAreaElement: "#element0",
-          title: "Sidebar menu",
-          content:
-            "This is your side bar menu. From here, you can navigate to all the main pages in the application.\nYou can also access the application settings and your account details.",
-        },
-        {
-          type: "informative",
-          targetElement: "#element1",
-          targetAreaElement: "#element1",
-          title: "Feature 2",
-          content: "This is the second feature of Stage 1.",
-        },
-        {
-          type: "action",
-          targetElement: "#element2",
-          targetAreaElement: "#element2",
-          title: "Feature 3",
-          content: "Click on feature 2",
-        },
-        {
-          type: "informative",
-          targetElement: "#element2",
-          targetAreaElement: "#element2",
-          title: "Take a look",
-          content: "Investigate all the search options by using this feature.",
-        },
-      ],
-      test: {
-        tasks: [
-          {
-            text: "Open the menu sidebar",
-            clickElements: [
-              {
-                elementId: "#menu-sidebar",
-                textInputElements: [],
-              },
-            ],
-          },
-          {
-            text: "Navigate to the devices and dashboard page",
-            clickElements: [
-              {
-                elementId: "#sidebar-devices-page",
-                textInputElements: [],
-              },
-              {
-                elementId: "#sidebar-dashboard-page",
-                textInputElements: [],
-              },
-            ],
-          },
-          {
-            text: "Create a new Mesh device with a MAC of 127:69:0:1",
-            clickElements: [
-              {
-                elementId: "#create-device-button",
-                textInputElements: [
-                  {
-                    elementId: "#mac-address-inputbox",
-                    requiredInput: "127:69:0:1",
-                  },
-                  {
-                    elementId: "#device-type-inputbox",
-                    requiredInput: "Mesh type",
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    },
-    {
-      stageName: "Mapping Nodes",
-      tooltips: [
-        {
-          type: "informative",
-          targetElement: "#element4",
-          targetAreaElement: "#element1",
-          title: "Feature 4",
-          content: "This is the first feature of Stage 2.",
-        },
-        {
-          type: "informative",
-          targetElement: "#element5",
-          targetAreaElement: "#element2",
-          title: "Feature 5",
-          content: "This is the second feature of Stage 2.",
-        },
-      ],
-    },
-    {
-      stageName: "Device Basics",
-      tooltips: [
-        {
-          type: "informative",
-          targetElement: "#element6",
-          targetAreaElement: "#element2",
-          title: "Feature 6",
-          content: "This is the first feature of Stage 3.",
-        },
-        {
-          type: "informative",
-          targetElement: "#element7",
-          targetAreaElement: "#element3",
-          title: "Feature 7",
-          content: "This is the second feature of Stage 3.",
-        },
-      ],
-    },
-    {
-      stageName: "Deleting Devices",
-      tooltips: [
-        {
-          type: "informative",
-          targetElement: "#element8",
-          targetAreaElement: "#element1",
-          title: "Feature 8",
-          content: "This is the first feature of Stage 4.",
-        },
-        {
-          type: "informative",
-          targetElement: "#element9",
-          targetAreaElement: "#element3",
-          title: "Feature 9",
-          content: "This is the second feature of Stage 4.",
-        },
-      ],
-    },
-    {
-      stageName: "Dealing with Alerts",
-      tooltips: [
-        {
-          type: "informative",
-          targetElement: "#element10",
-          targetAreaElement: "#element4",
-          title: "Feature 10",
-          content: "This is the first feature of Stage 4.",
-        },
-        {
-          type: "informative",
-          targetElement: "#element11",
-          targetAreaElement: "#element4",
-          title: "Feature 11",
-          content: "This is the second feature of Stage 4.",
-        },
-      ],
-    },
-    // Add more stages as needed
-  ];
-
   const nextStep = () => {
     const currentTooltips = tutorial[currentStage].tooltips;
     if (currentStep < currentTooltips.length - 1) {
@@ -197,7 +39,9 @@ const Tutorial = ({ tut, onExit }) => {
       if (currentStage < tutorial.length - 1) {
         // Stage complete - Move to test
         setWalkthroughActive(false);
-        setWalkthroughCompleteIntermission(true);
+        tutorial[currentStage].test.length > 0
+          ? setWalkthroughCompleteIntermission(true)
+          : setStageCompleteIntermission1(true);
       } else {
         // Tutorial completed
         console.log("Tutorial completed!");
@@ -224,7 +68,7 @@ const Tutorial = ({ tut, onExit }) => {
   };
 
   const nextTestStep = () => {
-    const currentTasks = tutorial[currentStage].test.tasks;
+    const currentTasks = tutorial[currentStage].test;
 
     if (currentTask < currentTasks.length - 1) {
       // All click elements complete - Move to next task
@@ -298,7 +142,18 @@ const Tutorial = ({ tut, onExit }) => {
   };
 
   return (
-    <Box overflow={"hidden"}>
+    <Box
+      zIndex={1000}
+      sx={{
+        position: "fixed",
+        top: "0px",
+        left: "0px",
+        width: "100%",
+        height: "100%",
+        pointerEvents: "none",
+      }}
+      //overflow={"hidden"}
+    >
       <CssBaseline />
       <TutorialHeader
         tutorialName={tutorialName}
@@ -308,7 +163,6 @@ const Tutorial = ({ tut, onExit }) => {
         onRedoStage={handleRedoStage}
         onSkipStage={handleSkipStage}
       />
-
       <Box display="flex" justifyContent="center" alignItems="center">
         {stageCompleteIntermission1 && (
           <Box
@@ -321,7 +175,11 @@ const Tutorial = ({ tut, onExit }) => {
             height="100%"
             top="0"
             left="0"
-            style={{ zIndex: 1007, backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+            style={{
+              zIndex: 1007,
+              backgroundColor: "rgba(0, 0, 0, 0.2)",
+              pointerEvents: "all",
+            }}
           >
             <StageCompleteCard
               stageNo={currentStage + 1}
@@ -341,7 +199,11 @@ const Tutorial = ({ tut, onExit }) => {
             height="100%"
             top="0"
             left="0"
-            style={{ zIndex: 1007, backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+            style={{
+              zIndex: 1007,
+              backgroundColor: "rgba(0, 0, 0, 0.2)",
+              pointerEvents: "all",
+            }}
           >
             <TutorialProgressTile
               tutorialName={tutorialName}
@@ -403,15 +265,9 @@ const Tutorial = ({ tut, onExit }) => {
         <TestProgressTile
           stageName={tutorial[currentStage].stageName}
           stageNo={currentStage}
-          taskNames={[
-            "Open the menu sidebar",
-            "Navigate to the devices page",
-            "Navigate to the dashboard page",
-            "Find Imhoff farm on the map",
-            "Navigate to the alerts page",
-          ]}
+          taskNames={tutorial[currentStage].test.map((task) => task.text)}
           currentTaskNo={currentTask}
-          currentTask={tutorial[currentStage].test.tasks[currentTask]}
+          currentTask={tutorial[currentStage].test[currentTask]}
           onNext={nextTestStep}
           onExit={handleExitTutorial}
           onSkipTest={handleSkipTest}
@@ -428,7 +284,11 @@ const Tutorial = ({ tut, onExit }) => {
           height="100%"
           top="0"
           left="0"
-          style={{ zIndex: 1007, backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+          style={{
+            zIndex: 1007,
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
+            pointerEvents: "all",
+          }}
         >
           <WalkthroughCompleteTile
             stageNo={currentStage + 1}

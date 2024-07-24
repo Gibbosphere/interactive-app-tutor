@@ -15,6 +15,7 @@ const StageCompleteCard = ({ stageNo, stageName, onContinue }) => {
   const style = {
     position: "absolute",
     zIndex: 1000,
+    pointerEvents: "all",
     padding: "16px",
     width: "420px",
     boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",

@@ -32,6 +32,7 @@ const Tooltip = ({
   useLayoutEffect(() => {
     const targetElement = document.querySelector(targetEl);
     const targetAreaElement = document.querySelector(targetAreaEl);
+    const rect = targetAreaElement.getBoundingClientRect(); // more reliable than using targetAreaElement directly
 
     if (!targetElement || !targetAreaElement || !tooltipRef.current) {
       return;
@@ -50,10 +51,10 @@ const Tooltip = ({
     // Position the target area highlight
     const updateTargetAreaPosition = () => {
       setTargetAreaPos({
-        left: targetAreaElement.offsetLeft,
-        top: targetAreaElement.offsetTop,
-        width: targetAreaElement.offsetWidth,
-        height: targetAreaElement.offsetHeight,
+        left: rect.left + window.scrollX,
+        top: rect.top + window.scrollY,
+        width: rect.width,
+        height: rect.height,
       });
     };
 
@@ -65,12 +66,8 @@ const Tooltip = ({
       const arrowSize = 30;
 
       // Default tooltip positioning: right of the target area and vertically centered
-      let top =
-        targetAreaElement.offsetTop +
-        targetAreaElement.offsetHeight / 2 -
-        tooltipHeight / 2;
-      let left =
-        targetAreaElement.offsetLeft + targetAreaElement.offsetWidth + offset;
+      let top = rect.top + window.scrollY + rect.height / 2 - tooltipHeight / 2;
+      let left = rect.left + window.scrollX + rect.width + offset;
 
       // Default arrow positioning: pointing left, centered vertically
       let arrowTop = top + tooltipHeight / 2 - arrowSize / 2;
@@ -78,26 +75,24 @@ const Tooltip = ({
 
       // Check if tooltip goes out of viewport on the right
       if (left + tooltipWidth > window.innerWidth) {
-        left = targetAreaElement.offsetLeft - tooltipWidth - offset; // Reposition to the left of the target area
+        left = rect.left + window.scrollX - tooltipWidth - offset; // Reposition to the left of the target area
         arrowLeft = left + tooltipWidth - (arrowSize + arrowSize / 2); // Arrow pointing right
       }
 
       // Check if tooltip goes out of viewport on the left
       if (left < 0) {
         left =
-          (2 * targetAreaElement.offsetLeft + targetAreaElement.offsetWidth) /
-            2 -
+          (2 * (rect.left + window.scrollX) + rect.width) / 2 -
           tooltipWidth / 2; // Adjust to fit within the viewport
         arrowLeft = left + tooltipWidth / 2 - arrowSize / 2; // Arrow centered horizontally
 
-        top = targetAreaElement.offsetTop - tooltipHeight - offset; // If tooltip cannot fit on both the left and right, try it on top
+        top = rect.top + window.scrollY - tooltipHeight - offset; // If tooltip cannot fit on both the left and right, try it on top
         arrowTop = top + tooltipHeight - arrowSize / 2; // Arrow pointing down
       }
 
       // Check if tooltip goes out of viewport vertically above
       if (top < 0) {
-        top =
-          targetAreaElement.offsetTop + targetAreaElement.offsetHeight + offset; // Place tooltip on bottom
+        top = rect.top + window.scrollY + rect.height + offset; // Place tooltip on bottom
         arrowTop = top - arrowSize / 2; // Arrow pointing up
       }
 
@@ -107,8 +102,10 @@ const Tooltip = ({
 
     updateTooltipPosition();
     window.addEventListener("resize", updateTooltipPosition);
+    //window.addEventListener("scroll", updateTooltipPosition);
     updateTargetAreaPosition();
     window.addEventListener("resize", updateTargetAreaPosition);
+    //window.addEventListener("scroll", updateTargetAreaPosition);
 
     return () => {
       if (type === "action") {
@@ -116,6 +113,8 @@ const Tooltip = ({
       }
       window.removeEventListener("resize", updateTooltipPosition);
       window.removeEventListener("resize", updateTargetAreaPosition);
+      //window.removeEventListener("scroll", updateTooltipPosition);
+      //window.removeEventListener("scroll", updateTargetAreaPosition);
     };
   }, [targetEl, targetAreaEl, type, onNext, tooltipNo]);
 
@@ -135,7 +134,6 @@ const Tooltip = ({
   ));
 
   const tooltipWidth = 270;
-  const targetAreaElement = document.querySelector(targetAreaEl);
 
   const tooltipStyle = {
     position: "absolute",
@@ -152,6 +150,7 @@ const Tooltip = ({
       <Box
         key={tooltipNo}
         sx={{
+          pointerEvents: "all",
           opacity: isVisible ? 1 : 0,
           transition: "opacity 0.5s ease-in-out",
         }}
@@ -270,6 +269,7 @@ const Tooltip = ({
       <Box
         key={tooltipNo}
         sx={{
+          pointerEvents: "all",
           opacity: isVisible ? 1 : 0,
           transition: "opacity 0.25s ease-in-out",
         }}

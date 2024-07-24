@@ -10,21 +10,27 @@ const TooltipOverlay = ({ targetAreaEl }) => {
 
   useLayoutEffect(() => {
     const targetAreaElement = document.querySelector(targetAreaEl);
+    if (!targetAreaElement) return;
+
     // Position the target area highlight
     const updateTargetAreaPosition = () => {
+      const rect = targetAreaElement.getBoundingClientRect();
       setTargetAreaPos({
-        left: targetAreaElement.offsetLeft,
-        top: targetAreaElement.offsetTop,
-        width: targetAreaElement.offsetWidth,
-        height: targetAreaElement.offsetHeight,
+        left: rect.left + window.scrollX,
+        top: rect.top + window.scrollY,
+        width: rect.width,
+        height: rect.height,
       });
+      console.log(rect.top);
     };
 
     updateTargetAreaPosition();
     window.addEventListener("resize", updateTargetAreaPosition);
+    window.addEventListener("scroll", updateTargetAreaPosition);
 
     return () => {
       window.removeEventListener("resize", updateTargetAreaPosition);
+      window.removeEventListener("scroll", updateTargetAreaPosition);
     };
   }, [targetAreaEl]);
 
@@ -42,7 +48,7 @@ const TooltipOverlay = ({ targetAreaEl }) => {
         left: 0,
         width: "100%",
         height: "100%",
-        pointerEvents: "none", // ensures elememts in inner rectangle is clickable
+        pointerEvents: "none", // ensures elements in inner rectangle are clickable
       }}
     >
       {/* Outer rectangles on the top, left, right, and bottom that blocks pointer events */}
@@ -74,7 +80,7 @@ const TooltipOverlay = ({ targetAreaEl }) => {
         y={targetAreaPos.top - areaOffset}
         width={Math.max(
           document.documentElement.clientWidth -
-            (targetAreaPos.left + targetAreaPos.width),
+            (targetAreaPos.left + targetAreaPos.width + areaOffset),
           0
         )}
         height={Math.max(targetAreaPos.height + 2 * areaOffset, 0)}
@@ -84,13 +90,13 @@ const TooltipOverlay = ({ targetAreaEl }) => {
       />
 
       <rect
-        id="topRect"
+        id="bottomRect"
         x="0"
         y={targetAreaPos.top + targetAreaPos.height + areaOffset}
         width="100%"
         height={Math.max(
           document.documentElement.clientHeight -
-            (targetAreaPos.top + targetAreaPos.height),
+            (targetAreaPos.top + targetAreaPos.height + areaOffset),
           0
         )}
         fill="black"

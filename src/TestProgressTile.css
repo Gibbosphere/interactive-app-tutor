@@ -7,11 +7,11 @@
   }
   /* Start from 50% - therefore first half of animation is the animation delay */
   50% {
-    transform: translateX(-100%);
+    width: 0;
   }
 
   100% {
-    transform: translateX(0);
+    width: 100;
   }
 }
 
@@ -43,7 +43,8 @@
   }
 }
 
-.strike-through-animate-task {
+/* Strike Through Classes */
+.strike-through-animate-task-1 {
   position: relative;
   display: inline-block;
   &::after {
@@ -52,13 +53,86 @@
     left: 0%;
     bottom: calc(50% - 1.5px);
     width: 100%;
-    height: 1.5px;
+    height: 1px;
     opacity: 0.6;
     background: black;
     animation: strikeThrough 1.5s normal;
   }
 }
 
+.strike-through-animate-task-2 {
+  position: relative;
+  display: inline-block;
+}
+
+.strike-through-animate-task-2::before,
+.strike-through-animate-task-2::after {
+  content: "";
+  position: absolute;
+  left: 0%;
+  width: 100%;
+  height: 1px;
+  opacity: 0.6;
+  background: black;
+  animation: strikeThrough 1.5s normal;
+}
+
+.strike-through-animate-task-2::before {
+  bottom: calc(25% - 1.5px);
+}
+
+.strike-through-animate-task-2::after {
+  bottom: calc(75% - 1.5px);
+}
+
+.strike-through-animate-task-3 {
+  position: relative;
+  display: inline-block;
+}
+
+.strike-through-animate-task-3::before,
+.strike-through-animate-task-3::after,
+.strike-through-animate-task-3 .extra-strike::after {
+  content: "";
+  position: absolute;
+  left: 0%;
+  width: 100%;
+  height: 1px;
+  opacity: 0.6;
+  background: black;
+  animation: strikeThrough 1.5s normal;
+}
+
+.strike-through-animate-task-3::before {
+  bottom: calc(16.67% - 1.5px); /* Adjusted for three lines */
+}
+
+.strike-through-animate-task-3::after {
+  bottom: calc(50% - 1.5px); /* Adjusted for three lines */
+}
+
+.strike-through-animate-task-3 .extra-strike::after {
+  content: "";
+  position: absolute;
+  bottom: calc(83.33% - 1.5px); /* Adjusted for three lines */
+  left: 0%;
+  width: 100%;
+  height: 1px;
+  opacity: 0.6;
+  background: black;
+  animation: strikeThrough 1.5s normal;
+}
+
+@keyframes strikeThrough {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Other classes */
 .change-color {
   animation: changeColor 2s 3s normal forwards;
 }

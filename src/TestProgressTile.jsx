@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useRef } from "react";
+import React, { useState, useLayoutEffect, useRef, useEffect } from "react";
 import {
   Box,
   Button,
@@ -88,6 +88,35 @@ const TestProgressTile = ({
     };
   }, [currentTaskNo, clickElementNo]);
 
+  const textRef = useRef(null);
+  const [lineCount, setLineCount] = useState(0);
+
+  useEffect(() => {
+    const measureLines = () => {
+      if (textRef.current) {
+        const textElement = textRef.current;
+        const lineHeight = parseFloat(getComputedStyle(textElement).lineHeight);
+        const totalHeight = textElement.offsetHeight;
+        const lines = Math.round(totalHeight / lineHeight);
+        setLineCount(lines);
+        console.log(
+          "Single line height for " +
+            textElement.textContent +
+            ": " +
+            lineHeight
+        );
+        console.log("Total line height: " + totalHeight);
+        console.log("Therefore line count is " + lines);
+      }
+    };
+
+    measureLines();
+
+    // Re-measure on window resize if need be
+    window.addEventListener("resize", measureLines);
+    return () => window.removeEventListener("resize", measureLines);
+  }, [currentTaskNo]);
+
   const handleOpenConfirmationPopup = (action) => {
     setConfirmationAction(action); // waiting to see whether this action (exit, skip) will be confirmed
     setConfirmationPopupOpen(true);
@@ -109,6 +138,7 @@ const TestProgressTile = ({
     position: "fixed",
     top: window.innerHeight - tileHeight,
     left: "60%",
+    pointerEvents: "all",
     zIndex: 1000,
     width: "380px",
     boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
@@ -144,15 +174,15 @@ const TestProgressTile = ({
       <ListItem
         key={index}
         disableGutters
-        sx={{ margin: "0 0", padding: "3.5px 0" }}
+        sx={{ margin: "0 0", padding: "2.5px 0" }}
       >
-        <ListItemIcon>
+        <ListItemIcon style={{ minWidth: "40px" }}>
           {index < currentTaskNo ? (
-            <CheckCircleIcon sx={{ color: "#4CAF50" }} />
+            <CheckCircleIcon sx={{ color: "#4CAF50", fontSize: "1.2rem" }} />
           ) : (
             <RadioButtonUncheckedIcon
               className={index === currentTaskNo ? "change-color" : ""}
-              sx={{ color: "#BDBDBD" }}
+              sx={{ color: "#BDBDBD", fontSize: "1.2rem" }}
             />
           )}
         </ListItemIcon>
@@ -160,16 +190,21 @@ const TestProgressTile = ({
           sx={{ overflow: "hidden" }}
           primary={
             <Typography
+              ref={index === currentTaskNo - 1 ? textRef : null}
               className={
-                index === currentTaskNo - 1 ? "strike-through-animate-task" : ""
+                index === currentTaskNo - 1
+                  ? `strike-through-animate-task-${lineCount}`
+                  : ""
               }
               sx={{
+                fontSize: "0.9rem",
                 textDecoration:
                   index < currentTaskNo - 1 ? "line-through" : "none",
                 color:
                   index < currentTaskNo ? "rgba(0, 0, 0, 0.54)" : "inherit",
               }}
             >
+              <span class="extra-strike"></span>
               {task}
             </Typography>
           }
@@ -333,7 +368,7 @@ const TestProgressTile = ({
                 ></Box>
               </Box>
               <Typography variant="body2">
-                {(currentTaskNo / taskNames.length) * 100}%
+                {Math.round((currentTaskNo / taskNames.length) * 100)}%
               </Typography>
             </Box>
           </Box>
@@ -408,7 +443,11 @@ const TestProgressTile = ({
           height="100%"
           top="0"
           left="0"
-          style={{ zIndex: 1007, backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+          style={{
+            zIndex: 1007,
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
+            pointerEvents: "all",
+          }}
         >
           <Box
             className="confirmation-container"

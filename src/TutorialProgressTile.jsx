@@ -46,6 +46,7 @@ const TutorialProgressTile = ({
   const style = {
     position: "absolute",
     zIndex: 1000,
+    pointerEvents: "all",
     width: "400px",
     boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
     borderRadius: "5px",
@@ -259,7 +260,11 @@ const TutorialProgressTile = ({
           height="100%"
           top="0"
           left="0"
-          style={{ zIndex: 1007, backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+          style={{
+            zIndex: 1007,
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
+            pointerEvents: "all",
+          }}
         >
           <Box
             className="confirmation-container"

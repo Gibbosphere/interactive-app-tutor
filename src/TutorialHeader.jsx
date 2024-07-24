@@ -99,7 +99,7 @@ const TutorialHeader = ({
   });
 
   return (
-    <Box>
+    <Box sx={{ pointerEvents: "all" }}>
       <Box
         id="tutorial-bar"
         position="relative"
@@ -110,6 +110,8 @@ const TutorialHeader = ({
           backgroundColor: "#3F15B1",
           padding: "3px 0 3px 10px",
         }}
+        height={"29.5px"}
+        maxHeight={"29.5px"}
       >
         <Box
           display="flex"
