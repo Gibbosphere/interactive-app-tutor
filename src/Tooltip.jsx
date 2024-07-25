@@ -76,7 +76,7 @@ const Tooltip = ({
       // Check if tooltip goes out of viewport on the right
       if (left + tooltipWidth > window.innerWidth) {
         left = rect.left + window.scrollX - tooltipWidth - offset; // Reposition to the left of the target area
-        arrowLeft = left + tooltipWidth - (arrowSize + arrowSize / 2); // Arrow pointing right
+        arrowLeft = left + tooltipWidth - arrowSize / 2; // Arrow pointing right
       }
 
       // Check if tooltip goes out of viewport on the left
@@ -145,149 +145,69 @@ const Tooltip = ({
     boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
   };
 
-  if (type === "informative") {
-    return (
+  return (
+    <Box
+      key={tooltipNo}
+      sx={{
+        pointerEvents: "all",
+        opacity: isVisible ? 1 : 0,
+        transition:
+          type === "informative"
+            ? "opacity 0.5s ease-in-out"
+            : "opacity 0.25s ease-in-out",
+      }}
+    >
       <Box
-        key={tooltipNo}
+        id="tooltip-arrow"
+        top={tooltipArrowPosition.top}
+        left={tooltipArrowPosition.left}
         sx={{
-          pointerEvents: "all",
-          opacity: isVisible ? 1 : 0,
-          transition: "opacity 0.5s ease-in-out",
+          position: "absolute",
+          width: 30,
+          height: 30,
+          backgroundColor: "#3F15B1",
+          transform: "rotate(45deg)",
+          boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
         }}
-      >
-        <Box
-          id="tooltip-arrow"
-          top={tooltipArrowPosition.top}
-          left={tooltipArrowPosition.left}
-          sx={{
-            position: "absolute",
-            width: 30,
-            height: 30,
-            backgroundColor: "#3F15B1",
-            transform: "rotate(45deg)",
-            boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
-          }}
-        ></Box>
-        <Paper ref={tooltipRef} style={tooltipStyle} elevation={3}>
-          <Typography sx={{ marginBottom: "6px" }} variant="h6">
-            {title}
-          </Typography>
-          <Typography variant="body2" paragraph>
-            {formattedContent}
-          </Typography>
-          <Box
-            display="flex"
-            justifyContent={canGoBack ? "space-between" : "flex-end"}
-            alignItems="center"
-          >
-            {canGoBack && (
-              <IconButton
-                onClick={onBack}
-                size="small"
-                sx={{ color: "#3F15B1" }}
-              >
-                <ArrowBackIcon fontSize="small" />
-              </IconButton>
-            )}
-            <Button
-              variant="contained"
-              size="small"
-              endIcon={<ArrowForwardIcon fontSize="small" />}
-              onClick={onNext}
-              sx={{
-                backgroundColor: "#3F15B1",
-                "&:hover": { backgroundColor: "#31119F" },
-              }}
-            >
-              {tooltipNo === totalTooltips ? "Finish" : "Next"}
-            </Button>
-          </Box>
-          <Box
-            id="tooltip-progress-container"
-            width={tooltipWidth}
-            sx={{
-              margin: "6px 0px 0px",
-              transform: "translateX(-16px)",
-              position: "relative",
-              padding: 0,
-            }}
-          >
-            <Typography
-              align="right"
-              id="tooltip-progress-numbers"
-              sx={{
-                padding: "0 3px 0 0",
-                margin: 0,
-                fontSize: "10px",
-                color: "#BFBFBF",
-              }}
-            >
-              {tooltipNo}/{totalTooltips}
+      ></Box>
+      <Paper ref={tooltipRef} style={tooltipStyle} elevation={3}>
+        {type === "informative" ? (
+          <>
+            <Typography sx={{ marginBottom: "6px" }} variant="h6">
+              {title}
+            </Typography>
+            <Typography variant="body2" paragraph>
+              {formattedContent}
             </Typography>
             <Box
-              id="tooltip-progressbar-container"
-              width="100%"
-              height="2.5px"
-              sx={{
-                margin: "2px 0px 0px",
-                position: "relative",
-                padding: 0,
-                border: "none",
-              }}
+              display="flex"
+              justifyContent={canGoBack ? "space-between" : "flex-end"}
+              alignItems="center"
             >
-              <Box
-                id="tooltip-progressbar-background"
-                height="100%"
-                width="100%"
-                sx={{
-                  backgroundColor: "#E8E8E8",
-                  position: "absolute",
-                  padding: 0,
-                  margin: 0,
-                }}
-              ></Box>
-              <Box
-                id="tooltip-progressbar"
-                height="100%"
-                width={`${(tooltipNo / totalTooltips) * 100}%`}
+              {canGoBack && (
+                <IconButton
+                  onClick={onBack}
+                  size="small"
+                  sx={{ color: "#3F15B1" }}
+                >
+                  <ArrowBackIcon fontSize="small" />
+                </IconButton>
+              )}
+              <Button
+                variant="contained"
+                size="small"
+                endIcon={<ArrowForwardIcon fontSize="small" />}
+                onClick={onNext}
                 sx={{
                   backgroundColor: "#3F15B1",
-                  position: "absolute",
-                  padding: 0,
-                  margin: 0,
-                  borderTopRightRadius: "10px",
-                  borderBottomRightRadius: "10px",
+                  "&:hover": { backgroundColor: "#31119F" },
                 }}
-              ></Box>
+              >
+                {tooltipNo === totalTooltips ? "Finish" : "Next"}
+              </Button>
             </Box>
-          </Box>
-        </Paper>
-      </Box>
-    );
-  } else if (type === "action") {
-    return (
-      <Box
-        key={tooltipNo}
-        sx={{
-          pointerEvents: "all",
-          opacity: isVisible ? 1 : 0,
-          transition: "opacity 0.25s ease-in-out",
-        }}
-      >
-        <Box
-          id="tooltip-arrow"
-          top={tooltipArrowPosition.top}
-          left={tooltipArrowPosition.left}
-          sx={{
-            position: "absolute",
-            width: 30,
-            height: 30,
-            backgroundColor: "#3F15B1",
-            transform: "rotate(45deg)",
-            boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
-          }}
-        ></Box>
-        <Paper ref={tooltipRef} style={tooltipStyle} elevation={3}>
+          </>
+        ) : (
           <Typography
             variant="body2"
             fontSize={"1.3rem"}
@@ -296,88 +216,79 @@ const Tooltip = ({
           >
             {formattedContent}
           </Typography>
+        )}
+        <Box
+          id="tooltip-progress-container"
+          width={tooltipWidth}
+          sx={{
+            margin: "6px 0px 0px",
+            transform: "translateX(-16px)",
+            position: "relative",
+            padding: 0,
+          }}
+        >
+          <Box display={"flex"} justifyContent={"flex-end"} alignItems={"end"}>
+            {type == "action" && canGoBack && (
+              <IconButton
+                onClick={onBack}
+                size="small"
+                sx={{ color: "#3F15B1", padding: 0, marginLeft: "2px" }}
+              >
+                <ArrowBackIcon fontSize="small" />
+              </IconButton>
+            )}
+            <Typography
+              id="tooltip-progress-numbers"
+              sx={{
+                padding: "0 3px 0 0",
+                marginLeft: "auto",
+                fontSize: "10px",
+                color: "#BFBFBF",
+              }}
+            >
+              {tooltipNo}/{totalTooltips}
+            </Typography>
+          </Box>
           <Box
-            id="tooltip-progress-container"
-            width={tooltipWidth}
+            id="tooltip-progressbar-container"
+            width="100%"
+            height="2.5px"
             sx={{
-              margin: "0px 0px 0px",
-              transform: "translateX(-16px)",
+              margin: "2px 0px 0px",
               position: "relative",
               padding: 0,
+              border: "none",
             }}
           >
             <Box
-              display={"flex"}
-              justifyContent={"space-between"}
-              alignItems={"end"}
-            >
-              {canGoBack && (
-                <IconButton
-                  onClick={onBack}
-                  size="small"
-                  sx={{
-                    color: "#3F15B1",
-                    padding: 0,
-                    marginLeft: "2px",
-                  }}
-                >
-                  <ArrowBackIcon fontSize="small" />
-                </IconButton>
-              )}
-              <Typography
-                align="right"
-                id="tooltip-progress-numbers"
-                sx={{
-                  padding: "0 3px 0 0",
-                  margin: 0,
-                  fontSize: "10px",
-                  color: "#BFBFBF",
-                }}
-              >
-                {tooltipNo}/{totalTooltips}
-              </Typography>
-            </Box>
-            <Box
-              id="tooltip-progressbar-container"
+              id="tooltip-progressbar-background"
+              height="100%"
               width="100%"
-              height="2.5px"
               sx={{
-                margin: "2px 0px 0px",
-                position: "relative",
+                backgroundColor: "#E8E8E8",
+                position: "absolute",
                 padding: 0,
-                border: "none",
+                margin: 0,
               }}
-            >
-              <Box
-                id="tooltip-progressbar-background"
-                height="100%"
-                width="100%"
-                sx={{
-                  backgroundColor: "#E8E8E8",
-                  position: "absolute",
-                  padding: 0,
-                  margin: 0,
-                }}
-              ></Box>
-              <Box
-                id="tooltip-progressbar"
-                height="100%"
-                width={`${(tooltipNo / totalTooltips) * 100}%`}
-                sx={{
-                  backgroundColor: "#3F15B1",
-                  position: "absolute",
-                  padding: 0,
-                  margin: 0,
-                  borderTopRightRadius: "10px",
-                  borderBottomRightRadius: "10px",
-                }}
-              ></Box>
-            </Box>
+            ></Box>
+            <Box
+              id="tooltip-progressbar"
+              height="100%"
+              width={`${(tooltipNo / totalTooltips) * 100}%`}
+              sx={{
+                backgroundColor: "#3F15B1",
+                position: "absolute",
+                padding: 0,
+                margin: 0,
+                borderTopRightRadius: "10px",
+                borderBottomRightRadius: "10px",
+              }}
+            ></Box>
           </Box>
-        </Paper>
-      </Box>
-    );
-  }
+        </Box>
+      </Paper>
+    </Box>
+  );
 };
 
 export default Tooltip;

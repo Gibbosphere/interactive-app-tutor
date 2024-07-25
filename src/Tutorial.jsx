@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tooltip from "./Tooltip";
 import { CssBaseline, Box } from "@mui/material";
 import StageCompleteCard from "./StageCompleteTile";
@@ -7,6 +7,7 @@ import TutorialHeader from "./TutorialHeader";
 import TooltipOverlay from "./TooltipOverlay";
 import TestProgressTile from "./TestProgressTile";
 import WalkthroughCompleteTile from "./WalkthroughCompleteTile";
+import BasicBackgroundOverlay from "./BasicBackgroundOverlay";
 
 // onActivte will handle the turning on and off of a tutorial
 const Tutorial = ({ tutorialContent, onExit }) => {
@@ -28,6 +29,19 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     useState(false);
   const [stageCompleteIntermission2, setStageCompleteIntermission2] =
     useState(false);
+
+  const [scrollHeight, setScrollHeight] = useState(0); // used to fade component onto screen
+
+  // Fade progress tile in smoothly
+  useEffect(() => {
+    const setHeight = () => {
+      setScrollHeight(document.documentElement.scrollHeight);
+    };
+
+    setHeight();
+    window.addEventListener("click", setHeight);
+    return () => window.removeEventListener("click", setHeight);
+  }, []);
 
   const nextStep = () => {
     const currentTooltips = tutorial[currentStage].tooltips;
@@ -145,11 +159,11 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     <Box
       zIndex={1000}
       sx={{
-        position: "fixed",
+        position: "absolute",
         top: "0px",
         left: "0px",
         width: "100%",
-        height: "100%",
+        height: `${scrollHeight}px`,
         pointerEvents: "none",
       }}
       //overflow={"hidden"}
@@ -163,48 +177,21 @@ const Tutorial = ({ tutorialContent, onExit }) => {
         onRedoStage={handleRedoStage}
         onSkipStage={handleSkipStage}
       />
-      <Box display="flex" justifyContent="center" alignItems="center">
-        {stageCompleteIntermission1 && (
-          <Box
-            id="completion-screen-overlay"
-            position="absolute"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            width="100%"
-            height="100%"
-            top="0"
-            left="0"
-            style={{
-              zIndex: 1007,
-              backgroundColor: "rgba(0, 0, 0, 0.2)",
-              pointerEvents: "all",
-            }}
-          >
+      {/* <Box display="flex" justifyContent="center" alignItems="center"> */}
+      {stageCompleteIntermission1 && (
+        <BasicBackgroundOverlay
+          focusElement={
             <StageCompleteCard
               stageNo={currentStage + 1}
               stageName={tutorial[currentStage].stageName}
               onContinue={handleStageContinue1}
             />
-          </Box>
-        )}
-        {stageCompleteIntermission2 && (
-          <Box
-            id="completion-screen-overlay"
-            position="absolute"
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            width="100%"
-            height="100%"
-            top="0"
-            left="0"
-            style={{
-              zIndex: 1007,
-              backgroundColor: "rgba(0, 0, 0, 0.2)",
-              pointerEvents: "all",
-            }}
-          >
+          }
+        ></BasicBackgroundOverlay>
+      )}
+      {stageCompleteIntermission2 && (
+        <BasicBackgroundOverlay
+          focusElement={
             <TutorialProgressTile
               tutorialName={tutorialName}
               stages={tutorial.map((stage) => stage.stageName)}
@@ -214,46 +201,47 @@ const Tutorial = ({ tutorialContent, onExit }) => {
               onRedoStage={handleRedoStage}
               onSkipStage={handleSkipStage}
             />
-          </Box>
-        )}
-        {tooltipChanging && (
-          <>
-            {
-              handleTootlipChange() // rerender tooltip for animation sake
+          }
+        ></BasicBackgroundOverlay>
+      )}
+      {tooltipChanging && (
+        <>
+          {
+            handleTootlipChange() // rerender tooltip for animation sake
+          }
+          <TooltipOverlay
+            targetAreaEl={
+              tutorial[currentStage].tooltips[currentStep].targetAreaElement
             }
-            <TooltipOverlay
-              targetAreaEl={
-                tutorial[currentStage].tooltips[currentStep].targetAreaElement
-              }
-            ></TooltipOverlay>
-          </>
-        )}
-        {!tooltipChanging && walkthroughActive && (
-          <>
-            <TooltipOverlay
-              targetAreaEl={
-                tutorial[currentStage].tooltips[currentStep].targetAreaElement
-              }
-            ></TooltipOverlay>
-            <Tooltip
-              type={tutorial[currentStage].tooltips[currentStep].type}
-              targetEl={
-                tutorial[currentStage].tooltips[currentStep].targetElement
-              }
-              targetAreaEl={
-                tutorial[currentStage].tooltips[currentStep].targetAreaElement
-              }
-              title={tutorial[currentStage].tooltips[currentStep].title}
-              content={tutorial[currentStage].tooltips[currentStep].content}
-              canGoBack={currentStep !== 0}
-              onNext={nextStep}
-              onBack={prevStep}
-              tooltipNo={currentStep + 1}
-              totalTooltips={tutorial[currentStage].tooltips.length}
-            />
-          </>
-        )}
-      </Box>
+          ></TooltipOverlay>
+        </>
+      )}
+      {!tooltipChanging && walkthroughActive && (
+        <>
+          <TooltipOverlay
+            targetAreaEl={
+              tutorial[currentStage].tooltips[currentStep].targetAreaElement
+            }
+          ></TooltipOverlay>
+          <Tooltip
+            type={tutorial[currentStage].tooltips[currentStep].type}
+            targetEl={
+              tutorial[currentStage].tooltips[currentStep].targetElement
+            }
+            targetAreaEl={
+              tutorial[currentStage].tooltips[currentStep].targetAreaElement
+            }
+            title={tutorial[currentStage].tooltips[currentStep].title}
+            content={tutorial[currentStage].tooltips[currentStep].content}
+            canGoBack={currentStep !== 0}
+            onNext={nextStep}
+            onBack={prevStep}
+            tooltipNo={currentStep + 1}
+            totalTooltips={tutorial[currentStage].tooltips.length}
+          />
+        </>
+      )}
+      {/* </Box> */}
       {taskChanging && (
         <>
           {
@@ -274,29 +262,16 @@ const Tutorial = ({ tutorialContent, onExit }) => {
         ></TestProgressTile>
       )}
       {walkthroughCompleteIntermission && (
-        <Box
-          id="completion-screen-overlay"
-          position="absolute"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          width="100%"
-          height="100%"
-          top="0"
-          left="0"
-          style={{
-            zIndex: 1007,
-            backgroundColor: "rgba(0, 0, 0, 0.2)",
-            pointerEvents: "all",
-          }}
-        >
-          <WalkthroughCompleteTile
-            stageNo={currentStage + 1}
-            onTakeTest={handleTakeTest}
-            onRedoWalkthrough={handleRedoWalkthrough}
-            onSkip={handleSkipTest}
-          ></WalkthroughCompleteTile>
-        </Box>
+        <BasicBackgroundOverlay
+          focusElement={
+            <WalkthroughCompleteTile
+              stageNo={currentStage + 1}
+              onTakeTest={handleTakeTest}
+              onRedoWalkthrough={handleRedoWalkthrough}
+              onSkip={handleSkipTest}
+            ></WalkthroughCompleteTile>
+          }
+        ></BasicBackgroundOverlay>
       )}
     </Box>
   );

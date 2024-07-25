@@ -102,7 +102,7 @@ const TutorialHeader = ({
     <Box sx={{ pointerEvents: "all" }}>
       <Box
         id="tutorial-bar"
-        position="relative"
+        position="fixed"
         zIndex={1006}
         width={"100%"}
         sx={{
@@ -175,7 +175,8 @@ const TutorialHeader = ({
         </Box>
       </Box>
       <Box
-        position={"absolute"}
+        position={"fixed"}
+        top={"29.5px"}
         zIndex={1005}
         className={isOpen ? "menu-slide-down" : "menu-slide-up"}
       >

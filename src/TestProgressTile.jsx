@@ -53,7 +53,7 @@ const TestProgressTile = ({
   }, [isExpanded, currentTaskNo]);
 
   useLayoutEffect(() => {
-    const elementToClickObject = clickElements[clickElementNo]; // the current element (entire object) that needs to be clicked next in the task
+    const elementToClickObject = clickElements[clickElementNo]; // the current element (JS object) that needs to be clicked next in the task
     const targetElementToClick = document.querySelector(
       elementToClickObject.elementId
     ); // the actual DOM element

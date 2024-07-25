@@ -33,8 +33,8 @@ const App = () => {
         },
         {
           type: "informative",
-          targetElement: "#element1",
-          targetAreaElement: "#element1",
+          targetElement: "#el-move-test-button",
+          targetAreaElement: "#el-move-test-button",
           title: "Feature 2",
           content: "This is the second feature of Stage 1.",
         },
@@ -47,8 +47,8 @@ const App = () => {
         },
         {
           type: "informative",
-          targetElement: "#element2",
-          targetAreaElement: "#element2",
+          targetElement: "#el-remove-replace-test-button",
+          targetAreaElement: "#el-remove-replace-test-button",
           title: "Take a look",
           content: "Investigate all the search options by using this feature.",
         },
@@ -342,6 +342,8 @@ const App = () => {
     setTutorialActive(false);
   };
 
+  const [onOffTest, setOnOffTest] = useState(true);
+
   return (
     <>
       {tutorialActive && <div style={{ height: "29.5px" }}></div>}
@@ -402,6 +404,49 @@ const App = () => {
           label="Standard"
           variant="standard"
         />
+      </Box>
+
+      <Button
+        id="el-move-test-button"
+        onClick={() => setOnOffTest((prev) => !prev)}
+        sx={{
+          display: onOffTest ? "block" : "",
+          position: "relative",
+          marginLeft: "auto",
+        }}
+      >
+        Testing when elements moved
+      </Button>
+
+      {onOffTest && (
+        <Button
+          id="el-remove-replace-test-button"
+          onClick={() => setOnOffTest((prev) => !prev)}
+        >
+          Testing element removal and immediate replacement
+        </Button>
+      )}
+      {!onOffTest && (
+        <Button
+          id="el-remove-replace-test-button"
+          onClick={() => setOnOffTest((prev) => !prev)}
+          sx={{ display: "block", position: "relative", marginLeft: "auto" }}
+        >
+          Testing element removal and immediate replacement
+        </Button>
+      )}
+
+      <Box id="element5" mt={2} p={2} border={1}>
+        Feature 5
+      </Box>
+      <Box id="element6" mt={2} p={2} border={1}>
+        Feature 6
+      </Box>
+      <Box id="element7" mt={2} p={2} border={1}>
+        Feature 7
+      </Box>
+      <Box id="element8" mt={2} p={2} border={1}>
+        Feature 8
       </Box>
       {tutorialActive && (
         <Tutorial
