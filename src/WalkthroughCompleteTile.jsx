@@ -75,8 +75,8 @@ const WalkthroughCompleteTile = ({
             color: "#404040",
           }}
         >
-          A test is ready for you to demonstrate the skills you've learned in
-          the walkthrough.
+          A test is ready for you to solidify the skills you've learned in the
+          walkthrough.
         </Typography>
 
         <Button

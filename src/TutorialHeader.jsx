@@ -19,6 +19,7 @@ const TutorialHeader = ({
   const [isOpen, setIsOpen] = useState(null);
   const [confirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
   const [confirmationAction, setConfirmationAction] = useState(null);
+  const headerHeight = 29.5;
   const dropDownWidth = 400;
 
   const handleMenuOpen = () => {
@@ -47,13 +48,20 @@ const TutorialHeader = ({
   };
 
   const dropDownStyle = {
+    position: "fixed",
     zIndex: 1001,
+    top: headerHeight,
+    right: isOpen
+      ? document.documentElement.clientWidth - dropDownWidth
+      : document.documentElement.clientWidth,
     width: dropDownWidth,
+    backgroundColor: "white",
     boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
     borderBottomRightRadius: "5px",
-    borderBottomLeftRadius: "5px",
+    borderBottomLeftRadius: "0px",
     borderTopRightRadius: "0px",
     borderTopLeftRadius: "0px",
+    transition: "right 0.3s ease-in-out",
     overflow: "hidden",
   };
 
@@ -110,8 +118,8 @@ const TutorialHeader = ({
           backgroundColor: "#3F15B1",
           padding: "3px 0 3px 10px",
         }}
-        height={"29.5px"}
-        maxHeight={"29.5px"}
+        height={headerHeight}
+        maxHeight={headerHeight}
       >
         <Box
           display="flex"
@@ -175,73 +183,71 @@ const TutorialHeader = ({
         </Box>
       </Box>
       <Box
-        position={"fixed"}
-        top={"29.5px"}
-        zIndex={1005}
-        className={isOpen ? "menu-slide-down" : "menu-slide-up"}
+        sx={dropDownStyle}
+        elevation={3}
+        className={`sidebar ${isOpen ? "open" : ""}`}
       >
-        <Paper style={dropDownStyle} elevation={3}>
-          <Box padding={"16px"} marginBottom={"2px"}>
-            {formattedStages}
-          </Box>
+        <Box id={"header-stages-list"} padding={"16px"} marginBottom={"2px"}>
+          {formattedStages}
+        </Box>
+        <Box
+          id="header-lower-buttons"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          marginBottom="3px"
+        >
           <Box
             display="flex"
-            flexDirection="column"
-            justifyContent="center"
+            justifyContent="space-between"
             alignItems="center"
-            marginBottom="3px"
+            width={"95%"}
           >
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              width={"95%"}
+            <Button
+              size="small"
+              startIcon={<ReplayIcon fontSize="0.7rem" />}
+              onClick={() => handleOpenConfirmationPopup("Redo")}
+              sx={{
+                color: "#BFBFBF",
+                fontSize: "0.7rem",
+                backgroundColor: "transparent",
+                "&:hover": {
+                  color: "#858585",
+                  backgroundColor: "transparent",
+                  border: "none",
+                  boxShadow: "none",
+                },
+                border: "none",
+                boxShadow: "none",
+                textTransform: "none",
+              }}
             >
-              <Button
-                size="small"
-                startIcon={<ReplayIcon fontSize="0.7rem" />}
-                onClick={() => handleOpenConfirmationPopup("Redo")}
-                sx={{
-                  color: "#BFBFBF",
-                  fontSize: "0.7rem",
+              Redo stage
+            </Button>
+            <Button
+              size="small"
+              endIcon={<FastForwardIcon fontSize="0.7rem" />}
+              onClick={() => handleOpenConfirmationPopup("Skip")}
+              sx={{
+                color: "#BFBFBF",
+                fontSize: "0.7rem",
+                backgroundColor: "transparent",
+                "&:hover": {
+                  color: "#858585",
                   backgroundColor: "transparent",
-                  "&:hover": {
-                    color: "#858585",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    boxShadow: "none",
-                  },
                   border: "none",
                   boxShadow: "none",
-                  textTransform: "none",
-                }}
-              >
-                Redo stage
-              </Button>
-              <Button
-                size="small"
-                endIcon={<FastForwardIcon fontSize="0.7rem" />}
-                onClick={() => handleOpenConfirmationPopup("Skip")}
-                sx={{
-                  color: "#BFBFBF",
-                  fontSize: "0.7rem",
-                  backgroundColor: "transparent",
-                  "&:hover": {
-                    color: "#858585",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    boxShadow: "none",
-                  },
-                  border: "none",
-                  boxShadow: "none",
-                  textTransform: "none",
-                }}
-              >
-                Skip stage
-              </Button>
-            </Box>
+                },
+                border: "none",
+                boxShadow: "none",
+                textTransform: "none",
+              }}
+            >
+              Skip stage
+            </Button>
           </Box>
-        </Paper>
+        </Box>
       </Box>
       {/* Confirmation Popup */}
       {confirmationPopupOpen && (

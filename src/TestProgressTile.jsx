@@ -36,6 +36,7 @@ const TestProgressTile = ({
   const [clickElementNo, setClickElementNo] = useState(0);
   const clickElements = currentTask.clickElements; // the element objects that need to be clicked to complete the round
 
+  // Get the height of the tile
   useLayoutEffect(() => {
     if (!testProgressTileRef.current) {
       return;

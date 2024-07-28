@@ -8,14 +8,19 @@ import TooltipOverlay from "./TooltipOverlay";
 import TestProgressTile from "./TestProgressTile";
 import WalkthroughCompleteTile from "./WalkthroughCompleteTile";
 import BasicBackgroundOverlay from "./BasicBackgroundOverlay";
+import IntroTile1 from "./IntroTile1";
+import IntroTile2 from "./IntroTile2";
 
 // onActivte will handle the turning on and off of a tutorial
 const Tutorial = ({ tutorialContent, onExit }) => {
   const tutorial = tutorialContent;
   const tutorialName = "iNethi Manager Tutorial";
+  const [startingScreen1, setStartingScreen1] = useState(true);
+  const [startingScreen2, setStartingScreen2] = useState(false);
+
   const [currentStage, setCurrentStage] = useState(0);
 
-  const [walkthroughActive, setWalkthroughActive] = useState(true);
+  const [walkthroughActive, setWalkthroughActive] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [tooltipChanging, setTooltipChanging] = useState(false);
   const [walkthroughCompleteIntermission, setWalkthroughCompleteIntermission] =
@@ -104,6 +109,16 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     }, 5);
   };
 
+  const handleStartScreen1Next = () => {
+    setStartingScreen1(false);
+    setStartingScreen2(true);
+  };
+
+  const handleStartScreen2Next = () => {
+    setStartingScreen2(false);
+    setWalkthroughActive(true);
+  };
+
   const handleTakeTest = () => {
     setWalkthroughCompleteIntermission(false);
     setTestActive(true);
@@ -169,6 +184,7 @@ const Tutorial = ({ tutorialContent, onExit }) => {
       //overflow={"hidden"}
     >
       <CssBaseline />
+
       <TutorialHeader
         tutorialName={tutorialName}
         stages={tutorial.map((stage) => stage.stageName)}
@@ -177,33 +193,34 @@ const Tutorial = ({ tutorialContent, onExit }) => {
         onRedoStage={handleRedoStage}
         onSkipStage={handleSkipStage}
       />
-      {/* <Box display="flex" justifyContent="center" alignItems="center"> */}
-      {stageCompleteIntermission1 && (
+
+      {startingScreen1 && (
         <BasicBackgroundOverlay
           focusElement={
-            <StageCompleteCard
-              stageNo={currentStage + 1}
-              stageName={tutorial[currentStage].stageName}
-              onContinue={handleStageContinue1}
+            <IntroTile1
+              logoSrc={"iNethiLogoWhite.png"}
+              tutorialName={"CommuNethi"}
+              description={
+                "This interactive tutorial will walk you through the application, helping you to gain a clear understanding of how it works."
+              }
+              onNext={handleStartScreen1Next}
             />
           }
         ></BasicBackgroundOverlay>
       )}
-      {stageCompleteIntermission2 && (
+      {startingScreen2 && (
         <BasicBackgroundOverlay
           focusElement={
-            <TutorialProgressTile
-              tutorialName={tutorialName}
+            <IntroTile2
+              logoSrc={"iNethiLogoWhite.png"}
               stages={tutorial.map((stage) => stage.stageName)}
-              nextStageNo={currentStage + 1}
+              onNext={handleStartScreen2Next}
               onExit={handleExitTutorial}
-              onContinue={handleStageContinue2}
-              onRedoStage={handleRedoStage}
-              onSkipStage={handleSkipStage}
             />
           }
         ></BasicBackgroundOverlay>
       )}
+
       {tooltipChanging && (
         <>
           {
@@ -241,7 +258,7 @@ const Tutorial = ({ tutorialContent, onExit }) => {
           />
         </>
       )}
-      {/* </Box> */}
+
       {taskChanging && (
         <>
           {
@@ -261,6 +278,7 @@ const Tutorial = ({ tutorialContent, onExit }) => {
           onSkipTest={handleSkipTest}
         ></TestProgressTile>
       )}
+
       {walkthroughCompleteIntermission && (
         <BasicBackgroundOverlay
           focusElement={
@@ -270,6 +288,33 @@ const Tutorial = ({ tutorialContent, onExit }) => {
               onRedoWalkthrough={handleRedoWalkthrough}
               onSkip={handleSkipTest}
             ></WalkthroughCompleteTile>
+          }
+        ></BasicBackgroundOverlay>
+      )}
+
+      {stageCompleteIntermission1 && (
+        <BasicBackgroundOverlay
+          focusElement={
+            <StageCompleteCard
+              stageNo={currentStage + 1}
+              stageName={tutorial[currentStage].stageName}
+              onContinue={handleStageContinue1}
+            />
+          }
+        ></BasicBackgroundOverlay>
+      )}
+      {stageCompleteIntermission2 && (
+        <BasicBackgroundOverlay
+          focusElement={
+            <TutorialProgressTile
+              tutorialName={tutorialName}
+              stages={tutorial.map((stage) => stage.stageName)}
+              nextStageNo={currentStage + 1}
+              onExit={handleExitTutorial}
+              onContinue={handleStageContinue2}
+              onRedoStage={handleRedoStage}
+              onSkipStage={handleSkipStage}
+            />
           }
         ></BasicBackgroundOverlay>
       )}
