@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Typography, IconButton, Paper, Button } from "@mui/material";
+import React, { useState, useEffect, useRef } from "react";
+import { Typography, IconButton, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@mui/icons-material/Close";
@@ -23,8 +23,45 @@ const TutorialHeader = ({
     closed: document.documentElement.clientWidth + 5,
   });
   const [isOpen, setIsOpen] = useState(null);
+
   const [confirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
   const [confirmationAction, setConfirmationAction] = useState(null);
+
+  const [windowClickCount, setWindowClickCount] = useState(0); // used to call use effect on every window click
+  const [clickedElement, setClickedElement] = useState(null); // used to call use effect on every window click
+  const headerRef = useRef(null);
+
+  // Assists with closing of menu when a click outside occurs
+  useEffect(() => {
+    const handleWindowClick = (event) => {
+      setWindowClickCount((prevCount) => prevCount + 1);
+      setClickedElement(event);
+    };
+
+    window.addEventListener("click", handleWindowClick);
+
+    return () => {
+      window.removeEventListener("click", handleWindowClick);
+    };
+  }, []);
+
+  // Close menu when click outside occurs
+  useEffect(() => {
+    //console.log(headerRef.current);
+
+    const closeMenu = () => {
+      //console.log(headerRef.current.contains(clickedElement.target));
+      if (
+        headerRef.current &&
+        clickedElement &&
+        !headerRef.current.contains(clickedElement.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    closeMenu();
+  }, [windowClickCount]);
 
   // Reset positions on resize
   useEffect(() => {
@@ -42,7 +79,8 @@ const TutorialHeader = ({
     };
   }, [isOpen]);
 
-  const handleMenuOpen = () => {
+  const handleMenuOpen = (event) => {
+    event.stopPropagation(); // Prevent event bubbling
     setIsOpen(true);
   };
 
@@ -116,7 +154,7 @@ const TutorialHeader = ({
   });
 
   return (
-    <Box sx={{ pointerEvents: "all" }}>
+    <Box id="tutorial-header" ref={headerRef} sx={{ pointerEvents: "all" }}>
       <Box
         id="tutorial-bar"
         position="fixed"
@@ -182,7 +220,7 @@ const TutorialHeader = ({
           </Typography>
           <Box marginBottom={"10px"}>{formattedStages}</Box>
           <Box
-            id="header-lower-buttons"
+            id="drop-down-menu-lower-buttons"
             display="flex"
             justifyContent="space-between"
             alignItems="center"

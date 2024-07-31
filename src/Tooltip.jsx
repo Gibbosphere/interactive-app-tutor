@@ -32,9 +32,26 @@ const Tooltip = ({
   useLayoutEffect(() => {
     const targetElement = document.querySelector(targetEl);
     const targetAreaElement = document.querySelector(targetAreaEl);
-    if (!targetElement || !targetAreaElement || !tooltipRef.current) {
+
+    if (!tooltipRef.current) {
       return;
     }
+
+    // If target element not found, display it in the center
+    if (!targetElement || !targetAreaElement) {
+      console.log("The provided target or area element is not found");
+      setTooltipPosition({
+        top: `calc(${document.documentElement.clientHeight / 2}px - ${
+          tooltipRef.current.offsetHeight / 2
+        }px)`,
+        left: `calc(${document.documentElement.clientWidth / 2}px - ${
+          tooltipRef.current.offsetWidth / 2
+        }px)`,
+      });
+      setTooltipArrowPosition({ top: -40, left: -40 });
+      return;
+    }
+
     const rect = targetAreaElement.getBoundingClientRect(); // more reliable than using targetAreaElement directly
 
     const handleAction = () => {
@@ -123,8 +140,6 @@ const Tooltip = ({
 
     const calculateScrollPos = () => {
       scrollPos = null;
-      // Check first if tooltip or target element higher
-
       // Ignore initial tooltip position of 0
       // Initially, both tooltipPosition and targetAreaPos are likely 0, leading to the if condition in calculateScrollPos always evaluating to true and scrolling to the top unnecessarily.
       if (
@@ -141,6 +156,7 @@ const Tooltip = ({
             (window.scrollY + document.documentElement.clientHeight)
         );
 
+        // Check first if tooltip or target element higher
         // if tooltip higher, you want to scroll to its top
         if (tooltipPosition.top < targetAreaPos.top) {
           // if tooltip is out of viewport

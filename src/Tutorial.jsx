@@ -169,6 +169,15 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     // note tutorial progress tile is still showing
   };
 
+  const handleSkipStageFromHeader = () => {
+    setWalkthroughCompleteIntermission(false);
+    setWalkthroughActive(false);
+    resetTest();
+    setCurrentStep(0);
+    setStageCompleteIntermission2(true);
+    // note tutorial progress tile is still showing
+  };
+
   const resetTest = () => {
     setTestActive(false);
     setCurrentTask(0);
@@ -185,7 +194,6 @@ const Tutorial = ({ tutorialContent, onExit }) => {
         height: `${scrollHeight}px`,
         pointerEvents: "none",
       }}
-      //overflow={"hidden"}
     >
       <CssBaseline />
 
@@ -195,22 +203,25 @@ const Tutorial = ({ tutorialContent, onExit }) => {
         stageNo={currentStage}
         onExit={handleExitTutorial}
         onRedoStage={handleRedoStage}
-        onSkipStage={handleSkipStage}
+        onSkipStage={handleSkipStageFromHeader}
       />
 
       {startingScreen1 && (
-        <BasicBackgroundOverlay
-          focusElement={
-            <IntroTile1
-              logoSrc={"iNethiLogoWhite.png"}
-              tutorialName={"CommuNethi"}
-              description={
-                "This interactive tutorial will walk you through the application, helping you to gain a clear understanding of how it works."
-              }
-              onNext={handleStartScreen1Next}
-            />
-          }
-        ></BasicBackgroundOverlay>
+        <>
+          {window.scrollTo({ top: 0, behavior: "smooth" })}
+          <BasicBackgroundOverlay
+            focusElement={
+              <IntroTile1
+                logoSrc={"iNethiLogoWhite.png"}
+                tutorialName={"CommuNethi"}
+                description={
+                  "This interactive tutorial will walk you through the application, helping you to gain a clear understanding of how it works."
+                }
+                onNext={handleStartScreen1Next}
+              />
+            }
+          ></BasicBackgroundOverlay>
+        </>
       )}
       {startingScreen2 && (
         <BasicBackgroundOverlay

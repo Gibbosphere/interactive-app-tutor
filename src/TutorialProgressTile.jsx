@@ -59,7 +59,7 @@ const TutorialProgressTile = ({
     let stageStyle = {};
     if (index === nextStageNo) {
       stageStyle = {
-        color: "green",
+        color: "#262626",
         fontSize: "0.9rem",
         width: "80%",
         textAlign: "center",
@@ -81,7 +81,7 @@ const TutorialProgressTile = ({
         margin: "4.5px 0",
       };
     } else {
-      stageStyle = { color: "#7F7F7F", fontSize: "0.9rem", margin: "4.5px 0" };
+      stageStyle = { color: "#262626", fontSize: "0.9rem", margin: "4.5px 0" };
     }
 
     const stageClassNames = [
@@ -123,39 +123,38 @@ const TutorialProgressTile = ({
     <>
       <Paper style={style} elevation={3}>
         <Box backgroundColor={"#3F15B1"}>
-          <Box display="flex" justifyContent="right" alignItems="right">
-            <Button
-              variant="contained"
-              size="small"
-              endIcon={<ExitToAppIcon fontSize="small" />}
-              onClick={() => handleOpenConfirmationPopup("Exit")}
-              sx={{
-                color: "#BFBFBF",
+          <Button
+            variant="contained"
+            size="small"
+            endIcon={<ExitToAppIcon fontSize="small" />}
+            onClick={() => handleOpenConfirmationPopup("Exit")}
+            sx={{
+              position: "absolute",
+              top: "1%",
+              right: "-2%",
+              color: "white",
+              backgroundColor: "transparent",
+              "&:hover": {
+                color: "#858585",
                 backgroundColor: "transparent",
-                "&:hover": {
-                  color: "#858585",
-                  backgroundColor: "transparent",
-                  border: "none",
-                  boxShadow: "none",
-                },
                 border: "none",
                 boxShadow: "none",
-                textTransform: "none",
-                padding: "4px 10px 0px 10px",
-              }}
-            >
-              Exit
-            </Button>
-          </Box>
+              },
+              border: "none",
+              boxShadow: "none",
+              textTransform: "none",
+              padding: "4px 10px 0px 10px",
+            }}
+          ></Button>
           <Typography
             sx={{
               color: "white",
-              width: "90%",
+              width: "80%",
               margin: "auto",
               textAlign: "center",
-              paddingBottom: "10px",
+              padding: "25px 0px 15px",
               fontWeight: "500",
-              fontSize: "2rem",
+              fontSize: "1.85rem",
             }}
             variant="h4"
           >

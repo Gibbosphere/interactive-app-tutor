@@ -42,6 +42,10 @@ const TestProgressTile = ({
   const clickElements = currentTask.clickElements; // the element objects that need to be clicked to complete the round
   const [windowClickCount, setWindowClickCount] = useState(0);
 
+  const progressBarWidth = `calc(${
+    (currentTaskNo / taskNames.length) * 100
+  }% - 4px)`;
+
   // Get the height of the tile
   useLayoutEffect(() => {
     if (!testProgressTileRef.current) {
@@ -169,11 +173,7 @@ const TestProgressTile = ({
   const handleCloseConfirmationPopup = (confirmed) => {
     setConfirmationPopupOpen(false);
     if (confirmed && confirmationAction) {
-      confirmationAction === "Exit"
-        ? onExit()
-        : confirmationAction === "Skip"
-        ? onSkipTest()
-        : console.log("nope");
+      confirmationAction === "Exit" ? onExit() : onSkipTest();
     }
     setConfirmationAction(null);
   };
@@ -333,17 +333,16 @@ const TestProgressTile = ({
                   width: "85%",
                   height: "13px",
                   borderRadius: "10px",
-                  padding: "1px 2px",
+                  padding: "1.5px 1.5px",
                   margin: "0 10px 0 0",
                 }}
               >
                 <Box
                   id="progress-bar-inner"
                   className="progress-grow"
-                  width={`calc(${
-                    (currentTaskNo / taskNames.length) * 100
-                  }% - 4px)`}
                   sx={{
+                    width: progressBarWidth,
+                    "--target-width": progressBarWidth,
                     backgroundColor: "green",
                     height: "100%",
                     borderRadius: "10px",
