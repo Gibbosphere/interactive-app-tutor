@@ -35,7 +35,12 @@
 
 @keyframes growX {
   0% {
-    transform: scaleX(0);
+    opacity: 0;
+    transform: scaleX(0.01);
+  }
+
+  0.5% {
+    opacity: 1;
   }
 
   100% {
@@ -139,4 +144,57 @@
 
 .progress-grow {
   animation: growX 1.5s 1.5s normal backwards;
+}
+
+.fade-in-text {
+  animation: fadeIn 0.7s;
+  -webkit-animation: fadeIn 0.7s;
+  -moz-animation: fadeIn 0.7s;
+  -o-animation: fadeIn 0.7s;
+  -ms-animation: fadeIn 0.7s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

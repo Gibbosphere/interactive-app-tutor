@@ -18,10 +18,28 @@
   }
 }
 
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .menu-slide-down {
   animation: slideDown 0.5s normal backwards;
 }
 
 .menu-slide-up {
   animation: slideUp 0.5s normal forwards;
+}
+
+.dropdownmenu-open {
+  opacity: 1;
+}
+
+.dropdownmenu-closed {
+  animation: disappear 0.1s 0.5s normal forwards;
 }

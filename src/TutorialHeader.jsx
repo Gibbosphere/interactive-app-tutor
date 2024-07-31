@@ -1,26 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, IconButton, Paper, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@mui/icons-material/Close";
 import ReplayIcon from "@mui/icons-material/Replay";
 import FastForwardIcon from "@mui/icons-material/FastForward";
-import { Box } from "@mui/system";
+import { Box, fontSize } from "@mui/system";
 import "./TutorialHeader.css";
 
 const TutorialHeader = ({
   tutorialName,
   stages,
-  nextStageNo,
+  stageNo,
   onExit,
   onRedoStage,
   onSkipStage,
 }) => {
+  const headerHeight = 29.5;
+  const dropDownWidth = 280;
+  const [dropDownMenuPosition, setDropDownMenuPosition] = useState({
+    open: document.documentElement.clientWidth - dropDownWidth,
+    closed: document.documentElement.clientWidth + 5,
+  });
   const [isOpen, setIsOpen] = useState(null);
   const [confirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
   const [confirmationAction, setConfirmationAction] = useState(null);
-  const headerHeight = 29.5;
-  const dropDownWidth = 400;
+
+  // Reset positions on resize
+  useEffect(() => {
+    const updateMenuPosition = () => {
+      setDropDownMenuPosition({
+        open: document.documentElement.clientWidth - dropDownWidth,
+        closed: document.documentElement.clientWidth + 5,
+      });
+    };
+    updateMenuPosition();
+    window.addEventListener("resize", updateMenuPosition);
+
+    return () => {
+      window.removeEventListener("resize", updateMenuPosition);
+    };
+  }, [isOpen]);
 
   const handleMenuOpen = () => {
     setIsOpen(true);
@@ -51,9 +71,7 @@ const TutorialHeader = ({
     position: "fixed",
     zIndex: 1001,
     top: headerHeight,
-    right: isOpen
-      ? document.documentElement.clientWidth - dropDownWidth
-      : document.documentElement.clientWidth,
+    right: isOpen ? dropDownMenuPosition.open : dropDownMenuPosition.closed,
     width: dropDownWidth,
     backgroundColor: "white",
     boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
@@ -67,40 +85,31 @@ const TutorialHeader = ({
 
   const formattedStages = stages.map((stage, index) => {
     let stageStyle = {};
-    if (index === nextStageNo) {
+    if (index === stageNo) {
       stageStyle = {
-        color: "green",
-        fontSize: "1.6rem",
-        backgroundColor: "#F1EDFD",
-        width: "80%",
-        textAlign: "center",
-        borderRadius: "25px",
-        margin: "7px 0",
-      };
-    } else if (index < nextStageNo) {
-      stageStyle = {
-        color: "#B4E5A2",
-        textDecoration: "line-through",
+        color: "#3F15B1",
         fontSize: "0.9rem",
         margin: "4.5px 0",
       };
     } else {
-      stageStyle = { color: "#7F7F7F", fontSize: "0.9rem", margin: "4.5px 0" };
+      stageStyle = {
+        color: "#262626",
+        fontSize: "0.9rem",
+        margin: "4.5px 0",
+      };
     }
+
     return (
       <Box
         display="flex"
-        justifyContent="center"
+        justifyContent="left"
         alignItems="center"
         key={stage}
+        padding={"0 0 0 10px"}
+        marginBottom={"2px"}
       >
-        <Typography
-          variant="body2"
-          style={stageStyle}
-          fontWeight={"550"}
-          height={"100%"}
-        >
-          {stage}
+        <Typography variant="body2" style={stageStyle} height={"100%"}>
+          {index === stageNo ? "→ " + stage : stage}
         </Typography>
       </Box>
     );
@@ -153,56 +162,32 @@ const TutorialHeader = ({
           >
             {tutorialName}
           </Typography>
-          {isOpen && (
-            <Button
-              //variant="contained"
-              size="small"
-              height={"100%"}
-              width="10px"
-              endIcon={<ExitToAppIcon />}
-              onClick={() => handleOpenConfirmationPopup("Exit")}
-              sx={{
-                fontSize: "0.7rem",
-                color: "white",
-                backgroundColor: "transparent",
-                "&:hover": {
-                  color: "#858585",
-                  backgroundColor: "transparent",
-                  border: "none",
-                  boxShadow: "none",
-                },
-                border: "none",
-                boxShadow: "none",
-                textTransform: "none",
-                padding: "0px 10px 0px 125px",
-              }}
-            >
-              Exit Tutorial
-            </Button>
-          )}
         </Box>
       </Box>
       <Box
+        id="header-drop-down-menu"
         sx={dropDownStyle}
         elevation={3}
-        className={`sidebar ${isOpen ? "open" : ""}`}
+        className={isOpen ? "dropdownmenu-open" : "dropdownmenu-closed"}
       >
-        <Box id={"header-stages-list"} padding={"16px"} marginBottom={"2px"}>
-          {formattedStages}
-        </Box>
-        <Box
-          id="header-lower-buttons"
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          marginBottom="3px"
-        >
+        <Box id="main-content" padding={"16px"} marginBottom={"4px"}>
+          <Typography
+            variant="h7"
+            sx={{
+              color: "#180844",
+              fontSize: "1rem",
+            }}
+          >
+            Stages
+          </Typography>
+          <Box marginBottom={"10px"}>{formattedStages}</Box>
           <Box
+            id="header-lower-buttons"
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            width={"95%"}
+            width={"75%"}
+            margin={"auto"}
           >
             <Button
               size="small"
@@ -211,6 +196,7 @@ const TutorialHeader = ({
               sx={{
                 color: "#BFBFBF",
                 fontSize: "0.7rem",
+                fontWeight: "400",
                 backgroundColor: "transparent",
                 "&:hover": {
                   color: "#858585",
@@ -223,8 +209,16 @@ const TutorialHeader = ({
                 textTransform: "none",
               }}
             >
-              Redo stage
+              Redo
             </Button>
+            <div
+              style={{
+                height: "0.7rem",
+                width: "0.5px",
+                minWidth: "0.5px",
+                backgroundColor: "#BFBFBF",
+              }}
+            ></div>
             <Button
               size="small"
               endIcon={<FastForwardIcon fontSize="0.7rem" />}
@@ -232,6 +226,7 @@ const TutorialHeader = ({
               sx={{
                 color: "#BFBFBF",
                 fontSize: "0.7rem",
+                fontWeight: "400",
                 backgroundColor: "transparent",
                 "&:hover": {
                   color: "#858585",
@@ -244,15 +239,45 @@ const TutorialHeader = ({
                 textTransform: "none",
               }}
             >
-              Skip stage
+              Skip
             </Button>
           </Box>
+        </Box>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="right"
+          sx={{ backgroundColor: "#3F15B1" }}
+        >
+          <Button
+            //variant="contained"
+            size="small"
+            height={"100%"}
+            endIcon={<ExitToAppIcon />}
+            onClick={() => handleOpenConfirmationPopup("Exit")}
+            sx={{
+              fontSize: "0.7rem",
+              color: "white",
+              backgroundColor: "transparent",
+              "&:hover": {
+                color: "#858585",
+                backgroundColor: "transparent",
+                border: "none",
+                boxShadow: "none",
+              },
+              border: "none",
+              boxShadow: "none",
+              textTransform: "none",
+            }}
+          >
+            Exit
+          </Button>
         </Box>
       </Box>
       {/* Confirmation Popup */}
       {confirmationPopupOpen && (
         <Box
-          position="absolute"
+          position="fixed"
           display="flex"
           justifyContent="center"
           alignItems="center"
@@ -273,12 +298,7 @@ const TutorialHeader = ({
               Are you sure you want to{" "}
               {confirmationAction === "Exit"
                 ? "exit the tutorial?"
-                : confirmationAction.toLowerCase() + " Stage "}{" "}
-              {confirmationAction === "Skip"
-                ? nextStageNo + 1
-                : confirmationAction === "Skip"
-                ? nextStageNo
-                : ""}
+                : confirmationAction.toLowerCase() + " Stage " + (stageNo + 1)}
             </Typography>
             <Box
               className="conformation-popup-actions"

@@ -252,7 +252,7 @@ const TutorialProgressTile = ({
       {/* Confirmation Popup */}
       {confirmationPopupOpen && (
         <Box
-          position="absolute"
+          position="fixed"
           display="flex"
           justifyContent="center"
           alignItems="center"

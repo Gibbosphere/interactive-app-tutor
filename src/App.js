@@ -33,8 +33,8 @@ const App = () => {
         },
         {
           type: "informative",
-          targetElement: "#el-move-test-button",
-          targetAreaElement: "#el-move-test-button",
+          targetElement: "#element1",
+          targetAreaElement: "#element1",
           title: "Feature 2",
           content: "This is the second feature of Stage 1.",
         },
@@ -47,8 +47,8 @@ const App = () => {
         },
         {
           type: "informative",
-          targetElement: "#el-remove-replace-test-button",
-          targetAreaElement: "#el-remove-replace-test-button",
+          targetElement: "#element4",
+          targetAreaElement: "#element4",
           title: "Take a look",
           content: "Investigate all the search options by using this feature.",
         },
@@ -72,6 +72,15 @@ const App = () => {
             },
             {
               elementId: "#sidebar-dashboard-page",
+              textInputElements: [],
+            },
+          ],
+        },
+        {
+          text: "Click the testing remove button",
+          clickElements: [
+            {
+              elementId: "#el-remove-test-button",
               textInputElements: [],
             },
           ],
@@ -121,15 +130,15 @@ const App = () => {
       tooltips: [
         {
           type: "informative",
-          targetElement: "#element2",
-          targetAreaElement: "#element2",
+          targetElement: "#element5",
+          targetAreaElement: "#element5",
           title: "Feature 6",
           content: "This is the first feature of Stage 3.",
         },
         {
           type: "informative",
-          targetElement: "#element3",
-          targetAreaElement: "#element3",
+          targetElement: "#element6",
+          targetAreaElement: "#element6",
           title: "Feature 7",
           content: "This is the second feature of Stage 3.",
         },
@@ -141,8 +150,8 @@ const App = () => {
       tooltips: [
         {
           type: "informative",
-          targetElement: "#element4",
-          targetAreaElement: "#element4",
+          targetElement: "#element7",
+          targetAreaElement: "#element7",
           title: "Feature 8",
           content: "This is the first feature of Stage 4.",
         },
@@ -161,15 +170,15 @@ const App = () => {
       tooltips: [
         {
           type: "informative",
-          targetElement: "#element4",
-          targetAreaElement: "#element4",
+          targetElement: "#element8",
+          targetAreaElement: "#element8",
           title: "Feature 10",
           content: "This is the first feature of Stage 4.",
         },
         {
           type: "informative",
-          targetElement: "#element2",
-          targetAreaElement: "#element2",
+          targetElement: "#element7",
+          targetAreaElement: "#element7",
           title: "Feature 11",
           content: "This is the second feature of Stage 4.",
         },
@@ -365,10 +374,10 @@ const App = () => {
         <Typography id="element0" variant="h4">
           My Application
         </Typography>
-        <Box id="element1" mt={2} p={2} border={1}>
+        <Box id="element1" mt={3} p={2} border={1}>
           Feature 1
         </Box>
-        <Box id="element2" mt={2} p={2} border={1}>
+        <Box id="element2" mt={3} p={2} border={1}>
           Feature 2
         </Box>
         <Box id="element3" mt={2} p={2} border={1}>
@@ -433,6 +442,20 @@ const App = () => {
           sx={{ display: "block", position: "relative", marginLeft: "auto" }}
         >
           Testing element removal and immediate replacement
+        </Button>
+      )}
+
+      {onOffTest && (
+        <Button
+          id="el-remove-test-button"
+          onClick={() => setOnOffTest((prev) => !prev)}
+          sx={{
+            display: onOffTest ? "block" : "",
+            position: "relative",
+            marginLeft: "auto",
+          }}
+        >
+          Testing when elements removed
         </Button>
       )}
 

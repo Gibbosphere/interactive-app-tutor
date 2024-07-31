@@ -81,7 +81,6 @@ const Tutorial = ({ tutorialContent, onExit }) => {
   // helps to rerender tooltip for animating new tooltip appearing
   const handleTootlipChange = () => {
     setTimeout(() => {
-      console.log("setting it back it to false");
       setTooltipChanging(false);
     }, 5);
   };
@@ -96,7 +95,7 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     } else {
       // Finished all tasks - Test and stage completed
       console.log("Test completed!");
-      setTestActive(false);
+      resetTest();
       setStageCompleteIntermission1(true);
     }
   };
@@ -104,7 +103,6 @@ const Tutorial = ({ tutorialContent, onExit }) => {
   // helps to rerender test progress tile for animating when a task is completed
   const handleTaskChange = () => {
     setTimeout(() => {
-      console.log("setting it back it to false");
       setTaskChanging(false);
     }, 5);
   };
@@ -132,6 +130,7 @@ const Tutorial = ({ tutorialContent, onExit }) => {
 
   const handleSkipTest = () => {
     setWalkthroughCompleteIntermission(false);
+    resetTest();
     setStageCompleteIntermission2(true);
   };
 
@@ -152,14 +151,14 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     setStageCompleteIntermission2(false);
     setCurrentStep(0);
     setCurrentStage(0);
-    setCurrentTask(0);
-    setTestActive(false);
+    resetTest();
     onExit();
   };
 
   const handleRedoStage = () => {
     setStageCompleteIntermission2(false);
     setCurrentStep(0);
+    resetTest();
     setWalkthroughActive(true);
     // and then not updating the stage
   };
@@ -168,6 +167,11 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     setCurrentStage((prevStage) => prevStage + 1);
     setCurrentStep(0);
     // note tutorial progress tile is still showing
+  };
+
+  const resetTest = () => {
+    setTestActive(false);
+    setCurrentTask(0);
   };
 
   return (
@@ -188,7 +192,7 @@ const Tutorial = ({ tutorialContent, onExit }) => {
       <TutorialHeader
         tutorialName={tutorialName}
         stages={tutorial.map((stage) => stage.stageName)}
-        nextStageNo={currentStage + 1}
+        stageNo={currentStage}
         onExit={handleExitTutorial}
         onRedoStage={handleRedoStage}
         onSkipStage={handleSkipStage}

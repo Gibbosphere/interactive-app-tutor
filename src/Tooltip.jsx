@@ -21,10 +21,10 @@ const Tooltip = ({
     left: 0,
   });
   const [targetAreaPos, setTargetAreaPos] = useState({
-    left: "0",
-    top: "0",
-    width: "0",
-    height: "0",
+    left: 0,
+    top: 0,
+    width: 0,
+    height: 0,
   });
   const [isVisible, setIsVisible] = useState(false); // used to fade component onto screen
   const tooltipRef = useRef(null);
@@ -32,11 +32,10 @@ const Tooltip = ({
   useLayoutEffect(() => {
     const targetElement = document.querySelector(targetEl);
     const targetAreaElement = document.querySelector(targetAreaEl);
-    const rect = targetAreaElement.getBoundingClientRect(); // more reliable than using targetAreaElement directly
-
     if (!targetElement || !targetAreaElement || !tooltipRef.current) {
       return;
     }
+    const rect = targetAreaElement.getBoundingClientRect(); // more reliable than using targetAreaElement directly
 
     const handleAction = () => {
       if (type === "action") {
@@ -101,11 +100,10 @@ const Tooltip = ({
     };
 
     updateTooltipPosition();
-    window.addEventListener("resize", updateTooltipPosition);
-    //window.addEventListener("scroll", updateTooltipPosition);
     updateTargetAreaPosition();
+
+    window.addEventListener("resize", updateTooltipPosition);
     window.addEventListener("resize", updateTargetAreaPosition);
-    //window.addEventListener("scroll", updateTargetAreaPosition);
 
     return () => {
       if (type === "action") {
@@ -113,10 +111,68 @@ const Tooltip = ({
       }
       window.removeEventListener("resize", updateTooltipPosition);
       window.removeEventListener("resize", updateTargetAreaPosition);
-      //window.removeEventListener("scroll", updateTooltipPosition);
-      //window.removeEventListener("scroll", updateTargetAreaPosition);
     };
   }, [targetEl, targetAreaEl, type, onNext, tooltipNo]);
+
+  // Scroll to tooltip automatically
+  useLayoutEffect(() => {
+    const tooltipHeight = tooltipRef.current.offsetHeight;
+    const offsetBottom = 130;
+    const offsetTop = 50;
+    let scrollPos = null;
+
+    const calculateScrollPos = () => {
+      scrollPos = null;
+      // Check first if tooltip or target element higher
+
+      // Ignore initial tooltip position of 0
+      // Initially, both tooltipPosition and targetAreaPos are likely 0, leading to the if condition in calculateScrollPos always evaluating to true and scrolling to the top unnecessarily.
+      if (
+        tooltipPosition.top !== 0 ||
+        tooltipPosition.left !== 0 ||
+        targetAreaPos.top !== 0 ||
+        targetAreaPos.left !== 0
+      ) {
+        console.log("Tooltip top: " + tooltipPosition.top);
+        console.log("Target Element top: " + targetAreaPos.top);
+        console.log("Window top: " + window.scrollY);
+        console.log(
+          "Window bottom: " +
+            (window.scrollY + document.documentElement.clientHeight)
+        );
+
+        // if tooltip higher, you want to scroll to its top
+        if (tooltipPosition.top < targetAreaPos.top) {
+          // if tooltip is out of viewport
+          if (
+            tooltipPosition.top - offsetTop < window.scrollY ||
+            tooltipPosition.top + tooltipHeight + offsetBottom >
+              window.scrollY + document.documentElement.clientHeight
+          ) {
+            // scroll to tooltip top
+            scrollPos = tooltipPosition.top - offsetTop;
+          }
+        }
+        // else if target element is higher, you want to scroll to its top
+        else {
+          // if target element is out of viewport
+          if (
+            targetAreaPos.top - offsetTop < window.scrollY ||
+            targetAreaPos.top + targetAreaPos.height + offsetBottom >
+              window.scrollY + document.documentElement.clientHeight
+          ) {
+            // scroll to target area top
+            scrollPos = targetAreaPos.top - offsetTop;
+          }
+        }
+      }
+    };
+    calculateScrollPos();
+
+    if (scrollPos !== null) {
+      window.scrollTo({ top: scrollPos, behavior: "smooth" });
+    }
+  }, [tooltipPosition, targetAreaPos]);
 
   // Fade tooltip in smoothly
   useEffect(() => {

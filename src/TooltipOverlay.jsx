@@ -25,13 +25,13 @@ const TooltipOverlay = ({ targetAreaEl }) => {
       // Position the target area highlight
       const rect = targetAreaElement.getBoundingClientRect();
 
-      console.log(
-        "Element position: ",
-        rect.left,
-        rect.top,
-        rect.width,
-        rect.height
-      );
+      // console.log(
+      //   "Element position: ",
+      //   rect.left,
+      //   rect.top,
+      //   rect.width,
+      //   rect.height
+      // );
 
       // converting these values to the svg viewBox dimensions you are working in
       setTargetAreaPos({

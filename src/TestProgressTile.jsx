@@ -31,10 +31,16 @@ const TestProgressTile = ({
   const [confirmationAction, setConfirmationAction] = useState(null);
   const [isExpanded, setIsExpanded] = useState(true);
   const [tileHeight, setTileHeight] = useState(0);
+  const [tileWidth, setTileWidth] = useState(0);
+  const [tilePosition, setTilePosition] = useState({
+    top: window.innerHeight - tileHeight,
+    left: document.documentElement.clientWidth - tileWidth - 20,
+  });
   const testProgressTileRef = useRef(null);
 
   const [clickElementNo, setClickElementNo] = useState(0);
   const clickElements = currentTask.clickElements; // the element objects that need to be clicked to complete the round
+  const [windowClickCount, setWindowClickCount] = useState(0);
 
   // Get the height of the tile
   useLayoutEffect(() => {
@@ -42,30 +48,56 @@ const TestProgressTile = ({
       return;
     }
 
-    const updateTileHeight = () => {
+    const updateTileDimensions = () => {
       setTileHeight(testProgressTileRef.current.offsetHeight);
+      setTileWidth(testProgressTileRef.current.offsetWidth);
     };
-    updateTileHeight();
-    window.addEventListener("resize", updateTileHeight);
+    updateTileDimensions();
+    window.addEventListener("resize", updateTileDimensions);
 
     return () => {
-      window.removeEventListener("resize", updateTileHeight);
+      window.removeEventListener("resize", updateTileDimensions);
     };
   }, [isExpanded, currentTaskNo]);
 
+  // Helps reinspect for element after every window click
+  useEffect(() => {
+    const handleWindowClick = () => {
+      setWindowClickCount((prevCount) => prevCount + 1);
+    };
+
+    window.addEventListener("click", handleWindowClick);
+
+    return () => {
+      window.removeEventListener("click", handleWindowClick);
+    };
+  }, []);
+
+  // Test logic
   useLayoutEffect(() => {
     const elementToClickObject = clickElements[clickElementNo]; // the current element (JS object) that needs to be clicked next in the task
-    const targetElementToClick = document.querySelector(
-      elementToClickObject.elementId
-    ); // the actual DOM element
+    const targetElementId = elementToClickObject.elementId;
+    const targetElementToClick = document.querySelector(targetElementId); // the actual DOM element
     const textInputElements = elementToClickObject.textInputElements;
+
+    // If target element not yet on page
+    if (!targetElementToClick) {
+      console.log(`Target element "${targetElementId}" not yet found`);
+      return;
+    } else {
+      console.log(`Target element "${targetElementId}" found`);
+    }
 
     const handleClick = () => {
       // Check to see if every input element has the correct input
       for (const textInputElement of textInputElements) {
         const inputElement = document.querySelector(textInputElement.elementId);
 
-        if (inputElement.value !== textInputElement.requiredInput) {
+        if (!textInputElement) {
+          console.log(
+            `Input field "${textInputElement.elementId}" not found - ignoring`
+          );
+        } else if (inputElement.value !== textInputElement.requiredInput) {
           console.log("Not all required text inputs are correct");
           return;
         }
@@ -87,11 +119,12 @@ const TestProgressTile = ({
     return () => {
       targetElementToClick.removeEventListener("click", handleClick);
     };
-  }, [currentTaskNo, clickElementNo]);
+  }, [currentTaskNo, clickElementNo, windowClickCount]);
 
   const textRef = useRef(null);
   const [lineCount, setLineCount] = useState(0);
 
+  // Some formatting logic
   useEffect(() => {
     const measureLines = () => {
       if (textRef.current) {
@@ -100,23 +133,33 @@ const TestProgressTile = ({
         const totalHeight = textElement.offsetHeight;
         const lines = Math.round(totalHeight / lineHeight);
         setLineCount(lines);
-        console.log(
-          "Single line height for " +
-            textElement.textContent +
-            ": " +
-            lineHeight
-        );
-        console.log("Total line height: " + totalHeight);
-        console.log("Therefore line count is " + lines);
+        // console.log(
+        //   "Single line height for " +
+        //     textElement.textContent +
+        //     ": " +
+        //     lineHeight
+        // );
+        // console.log("Total line height: " + totalHeight);
+        // console.log("Therefore line count is " + lines);
       }
     };
-
     measureLines();
+    window.addEventListener("resize", measureLines); // Re-measure on window resize if need be
 
-    // Re-measure on window resize if need be
-    window.addEventListener("resize", measureLines);
-    return () => window.removeEventListener("resize", measureLines);
-  }, [currentTaskNo]);
+    const updateTilePosition = () => {
+      setTilePosition({
+        top: window.innerHeight - tileHeight,
+        left: document.documentElement.clientWidth - tileWidth - 20,
+      });
+    };
+    updateTilePosition();
+    window.addEventListener("resize", updateTilePosition);
+
+    return () => {
+      window.removeEventListener("resize", measureLines);
+      window.removeEventListener("resize", updateTilePosition);
+    };
+  }, [currentTaskNo, tileHeight]);
 
   const handleOpenConfirmationPopup = (action) => {
     setConfirmationAction(action); // waiting to see whether this action (exit, skip) will be confirmed
@@ -137,8 +180,8 @@ const TestProgressTile = ({
 
   const style = {
     position: "fixed",
-    top: window.innerHeight - tileHeight,
-    left: "60%",
+    top: tilePosition.top,
+    left: tilePosition.left,
     pointerEvents: "all",
     zIndex: 1000,
     width: "380px",
@@ -148,7 +191,8 @@ const TestProgressTile = ({
     borderTopRightRadius: "5px",
     borderTopLeftRadius: "5px",
     overflow: "hidden",
-    transition: "opacity 0.0s ease-in-out",
+    //transition: "opacity 0.0s ease-in-out",
+    transition: "top 0.3s ease-out",
   };
 
   const formattedTasks = taskNames.map((task, index) => {
@@ -192,15 +236,15 @@ const TestProgressTile = ({
           primary={
             <Typography
               ref={index === currentTaskNo - 1 ? textRef : null}
-              className={
-                index === currentTaskNo - 1
-                  ? `strike-through-animate-task-${lineCount}`
-                  : ""
-              }
+              // className={
+              //   index === currentTaskNo - 1
+              //     ? `strike-through-animate-task-${lineCount}`
+              //     : ""
+              // }
               sx={{
-                fontSize: "0.9rem",
-                textDecoration:
-                  index < currentTaskNo - 1 ? "line-through" : "none",
+                fontSize: "0.95rem",
+                // textDecoration:
+                //   index < currentTaskNo - 1 ? "line-through" : "none",
                 color:
                   index < currentTaskNo ? "rgba(0, 0, 0, 0.54)" : "inherit",
               }}
@@ -216,141 +260,80 @@ const TestProgressTile = ({
 
   return (
     <>
-      {!isExpanded && (
+      <Box
+        id={`test-progress-tile-${isExpanded ? "expanded" : "reduced"}`}
+        ref={isExpanded ? testProgressTileRef : null}
+        style={style}
+        elevation={3}
+      >
         <Box
-          id="test-progress-tile-reduced"
-          ref={testProgressTileRef}
-          style={style}
-          elevation={3}
+          ref={!isExpanded ? testProgressTileRef : null}
+          id="header"
+          color="white"
+          backgroundColor="#3F15B1"
+          padding="12px"
         >
           <Box
-            id="header"
-            color={"white"}
-            backgroundColor={"#3F15B1"}
-            padding={"8px"}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
           >
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Typography
-                variant="subtitle1"
-                sx={{
-                  fontSize: "1rem",
-                  fontWeight: "300",
-                  marginBottom: 0,
-                  paddingBottom: 0,
-                }}
-              >
-                Next Task:
-              </Typography>
-              <IconButton
-                onClick={() => setIsExpanded(true)}
-                sx={{ color: "white", padding: 0, margin: 0 }}
-                size="medium"
-              >
-                <ExpandLessIcon fontSize="medium" />
-              </IconButton>
-            </Box>
             <Typography
-              variant="h6"
+              className="fade-in-text"
+              variant={isExpanded ? "subtitle2" : "subtitle1"}
               sx={{
-                fontSize: "1.2rem",
-                fontWeight: "bold",
+                fontSize: isExpanded ? "0.8rem" : "0.8rem",
+                fontWeight: isExpanded ? "400" : "400",
                 marginBottom: "0px",
-                lineHeight: "1.2rem",
+                paddingBottom: 0,
               }}
             >
-              {taskNames[currentTaskNo]}
+              {isExpanded ? `Stage ${stageNo + 1} Test` : "Next Task:"}
             </Typography>
-            <Typography
-              variant="subtitle2"
-              sx={{
-                fontWeight: 400,
-                fontSize: "0.7rem",
-                lineHeight: "0.7rem",
-                marginBottom: "0px",
-                paddingRight: "5px",
-                width: "100%",
-                textAlign: "right",
-              }}
+            <IconButton
+              onClick={() => setIsExpanded(!isExpanded)}
+              sx={{ color: "white", padding: 0, margin: 0 }}
+              size="medium"
             >
-              Stage {stageNo + 1}
-            </Typography>
-          </Box>
-        </Box>
-      )}
-
-      {isExpanded && (
-        <Box
-          id="test-progress-tile-expanded"
-          ref={testProgressTileRef}
-          style={style}
-          elevation={3}
-        >
-          <Box
-            id="header"
-            color={"white"}
-            backgroundColor={"#3F15B1"}
-            padding={"12px"}
-          >
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Typography
-                variant="subtitle2"
-                sx={{
-                  fontSize: "0.8rem",
-                  fontWeight: "400",
-                  marginBottom: "0px",
-                  paddingBottom: 0,
-                }}
-              >
-                Stage {stageNo + 1} Test
-              </Typography>
-              <IconButton
-                onClick={() => setIsExpanded(false)}
-                sx={{
-                  color: "white",
-                  padding: 0,
-                  margin: 0,
-                }}
-                size="medium"
-              >
+              {isExpanded ? (
                 <ExpandMoreIcon fontSize="medium" />
-              </IconButton>
-            </Box>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: "bold",
-                marginBottom: "5px",
-                fontSize: "1.25rem",
-                lineHeight: "1.25rem",
-                marginBottom: "10px",
-              }}
-            >
-              {stageName}
-            </Typography>
+              ) : (
+                <ExpandLessIcon fontSize="medium" />
+              )}
+            </IconButton>
+          </Box>
+          <Typography
+            className="fade-in-text"
+            variant="h6"
+            sx={{
+              width: isExpanded ? "100%" : "92%",
+              fontWeight: isExpanded ? "700" : "500",
+              marginBottom: isExpanded ? "5px" : "0px",
+              fontSize: isExpanded ? "1.25rem" : "1.2rem",
+              lineHeight: isExpanded ? "1.25rem" : "1.3rem",
+            }}
+          >
+            {isExpanded ? stageName : taskNames[currentTaskNo]}
+          </Typography>
+          {isExpanded && (
             <Box
               id="progress-bar-container"
-              display={"flex"}
-              alignItems={"center"}
+              className="fade-in-text"
+              display="flex"
+              alignItems="center"
             >
               <Box
                 id="progress-bar-outer"
-                display={"flex"}
-                alignItems={"center"}
-                justifyContent={"left"}
+                position="relative" // Added position relative
+                display="flex"
+                alignItems="center"
+                justifyContent="left"
                 sx={{
                   backgroundColor: "white",
                   width: "85%",
                   height: "13px",
                   borderRadius: "10px",
-                  padding: "0 2px",
+                  padding: "1px 2px",
                   margin: "0 10px 0 0",
                 }}
               >
@@ -362,9 +345,11 @@ const TestProgressTile = ({
                   }% - 4px)`}
                   sx={{
                     backgroundColor: "green",
-                    height: "80%",
+                    height: "100%",
                     borderRadius: "10px",
                     transformOrigin: "0% 50%",
+                    padding: 0,
+                    margin: 0,
                   }}
                 ></Box>
               </Box>
@@ -372,71 +357,71 @@ const TestProgressTile = ({
                 {Math.round((currentTaskNo / taskNames.length) * 100)}%
               </Typography>
             </Box>
+          )}
+        </Box>
+        <Box id="test-expanded-data" backgroundColor="#F2F2F2">
+          <Box id="test-stages" padding="8px 16px" marginBottom="0px">
+            <List>{formattedTasks}</List>
           </Box>
-          <Box id="test-expanded-data" backgroundColor="#F2F2F2">
-            <Box id="test-stages" padding={"8px 16px"} marginBottom={"0px"}>
-              <List>{formattedTasks}</List>
-            </Box>
-            <Box
-              id="bottom-buttons"
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              width={"95%"}
-              margin={"auto"}
-              marginBottom={"2px"}
+          <Box
+            id="bottom-buttons"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            width="95%"
+            margin="auto"
+            marginBottom="2px"
+          >
+            <Button
+              size="small"
+              startIcon={<ExitToAppIcon fontSize="0.7rem" />}
+              onClick={() => handleOpenConfirmationPopup("Exit")}
+              sx={{
+                color: "#BFBFBF",
+                fontSize: "0.7rem",
+                backgroundColor: "transparent",
+                "&:hover": {
+                  color: "#858585",
+                  backgroundColor: "transparent",
+                  border: "none",
+                  boxShadow: "none",
+                },
+                border: "none",
+                boxShadow: "none",
+                textTransform: "none",
+              }}
             >
-              <Button
-                size="small"
-                startIcon={<ExitToAppIcon fontSize="0.7rem" />}
-                onClick={() => handleOpenConfirmationPopup("Exit")}
-                sx={{
-                  color: "#BFBFBF",
-                  fontSize: "0.7rem",
+              Exit tutorial
+            </Button>
+            <Button
+              size="small"
+              endIcon={<FastForwardIcon fontSize="0.7rem" />}
+              onClick={() => handleOpenConfirmationPopup("Skip")}
+              sx={{
+                color: "#BFBFBF",
+                fontSize: "0.7rem",
+                backgroundColor: "transparent",
+                "&:hover": {
+                  color: "#858585",
                   backgroundColor: "transparent",
-                  "&:hover": {
-                    color: "#858585",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    boxShadow: "none",
-                  },
                   border: "none",
                   boxShadow: "none",
-                  textTransform: "none",
-                }}
-              >
-                Exit tutorial
-              </Button>
-              <Button
-                size="small"
-                endIcon={<FastForwardIcon fontSize="0.7rem" />}
-                onClick={() => handleOpenConfirmationPopup("Skip")}
-                sx={{
-                  color: "#BFBFBF",
-                  fontSize: "0.7rem",
-                  backgroundColor: "transparent",
-                  "&:hover": {
-                    color: "#858585",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    boxShadow: "none",
-                  },
-                  border: "none",
-                  boxShadow: "none",
-                  textTransform: "none",
-                }}
-              >
-                Skip test
-              </Button>
-            </Box>
+                },
+                border: "none",
+                boxShadow: "none",
+                textTransform: "none",
+              }}
+            >
+              Skip test
+            </Button>
           </Box>
         </Box>
-      )}
+      </Box>
 
       {/* Confirmation Popup */}
       {confirmationPopupOpen && (
         <Box
-          position="absolute"
+          position="fixed"
           display="flex"
           justifyContent="center"
           alignItems="center"
