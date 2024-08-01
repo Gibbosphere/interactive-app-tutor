@@ -107,7 +107,7 @@ const TutorialHeader = ({
 
   const dropDownStyle = {
     position: "fixed",
-    zindex: 1000000001,
+    zIndex: 1000000001,
     top: headerHeight,
     right: isOpen ? dropDownMenuPosition.open : dropDownMenuPosition.closed,
     width: dropDownWidth,
@@ -158,7 +158,7 @@ const TutorialHeader = ({
       <Box
         id="tutorial-bar"
         position="fixed"
-        zindex={1000000006}
+        zIndex={1000000006}
         width={"100%"}
         sx={{
           color: "white",
@@ -323,7 +323,7 @@ const TutorialHeader = ({
           height="100%"
           top="0"
           left="0"
-          style={{ zindex: 1000000007, backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+          style={{ zIndex: 1000000007, backgroundColor: "rgba(0, 0, 0, 0.2)" }}
         >
           <Box
             className="confirmation-container"

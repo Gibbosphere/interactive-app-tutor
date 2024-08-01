@@ -211,7 +211,7 @@ const Tooltip = ({
     position: "absolute",
     top: tooltipPosition.top,
     left: tooltipPosition.left,
-    zindex: 1000000000,
+    zIndex: 1000000000,
     padding: "16px",
     width: tooltipWidth,
     boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
