@@ -183,7 +183,7 @@ const TestProgressTile = ({
     top: tilePosition.top,
     left: tilePosition.left,
     pointerEvents: "all",
-    zIndex: 1000,
+    zindex: 1000000000,
     width: "380px",
     boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
     borderBottomRightRadius: "0px",
@@ -429,7 +429,7 @@ const TestProgressTile = ({
           top="0"
           left="0"
           style={{
-            zIndex: 1007,
+            zindex: 1000000007,
             backgroundColor: "rgba(0, 0, 0, 0.2)",
             pointerEvents: "all",
           }}

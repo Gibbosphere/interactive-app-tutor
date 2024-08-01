@@ -185,7 +185,7 @@ const Tutorial = ({ tutorialContent, onExit }) => {
 
   return (
     <Box
-      zIndex={1000}
+      zindex={1000000000}
       sx={{
         position: "absolute",
         top: "0px",
