@@ -152,7 +152,7 @@ const TestProgressTile = ({
 
     const updateTilePosition = () => {
       setTilePosition({
-        top: window.innerHeight - tileHeight,
+        top: document.documentElement.clientHeight - tileHeight,
         left: document.documentElement.clientWidth - tileWidth - 20,
       });
     };
@@ -185,6 +185,7 @@ const TestProgressTile = ({
     pointerEvents: "all",
     zIndex: 1000000000,
     width: "380px",
+    backgroundColor: "white",
     boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
     borderBottomRightRadius: "0px",
     borderBottomLeftRadius: "0px",

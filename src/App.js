@@ -13,6 +13,7 @@ import Page1 from "./pages/Page1";
 import Page2 from "./pages/Page2";
 import Page3 from "./pages/Page3";
 import Tutorial from "./Tutorial";
+import ResourceCircle from "./ResourceCircle";
 
 // onActivte will handle the turning on and off of a tutorial
 const App = () => {
@@ -471,6 +472,7 @@ const App = () => {
       <Box id="element8" mt={2} p={2} border={1}>
         Feature 8
       </Box>
+      <ResourceCircle></ResourceCircle>
       {tutorialActive && (
         <Tutorial
           tutorialContent={tutorial}
