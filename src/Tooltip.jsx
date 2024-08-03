@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { Box, Button, Typography, Paper, IconButton } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Tooltip = ({
   type,
@@ -9,9 +10,11 @@ const Tooltip = ({
   targetAreaEl,
   title,
   content,
-  canGoBack,
   onNext,
+  canGoBack,
   onBack,
+  canExit = false,
+  onExit,
   tooltipNo,
   totalTooltips,
 }) => {
@@ -242,13 +245,36 @@ const Tooltip = ({
           boxShadow: "0 0 4px 2px rgba(63, 21, 177, 0.2)",
         }}
       ></Box>
-      <Paper ref={tooltipRef} style={tooltipStyle} elevation={3}>
+      <Paper id="tooltip" ref={tooltipRef} style={tooltipStyle} elevation={3}>
+        {canExit && (
+          <CloseIcon
+            onClick={onExit}
+            sx={{
+              position: "absolute",
+              right: "5px",
+              top: "5px",
+              fontSize: "large",
+              color: "#D1D1D1",
+              cursor: "pointer",
+              "&:hover": { color: "#979797" },
+              transition: "color 0.1s ease-in",
+            }}
+          ></CloseIcon>
+        )}
         {type === "informative" ? (
           <>
-            <Typography sx={{ marginBottom: "6px" }} variant="h6">
+            <Typography
+              id="tooltip-title"
+              sx={{ marginBottom: "6px" }}
+              variant="h6"
+            >
               {title}
             </Typography>
-            <Typography variant="body2" paragraph>
+            <Typography
+              id="tooltip-informative-content"
+              variant="body2"
+              paragraph
+            >
               {formattedContent}
             </Typography>
             <Box
@@ -258,6 +284,7 @@ const Tooltip = ({
             >
               {canGoBack && (
                 <IconButton
+                  id="tooltip-back-button"
                   onClick={onBack}
                   size="small"
                   sx={{ color: "#3F15B1" }}
@@ -266,6 +293,7 @@ const Tooltip = ({
                 </IconButton>
               )}
               <Button
+                id="tooltip-next-button"
                 variant="contained"
                 size="small"
                 endIcon={<ArrowForwardIcon fontSize="small" />}
@@ -281,6 +309,7 @@ const Tooltip = ({
           </>
         ) : (
           <Typography
+            id="tooltip-action-content"
             variant="body2"
             fontSize={"1.3rem"}
             fontWeight={550}
@@ -300,7 +329,7 @@ const Tooltip = ({
           }}
         >
           <Box display={"flex"} justifyContent={"flex-end"} alignItems={"end"}>
-            {type == "action" && canGoBack && (
+            {type === "action" && canGoBack && (
               <IconButton
                 onClick={onBack}
                 size="small"

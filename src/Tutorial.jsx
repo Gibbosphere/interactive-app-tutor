@@ -11,7 +11,7 @@ import BasicBackgroundOverlay from "./BasicBackgroundOverlay";
 import IntroTile1 from "./IntroTile1";
 import IntroTile2 from "./IntroTile2";
 
-// onActivte will handle the turning on and off of a tutorial
+// onActivate will handle the turning on and off of a tutorial
 const Tutorial = ({ tutorialContent, onExit }) => {
   const tutorial = tutorialContent;
   const tutorialName = "iNethi Manager Tutorial";

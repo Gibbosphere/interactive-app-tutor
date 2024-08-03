@@ -1,0 +1,104 @@
+import { CssBaseline } from "@mui/material";
+import { Box } from "@mui/system";
+import React, { useEffect, useState } from "react";
+import TooltipOverlay from "./TooltipOverlay";
+import Tooltip from "./Tooltip";
+
+const InteractiveGuide = ({ guide, onExit, onComplete }) => {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [tooltipChanging, setTooltipChanging] = useState(false);
+  const [walkthroughActive, setWalkthroughActive] = useState(true);
+
+  const [scrollHeight, setScrollHeight] = useState(
+    document.documentElement.scrollHeight
+  );
+  const [scrollWidth, setScrollWidth] = useState(
+    document.documentElement.scrollHeight
+  );
+
+  // Get height and width of entire page (including scroll)
+  useEffect(() => {
+    const setPageDimensions = () => {
+      setScrollHeight(document.documentElement.scrollHeight);
+      setScrollWidth(document.documentElement.scrollWidth);
+    };
+    setPageDimensions();
+
+    window.addEventListener("click", setPageDimensions);
+    window.addEventListener("resize", setPageDimensions);
+
+    return () => {
+      window.removeEventListener("click", setPageDimensions);
+      window.removeEventListener("resize", setPageDimensions);
+    };
+  }, []);
+
+  const nextStep = () => {
+    const tooltips = guide.tooltips;
+    if (currentStep < tooltips.length - 1) {
+      // Move to next tooltip
+      setTooltipChanging(true);
+      setCurrentStep((prevStep) => prevStep + 1);
+    } else {
+      // Guide completed
+      console.log("Guide completed!");
+      onComplete();
+    }
+  };
+
+  const prevStep = () => {
+    if (currentStep > 0) {
+      // set timeout is delaying transition to next tooltip for effect
+      setTimeout(() => {
+        setCurrentStep((prevStep) => prevStep - 1);
+      }, 300);
+    }
+    console.log("previous step called");
+  };
+
+  // helps to rerender tooltip for animating new tooltip appearing
+  const handleTootlipChange = () => {
+    setTimeout(() => {
+      setTooltipChanging(false);
+    }, 5);
+  };
+
+  return (
+    <>
+      <CssBaseline />
+      {tooltipChanging && (
+        <>
+          {
+            handleTootlipChange() // rerender tooltip for animation sake
+          }
+          <TooltipOverlay
+            targetAreaEl={guide.tooltips[currentStep].targetAreaElement}
+          ></TooltipOverlay>
+        </>
+      )}
+      {!tooltipChanging && walkthroughActive && (
+        <>
+          <TooltipOverlay
+            targetAreaEl={guide.tooltips[currentStep].targetAreaElement}
+          ></TooltipOverlay>
+          <Tooltip
+            type={guide.tooltips[currentStep].type}
+            targetEl={guide.tooltips[currentStep].targetElement}
+            targetAreaEl={guide.tooltips[currentStep].targetAreaElement}
+            title={guide.tooltips[currentStep].title}
+            content={guide.tooltips[currentStep].content}
+            onNext={nextStep}
+            canGoBack={currentStep !== 0}
+            onBack={prevStep}
+            canExit={true}
+            onExit={onExit}
+            tooltipNo={currentStep + 1}
+            totalTooltips={guide.tooltips.length}
+          />
+        </>
+      )}
+    </>
+  );
+};
+
+export default InteractiveGuide;
