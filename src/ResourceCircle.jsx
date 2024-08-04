@@ -1,6 +1,5 @@
 import {
   CssBaseline,
-  Divider,
   Icon,
   IconButton,
   Switch,
@@ -15,7 +14,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import InteractiveGuideCard from "./InteractiveGuideCard";
 import InteractiveGuide from "./InteractiveGuide";
 import InfoIcon from "./InfoIcon";
-import { HorizontalRule } from "@mui/icons-material";
 import {
   BrowserRouter as Router,
   useNavigate,

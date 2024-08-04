@@ -15,6 +15,7 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
+import TutorialCompleteTile from "./TutorialCompleteTile";
 
 // onActivate will handle the turning on and off of a tutorial
 const Tutorial = ({ tutorialContent, onExit }) => {
@@ -42,6 +43,8 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     useState(false);
   const [stageCompleteIntermission2, setStageCompleteIntermission2] =
     useState(false);
+
+  const [tutorialComplete, setTutorialComplete] = useState(false);
 
   const [scrollHeight, setScrollHeight] = useState(0); // used to fade component onto screen
 
@@ -90,6 +93,9 @@ const Tutorial = ({ tutorialContent, onExit }) => {
       } else {
         // Tutorial completed
         console.log("Tutorial completed!");
+        setWalkthroughActive(false);
+        setTestActive(false);
+        setTutorialComplete(true);
       }
     }
   };
@@ -158,7 +164,11 @@ const Tutorial = ({ tutorialContent, onExit }) => {
   const handleSkipTest = () => {
     setWalkthroughCompleteIntermission(false);
     resetTest();
-    setStageCompleteIntermission2(true);
+    if (currentStage < tutorial.length - 1) {
+      setStageCompleteIntermission2(true);
+    } else {
+      setTutorialComplete(true);
+    }
   };
 
   const handleStageContinue2 = () => {
@@ -187,12 +197,17 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     setStageCompleteIntermission2(false);
     setCurrentStep(0);
     resetTest();
+    setTutorialComplete(false);
     setWalkthroughActive(true);
     navigateToPage();
     // and then not updating the stage
   };
 
   const handleSkipStage = () => {
+    if (currentStage + 1 >= tutorial.length - 1) {
+      setStageCompleteIntermission2(false);
+      setTutorialComplete(true);
+    }
     setCurrentStage((prevStage) => prevStage + 1);
     setCurrentStep(0);
     // note tutorial progress tile is still showing
@@ -203,13 +218,26 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     setWalkthroughActive(false);
     resetTest();
     setCurrentStep(0);
-    setStageCompleteIntermission2(true);
-    // note tutorial progress tile is still showing
+    if (currentStage < tutorial.length - 1) {
+      setStageCompleteIntermission2(true);
+    } else {
+      setTutorialComplete(true);
+    }
   };
 
   const resetTest = () => {
     setTestActive(false);
     setCurrentTask(0);
+  };
+
+  const handleRestartTutorial = () => {
+    setWalkthroughCompleteIntermission(false);
+    setWalkthroughActive(false);
+    resetTest();
+    setCurrentStep(0);
+    setCurrentStage(0);
+    setTutorialComplete(false);
+    setStartingScreen1(true);
   };
 
   return (
@@ -359,6 +387,21 @@ const Tutorial = ({ tutorialContent, onExit }) => {
               onRedoStage={handleRedoStage}
               onSkipStage={handleSkipStage}
             />
+          }
+        ></BasicBackgroundOverlay>
+      )}
+
+      {tutorialComplete && (
+        <BasicBackgroundOverlay
+          focusElement={
+            <TutorialCompleteTile
+              tutorialName={tutorialName}
+              prevStageNo={currentStage + 1}
+              prevStageName={tutorial[currentStage].stageName}
+              onExit={handleExitTutorial}
+              onRedoStage={handleRedoStage}
+              onRestartTutorial={handleRestartTutorial}
+            ></TutorialCompleteTile>
           }
         ></BasicBackgroundOverlay>
       )}
