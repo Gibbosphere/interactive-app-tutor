@@ -83,6 +83,7 @@ const Tooltip = ({
       const offset = 20; // Offset from the target area
       const tooltipHeight = tooltipRef.current.offsetHeight;
       const arrowSize = 30;
+      let position = "right";
 
       // Default tooltip positioning: right of the target area and vertically centered
       let top = rect.top + window.scrollY + rect.height / 2 - tooltipHeight / 2;
@@ -94,12 +95,14 @@ const Tooltip = ({
 
       // Check if tooltip goes out of viewport on the right
       if (left + tooltipWidth > window.innerWidth) {
+        position = "left";
         left = rect.left + window.scrollX - tooltipWidth - offset; // Reposition to the left of the target area
         arrowLeft = left + tooltipWidth - arrowSize / 2; // Arrow pointing right
       }
 
       // Check if tooltip goes out of viewport on the left
       if (left < 0) {
+        position = null;
         left =
           (2 * (rect.left + window.scrollX) + rect.width) / 2 -
           tooltipWidth / 2; // Adjust to fit within the viewport
@@ -111,8 +114,14 @@ const Tooltip = ({
 
       // Check if tooltip goes out of viewport vertically above
       if (top < 0) {
-        top = rect.top + window.scrollY + rect.height + offset; // Place tooltip on bottom
-        arrowTop = top - arrowSize / 2; // Arrow pointing up
+        console.log("Out above");
+        if (position) {
+          top = rect.top + window.scrollY - offset / 2;
+          arrowTop = rect.top + rect.height / 2 + window.scrollY - offset / 2;
+        } else {
+          top = rect.top + window.scrollY + rect.height + offset; // Place tooltip on bottom
+          arrowTop = top - arrowSize / 2; // Arrow pointing up
+        }
       }
 
       setTooltipPosition({ top, left });

@@ -10,6 +10,11 @@ import WalkthroughCompleteTile from "./WalkthroughCompleteTile";
 import BasicBackgroundOverlay from "./BasicBackgroundOverlay";
 import IntroTile1 from "./IntroTile1";
 import IntroTile2 from "./IntroTile2";
+import {
+  BrowserRouter as Router,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 
 // onActivate will handle the turning on and off of a tutorial
 const Tutorial = ({ tutorialContent, onExit }) => {
@@ -17,6 +22,9 @@ const Tutorial = ({ tutorialContent, onExit }) => {
   const tutorialName = "iNethi Manager Tutorial";
   const [startingScreen1, setStartingScreen1] = useState(true);
   const [startingScreen2, setStartingScreen2] = useState(false);
+
+  const navigate = useNavigate();
+  const { pathname: currentPath } = useLocation(); // Destructure pathname from useLocation
 
   const [currentStage, setCurrentStage] = useState(0);
 
@@ -48,6 +56,24 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     return () => window.removeEventListener("click", setHeight);
   }, []);
 
+  const navigateToPage = () => {
+    if (navigate) {
+      const targetPage =
+        tutorialContent[currentStage].tooltips[currentStep].page;
+
+      // Only navigate if the target page is different from the current path
+      if (currentPath !== targetPage) {
+        navigate(targetPage);
+      } else {
+        console.log("Already on the correct page:", currentPath);
+      }
+    } else {
+      console.warn(
+        "Navigate function is not available. Are you sure you wrapped your <Tutorial> component in a <Router> component?"
+      );
+    }
+  };
+
   const nextStep = () => {
     const currentTooltips = tutorial[currentStage].tooltips;
     if (currentStep < currentTooltips.length - 1) {
@@ -70,10 +96,8 @@ const Tutorial = ({ tutorialContent, onExit }) => {
 
   const prevStep = () => {
     if (currentStep > 0) {
-      // set timeout is delaying transition to next tooltip for effect
-      setTimeout(() => {
-        setCurrentStep((prevStep) => prevStep - 1);
-      }, 500);
+      setTooltipChanging(true);
+      setCurrentStep((prevStep) => prevStep - 1);
     }
     console.log("previous step called");
   };
@@ -81,6 +105,7 @@ const Tutorial = ({ tutorialContent, onExit }) => {
   // helps to rerender tooltip for animating new tooltip appearing
   const handleTootlipChange = () => {
     setTimeout(() => {
+      navigateToPage();
       setTooltipChanging(false);
     }, 5);
   };
@@ -115,6 +140,7 @@ const Tutorial = ({ tutorialContent, onExit }) => {
   const handleStartScreen2Next = () => {
     setStartingScreen2(false);
     setWalkthroughActive(true);
+    navigateToPage();
   };
 
   const handleTakeTest = () => {
@@ -126,6 +152,7 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     setWalkthroughCompleteIntermission(false);
     setCurrentStep(0);
     setWalkthroughActive(true);
+    navigateToPage();
   };
 
   const handleSkipTest = () => {
@@ -139,6 +166,7 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     setCurrentStep(0);
     setCurrentStage((prevStage) => prevStage + 1);
     setWalkthroughActive(true);
+    navigateToPage();
   };
 
   const handleStageContinue1 = () => {
@@ -160,6 +188,7 @@ const Tutorial = ({ tutorialContent, onExit }) => {
     setCurrentStep(0);
     resetTest();
     setWalkthroughActive(true);
+    navigateToPage();
     // and then not updating the stage
   };
 

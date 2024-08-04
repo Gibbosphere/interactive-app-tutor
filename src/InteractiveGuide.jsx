@@ -3,10 +3,15 @@ import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import TooltipOverlay from "./TooltipOverlay";
 import Tooltip from "./Tooltip";
+import {
+  BrowserRouter as Router,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 
 const InteractiveGuide = ({ guide, onExit, onComplete }) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [tooltipChanging, setTooltipChanging] = useState(false);
+  const [tooltipChanging, setTooltipChanging] = useState(true);
   const [walkthroughActive, setWalkthroughActive] = useState(true);
 
   const [scrollHeight, setScrollHeight] = useState(
@@ -15,6 +20,9 @@ const InteractiveGuide = ({ guide, onExit, onComplete }) => {
   const [scrollWidth, setScrollWidth] = useState(
     document.documentElement.scrollHeight
   );
+
+  const navigate = useNavigate();
+  const { pathname: currentPath } = useLocation(); // Destructure pathname from useLocation
 
   // Get height and width of entire page (including scroll)
   useEffect(() => {
@@ -33,6 +41,23 @@ const InteractiveGuide = ({ guide, onExit, onComplete }) => {
     };
   }, []);
 
+  const navigateToPage = () => {
+    if (navigate) {
+      const targetPage = guide.tooltips[currentStep].page;
+
+      // Only navigate if the target page is different from the current path
+      if (currentPath !== targetPage) {
+        navigate(targetPage);
+      } else {
+        console.log("Already on the correct page:", currentPath);
+      }
+    } else {
+      console.warn(
+        "Navigate function is not available. Are you sure you wrapped your <Tutorial> component in a <Router> component?"
+      );
+    }
+  };
+
   const nextStep = () => {
     const tooltips = guide.tooltips;
     if (currentStep < tooltips.length - 1) {
@@ -48,10 +73,8 @@ const InteractiveGuide = ({ guide, onExit, onComplete }) => {
 
   const prevStep = () => {
     if (currentStep > 0) {
-      // set timeout is delaying transition to next tooltip for effect
-      setTimeout(() => {
-        setCurrentStep((prevStep) => prevStep - 1);
-      }, 300);
+      setTooltipChanging(true);
+      setCurrentStep((prevStep) => prevStep - 1);
     }
     console.log("previous step called");
   };
@@ -59,6 +82,7 @@ const InteractiveGuide = ({ guide, onExit, onComplete }) => {
   // helps to rerender tooltip for animating new tooltip appearing
   const handleTootlipChange = () => {
     setTimeout(() => {
+      navigateToPage();
       setTooltipChanging(false);
     }, 5);
   };
