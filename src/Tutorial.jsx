@@ -91,11 +91,17 @@ const Tutorial = ({ tutorialContent, onExit }) => {
           ? setWalkthroughCompleteIntermission(true)
           : setStageCompleteIntermission1(true);
       } else {
-        // Tutorial completed
-        console.log("Tutorial completed!");
         setWalkthroughActive(false);
-        setTestActive(false);
-        setTutorialComplete(true);
+
+        if (tutorial[currentStage].test.length > 0) {
+          // if there is a test for your last stage
+          setWalkthroughCompleteIntermission(true);
+        } else {
+          // Tutorial completed
+          console.log("Tutorial completed!");
+          resetTest();
+          setTutorialComplete(true);
+        }
       }
     }
   };
@@ -127,7 +133,13 @@ const Tutorial = ({ tutorialContent, onExit }) => {
       // Finished all tasks - Test and stage completed
       console.log("Test completed!");
       resetTest();
-      setStageCompleteIntermission1(true);
+      if (currentStage < tutorial.length - 1) {
+        // if not last test of last stage
+        setStageCompleteIntermission1(true);
+      } else {
+        console.log("Tutorial completed!");
+        setTutorialComplete(true);
+      }
     }
   };
 
