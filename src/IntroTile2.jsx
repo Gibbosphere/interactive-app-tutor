@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Box, Button, Typography } from "@mui/material";
 
 const IntroTile2 = ({ logoSrc, stages, onNext, onExit }) => {
   const circleSize = 70;
   const tileWidth = 400;
   const [isVisible, setIsVisible] = useState(false); // used to fade component onto screen
+  const [tileHeight, setTileHeight] = useState(0);
+  const tileRef = useRef(null);
 
   // Fade progress tile in smoothly
   useEffect(() => {
+    setTileHeight(tileRef.current.offsetHeight);
     setIsVisible(false);
     const timer = setTimeout(() => setIsVisible(true), 10);
     return () => clearTimeout(timer);
@@ -16,6 +19,7 @@ const IntroTile2 = ({ logoSrc, stages, onNext, onExit }) => {
   return (
     <>
       <Box
+        ref={tileRef}
         sx={{
           position: "absolute",
           zIndex: 1000000000,
@@ -27,6 +31,7 @@ const IntroTile2 = ({ logoSrc, stages, onNext, onExit }) => {
           opacity: isVisible ? 1 : 0,
           transition: "opacity 0.5s ease-in-out",
           backgroundColor: "white",
+          overflow: "visible",
         }}
       >
         <Box
@@ -82,12 +87,31 @@ const IntroTile2 = ({ logoSrc, stages, onNext, onExit }) => {
           and solidify your new knowledge.
         </Typography>
         <Box
-          id="stages"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          marginBottom={"15px"}
+          id="stages-container"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: tileHeight * 0.6,
+            overflowY: "auto",
+            marginBottom: "15px",
+            paddingLeft: "5px",
+            "&::-webkit-scrollbar": {
+              width: "5px", // width of the scrollbar
+            },
+            "&::-webkit-scrollbar-track": {
+              backgroundColor: "#f1f1f1", // track color
+              borderRadius: "10px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "#E1E3E7", // thumb color
+              borderRadius: "10px",
+            },
+            "&::-webkit-scrollbar-thumb:hover": {
+              backgroundColor: "#555", // thumb color on hover
+            },
+          }}
         >
           {stages.map((stage, index) => (
             <Typography

@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  CssBaseline,
-  Container,
-  Typography,
-  TextField,
-} from "@mui/material";
+import { Box, Button, CssBaseline, Container, Typography, TextField } from "@mui/material";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Page1 from "./pages/Page1";
@@ -30,11 +23,18 @@ const App = () => {
 
   return (
     <>
-      {tutorialActive && <div style={{ height: "29.5px" }}></div>}
+      {/* {tutorialActive && <div style={{ height: "29.5px" }}></div>} */}
       <Router>
         <Box sx={{ display: "flex" }}>
           <Sidebar />
-          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Box
+            component="main"
+            sx={{
+              p: 3,
+              marginLeft: "100px",
+              transition: "margin-left 0.3s", // Matches the sidebar transition
+            }}
+          >
             <Container>
               <Routes>
                 <Route path="/page1" element={<Page1 />} />
@@ -145,21 +145,18 @@ const App = () => {
       <Box id="element8" mt={2} p={2} border={1}>
         Feature 8
       </Box> */}
-        <ResourceCircle
-          guides={guidesData}
-          infoIcons={infoIconsData}
-        ></ResourceCircle>
-        {tutorialActive && (
-          <Tutorial
-            tutorialContent={tutorialData}
-            onExit={handleExitTutorial}
-          ></Tutorial>
-        )}
         {!tutorialActive && (
-          <Button onClick={() => setTutorialActive(true)}>
-            Start Tutorial
-          </Button>
+          <ResourceCircle
+            positionX="right"
+            positionY="bottom"
+            guides={guidesData}
+            infoIcons={infoIconsData}
+          ></ResourceCircle>
         )}
+        {tutorialActive && (
+          <Tutorial tutorialContent={tutorialData} onExit={handleExitTutorial}></Tutorial>
+        )}
+        {!tutorialActive && <Button onClick={() => setTutorialActive(true)}>Start Tutorial</Button>}
       </Router>
     </>
   );

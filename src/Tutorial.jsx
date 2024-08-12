@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Tooltip from "./Tooltip";
 import { CssBaseline, Box } from "@mui/material";
 import StageCompleteCard from "./StageCompleteTile";
 import TutorialProgressTile from "./TutorialProgressTile";
-import TutorialHeader from "./TutorialHeader";
-import TooltipOverlay from "./TooltipOverlay";
 import TestProgressTile from "./TestProgressTile";
 import WalkthroughCompleteTile from "./WalkthroughCompleteTile";
 import BasicBackgroundOverlay from "./BasicBackgroundOverlay";
@@ -12,9 +10,9 @@ import IntroTile1 from "./IntroTile1";
 import IntroTile2 from "./IntroTile2";
 import { BrowserRouter as Router, useNavigate, useLocation } from "react-router-dom";
 import TutorialCompleteTile from "./TutorialCompleteTile";
+import TutorialMenu from "./TutorialMenu";
 
-// onActivate will handle the turning on and off of a tutorial
-const Tutorial = ({ logoSrc, tutorialContent, onExit }) => {
+const Tutorial = ({ logoSrc, tutorialContent = [], onExit }) => {
   const tutorial = tutorialContent;
   const tutorialName = "iNethi Manager Tutorial";
   const [startingScreen1, setStartingScreen1] = useState(true);
@@ -39,26 +37,13 @@ const Tutorial = ({ logoSrc, tutorialContent, onExit }) => {
 
   const [tutorialComplete, setTutorialComplete] = useState(false);
 
-  const [scrollHeight, setScrollHeight] = useState(0);
-
-  // Fade progress tile in smoothly
-  useEffect(() => {
-    const setHeight = () => {
-      setScrollHeight(document.documentElement.scrollHeight);
-    };
-
-    setHeight();
-    window.addEventListener("click", setHeight);
-    return () => window.removeEventListener("click", setHeight);
-  }, []);
-
   const navigateToPage = (targetPage) => {
     if (navigate) {
       // Only navigate if the target page is different from the current path
       if (currentPath !== targetPage) {
         navigate(targetPage);
       } else {
-        console.log("Already on the correct page:", currentPath);
+        //console.log("Already on the correct page:", currentPath);
       }
     } else {
       console.warn(
@@ -71,7 +56,6 @@ const Tutorial = ({ logoSrc, tutorialContent, onExit }) => {
     const currentTooltips = tutorial[currentStage].tooltips;
     if (currentStep < currentTooltips.length - 1) {
       // Move to next tooltip
-      //setTooltipChanging(true);
       navigateToPage(tutorialContent[currentStage].tooltips[currentStep + 1].page);
       setCurrentStep((prevStep) => prevStep + 1);
     } else {
@@ -99,19 +83,18 @@ const Tutorial = ({ logoSrc, tutorialContent, onExit }) => {
 
   const prevStep = () => {
     if (currentStep > 0) {
-      //setTooltipChanging(true);
       navigateToPage(tutorialContent[currentStage].tooltips[currentStep - 1].page);
       setCurrentStep((prevStep) => prevStep - 1);
     }
-    console.log("previous step called");
   };
 
   // helps to rerender tooltip for animating new tooltip appearing
   const handleTootlipChange = () => {
     setTimeout(() => {
-      navigateToPage();
+      // navigateToPage();
+      //setContainerHeight(document.documentElement.scrollHeight);
       setTooltipChanging(false);
-    }, 5);
+    }, 0);
   };
 
   const nextTestStep = () => {
@@ -248,18 +231,17 @@ const Tutorial = ({ logoSrc, tutorialContent, onExit }) => {
     <Box
       zIndex={1000000000}
       sx={{
-        // backgroundColor: "rgba(88, 250, 200, 0.3)",
         position: "absolute",
         top: "0px",
         left: "0px",
-        width: "100%",
-        height: `${scrollHeight}px`,
         pointerEvents: "none",
       }}
     >
       <CssBaseline />
 
-      <TutorialHeader
+      <TutorialMenu
+        positionY="top"
+        positionX="right"
         tutorialName={tutorialName}
         stages={tutorial.map((stage) => stage.stageName)}
         stageNo={currentStage}
@@ -298,44 +280,22 @@ const Tutorial = ({ logoSrc, tutorialContent, onExit }) => {
         ></BasicBackgroundOverlay>
       )}
 
-      {tooltipChanging && (
-        <>
-          {
-            handleTootlipChange() // rerender tooltip for animation sake
-          }
-          <TooltipOverlay
-            targetAreaEl={tutorial[currentStage].tooltips[currentStep].targetAreaElement}
-          ></TooltipOverlay>
-        </>
-      )}
-      {!tooltipChanging && walkthroughActive && (
-        <>
-          <TooltipOverlay
-            targetAreaEl={tutorial[currentStage].tooltips[currentStep].targetAreaElement}
-          ></TooltipOverlay>
-          <Tooltip
-            type={tutorial[currentStage].tooltips[currentStep].type}
-            targetEl={tutorial[currentStage].tooltips[currentStep].targetElement}
-            targetAreaEl={tutorial[currentStage].tooltips[currentStep].targetAreaElement}
-            title={tutorial[currentStage].tooltips[currentStep].title}
-            content={tutorial[currentStage].tooltips[currentStep].content}
-            canGoBack={currentStep !== 0}
-            onNext={nextStep}
-            onBack={prevStep}
-            tooltipNo={currentStep + 1}
-            totalTooltips={tutorial[currentStage].tooltips.length}
-          />
-        </>
+      {walkthroughActive && (
+        <Tooltip
+          type={tutorial[currentStage].tooltips[currentStep].type}
+          targetEl={tutorial[currentStage].tooltips[currentStep].targetElement}
+          targetAreaEl={tutorial[currentStage].tooltips[currentStep].targetAreaElement}
+          title={tutorial[currentStage].tooltips[currentStep].title}
+          content={tutorial[currentStage].tooltips[currentStep].content}
+          canGoBack={currentStep !== 0}
+          onNext={nextStep}
+          onBack={prevStep}
+          tooltipNo={currentStep + 1}
+          totalTooltips={tutorial[currentStage].tooltips.length}
+        />
       )}
 
-      {taskChanging && (
-        <>
-          {
-            handleTaskChange() // rerender test progress tile for animation sake
-          }
-        </>
-      )}
-      {!taskChanging && testActive && (
+      {testActive && (
         <TestProgressTile
           stageName={tutorial[currentStage].stageName}
           stageNo={currentStage}

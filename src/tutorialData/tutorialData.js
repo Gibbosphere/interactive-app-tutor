@@ -297,6 +297,28 @@ const tutorialData = [
         title: "Input 2",
         content: "This is Input 2. Enter some text to interact with it.",
       },
+      {
+        type: "informative",
+        page: "/page2",
+        targetElement: "#element4",
+        targetAreaElement: "#element4",
+        title: "Feature4",
+        content: "This is Feature 4.\nIt is one of my favorite features ever.",
+      },
+      {
+        type: "informative",
+        targetElement: "#create-device-button",
+        targetAreaElement: "#create-device-button",
+        title: "Feature 4",
+        content: "This is the first feature of Stage 2.",
+      },
+      {
+        type: "informative",
+        targetElement: "#device-type-inputbox",
+        targetAreaElement: "#device-type-inputbox",
+        title: "Feature 5",
+        content: "This is the second feature of Stage 2.",
+      },
     ],
     test: [
       {
@@ -328,6 +350,278 @@ const tutorialData = [
                 requiredInput: "Another sample text",
               },
             ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    stageName: "Navigate to Page 1",
+    startingPage: "/page1",
+    tooltips: [
+      {
+        type: "informative",
+        page: "/page1",
+        targetElement: "#sidebar",
+        targetAreaElement: "#sidebar",
+        title: "Sidebar Menu",
+        content:
+          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+      },
+      {
+        type: "action",
+        page: "/page1",
+        targetElement: "#nav-page1",
+        targetAreaElement: "#nav-page1",
+        title: "Page 1 Navigation",
+        content: "Click here to navigate to Page 1.",
+      },
+    ],
+    test: [
+      {
+        text: "Open the sidebar menu and navigate to Page 1",
+        clickElements: [
+          {
+            elementId: "#nav-page1",
+            textInputElements: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    stageName: "Navigate to Page 1",
+    startingPage: "/page1",
+    tooltips: [
+      {
+        type: "informative",
+        page: "/page1",
+        targetElement: "#sidebar",
+        targetAreaElement: "#sidebar",
+        title: "Sidebar Menu",
+        content:
+          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+      },
+      {
+        type: "action",
+        page: "/page1",
+        targetElement: "#nav-page1",
+        targetAreaElement: "#nav-page1",
+        title: "Page 1 Navigation",
+        content: "Click here to navigate to Page 1.",
+      },
+    ],
+    test: [
+      {
+        text: "Open the sidebar menu and navigate to Page 1",
+        clickElements: [
+          {
+            elementId: "#nav-page1",
+            textInputElements: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    stageName: "Navigate to Page 1 pleeeesss",
+    startingPage: "/page1",
+    tooltips: [
+      {
+        type: "informative",
+        page: "/page1",
+        targetElement: "#sidebar",
+        targetAreaElement: "#sidebar",
+        title: "Sidebar Menu",
+        content:
+          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+      },
+      {
+        type: "action",
+        page: "/page1",
+        targetElement: "#nav-page1",
+        targetAreaElement: "#nav-page1",
+        title: "Page 1 Navigation",
+        content: "Click here to navigate to Page 1.",
+      },
+    ],
+    test: [
+      {
+        text: "Open the sidebar menu and navigate to Page 1",
+        clickElements: [
+          {
+            elementId: "#nav-page1",
+            textInputElements: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    stageName: "Navigate to Page 1",
+    startingPage: "/page1",
+    tooltips: [
+      {
+        type: "informative",
+        page: "/page1",
+        targetElement: "#sidebar",
+        targetAreaElement: "#sidebar",
+        title: "Sidebar Menu",
+        content:
+          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+      },
+      {
+        type: "action",
+        page: "/page1",
+        targetElement: "#nav-page1",
+        targetAreaElement: "#nav-page1",
+        title: "Page 1 Navigation",
+        content: "Click here to navigate to Page 1.",
+      },
+    ],
+    test: [
+      {
+        text: "Open the sidebar menu and navigate to Page 1",
+        clickElements: [
+          {
+            elementId: "#nav-page1",
+            textInputElements: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    stageName: "Navigate to Page 1",
+    startingPage: "/page1",
+    tooltips: [
+      {
+        type: "informative",
+        page: "/page1",
+        targetElement: "#sidebar",
+        targetAreaElement: "#sidebar",
+        title: "Sidebar Menu",
+        content:
+          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+      },
+      {
+        type: "action",
+        page: "/page1",
+        targetElement: "#nav-page1",
+        targetAreaElement: "#nav-page1",
+        title: "Page 1 Navigation",
+        content: "Click here to navigate to Page 1.",
+      },
+    ],
+    test: [
+      {
+        text: "Open the sidebar menu and navigate to Page 1",
+        clickElements: [
+          {
+            elementId: "#nav-page1",
+            textInputElements: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    stageName: "Navigate to Page 1",
+    startingPage: "/page1",
+    tooltips: [
+      {
+        type: "informative",
+        page: "/page1",
+        targetElement: "#sidebar",
+        targetAreaElement: "#sidebar",
+        title: "Sidebar Menu",
+        content:
+          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+      },
+      {
+        type: "action",
+        page: "/page1",
+        targetElement: "#nav-page1",
+        targetAreaElement: "#nav-page1",
+        title: "Page 1 Navigation",
+        content: "Click here to navigate to Page 1.",
+      },
+    ],
+    test: [
+      {
+        text: "Open the sidebar menu and navigate to Page 1",
+        clickElements: [
+          {
+            elementId: "#nav-page1",
+            textInputElements: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    stageName: "Navigate to Page 1",
+    startingPage: "/page1",
+    tooltips: [
+      {
+        type: "informative",
+        page: "/page1",
+        targetElement: "#sidebar",
+        targetAreaElement: "#sidebar",
+        title: "Sidebar Menu",
+        content:
+          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+      },
+      {
+        type: "action",
+        page: "/page1",
+        targetElement: "#nav-page1",
+        targetAreaElement: "#nav-page1",
+        title: "Page 1 Navigation",
+        content: "Click here to navigate to Page 1.",
+      },
+    ],
+    test: [
+      {
+        text: "Open the sidebar menu and navigate to Page 1",
+        clickElements: [
+          {
+            elementId: "#nav-page1",
+            textInputElements: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    stageName: "Navigate to Page 1",
+    startingPage: "/page1",
+    tooltips: [
+      {
+        type: "informative",
+        page: "/page1",
+        targetElement: "#sidebar",
+        targetAreaElement: "#sidebar",
+        title: "Sidebar Menu",
+        content:
+          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+      },
+      {
+        type: "action",
+        page: "/page1",
+        targetElement: "#nav-page1",
+        targetAreaElement: "#nav-page1",
+        title: "Page 1 Navigation",
+        content: "Click here to navigate to Page 1.",
+      },
+    ],
+    test: [
+      {
+        text: "Open the sidebar menu and navigate to Page 1",
+        clickElements: [
+          {
+            elementId: "#nav-page1",
+            textInputElements: [],
           },
         ],
       },

@@ -47,6 +47,10 @@ const InfoIcon = ({ targetEl, title, body, transitionTime = 0.3, delayTime = 0 }
     const targetElement = document.querySelector(targetEl);
     if (!targetElement) {
       setTargetElementFound(false);
+      setInfoIconPos({
+        top: document.documentElement.clientHeight + window.scrollY - infoIconSize,
+        left: document.documentElement.clientWidth + window.scrollX - infoIconSize,
+      });
       return;
     }
 
@@ -114,10 +118,6 @@ const InfoIcon = ({ targetEl, title, body, transitionTime = 0.3, delayTime = 0 }
     setIsOpen((prevValue) => !prevValue);
   };
 
-  if (!targetElementFound) {
-    return null;
-  }
-
   return (
     <Box ref={iconRef} zIndex={1000000000} sx={{ pointerEvents: "all" }}>
       <CssBaseline />
@@ -141,6 +141,8 @@ const InfoIcon = ({ targetEl, title, body, transitionTime = 0.3, delayTime = 0 }
           "&:hover": { color: "#d6d6d6" },
           userSelect: "none",
           transition: `top ${transitionTime}s ${delayTime}s ease-out, left ${transitionTime}s ${delayTime}s ease-out`,
+          opacity: targetElementFound ? 1 : 0,
+          pointerEvents: targetElementFound ? "all" : "none",
         }}
       >
         ?
