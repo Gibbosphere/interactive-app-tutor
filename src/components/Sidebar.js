@@ -28,10 +28,10 @@ const Sidebar = () => {
         alignItems: "flex-start",
       }}
     >
-      <IconButton onClick={toggleSidebar} sx={{ position: "absolute", top: 16, right: 0 }}>
+      <IconButton onClick={toggleSidebar} sx={{ position: "absolute", top: 4, right: 50 }}>
         {open ? <CloseIcon /> : <MenuIcon />}
       </IconButton>
-      <List>
+      <List sx={{ overflowY: "scroll", position: "relative", height: "200px" }}>
         <ListItem component={Link} to="/page1" id="nav-page1">
           <ListItemText primary="Page 1" />
         </ListItem>
@@ -40,6 +40,18 @@ const Sidebar = () => {
         </ListItem>
         <ListItem component={Link} to="/page3" id="nav-page3">
           <ListItemText primary="Page 3" />
+        </ListItem>
+        <ListItem component={Link} to="/page3" id="nav-page4">
+          <ListItemText primary="Page 4" />
+        </ListItem>
+        <ListItem component={Link} to="/page3" id="nav-page5">
+          <ListItemText primary="Page 5" />
+        </ListItem>
+        <ListItem component={Link} to="/page3" id="nav-page6">
+          <ListItemText primary="Page 6" />
+        </ListItem>
+        <ListItem component={Link} to="/page3" id="nav-page7">
+          <ListItemText primary="Page 7" />
         </ListItem>
       </List>
     </Box>

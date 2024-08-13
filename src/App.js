@@ -30,6 +30,7 @@ const App = () => {
           <Box
             component="main"
             sx={{
+              position: "relative",
               p: 3,
               marginLeft: "100px",
               transition: "margin-left 0.3s", // Matches the sidebar transition
@@ -154,7 +155,12 @@ const App = () => {
           ></ResourceCircle>
         )}
         {tutorialActive && (
-          <Tutorial tutorialContent={tutorialData} onExit={handleExitTutorial}></Tutorial>
+          <Tutorial
+            tutorialName="CommuNethi"
+            tutorialDescription="This interactive tutorial will walk you through the application, helping you to gain a clear understanding of how it works."
+            tutorialContent={tutorialData}
+            onExit={handleExitTutorial}
+          ></Tutorial>
         )}
         {!tutorialActive && <Button onClick={() => setTutorialActive(true)}>Start Tutorial</Button>}
       </Router>

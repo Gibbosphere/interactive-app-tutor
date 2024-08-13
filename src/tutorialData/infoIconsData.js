@@ -7,6 +7,21 @@ const infoIconsData = [
     body: "This is where you find all the good info",
   },
   {
+    targetElement: "#nav-page1",
+    title: "Dashboard",
+    body: "This is where you find all the good info",
+  },
+  {
+    targetElement: "#nav-page3",
+    title: "Dashboard",
+    body: "This is where you find all the good info",
+  },
+  {
+    targetElement: "#nav-page5",
+    title: "Dashboard",
+    body: "This is where you find all the good info",
+  },
+  {
     targetElement: "#el-remove-test-button",
     title: "Reports",
     body: "Here you can view various reports and analytics.",

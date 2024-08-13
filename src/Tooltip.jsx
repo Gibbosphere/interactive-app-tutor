@@ -6,13 +6,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import TooltipOverlay from "./TooltipOverlay";
 
 const Tooltip = ({
-  type,
+  type = "informative",
   targetEl,
   targetAreaEl,
-  title,
-  content,
+  title = "No Title Given",
+  content = "No Content Given",
   onNext,
-  canGoBack,
+  canGoBack = false,
   onBack,
   canExit = false,
   onExit,
@@ -27,6 +27,10 @@ const Tooltip = ({
   });
   const tooltipWidth = 270;
   const arrowSize = 30;
+  console.log((tooltipNo - 1 / totalTooltips) * 100);
+  console.log(totalTooltips);
+  const [progressBarWidth, setProgressBarWidth] = useState(0);
+
   const [targetAreaPos, setTargetAreaPos] = useState({
     left: 0,
     top: 0,
@@ -47,6 +51,7 @@ const Tooltip = ({
     const interval = setInterval(() => {
       if (!tooltipChanging) {
         setRefreshInterval(new Date());
+        setProgressBarWidth((tooltipNo / totalTooltips) * 100);
         console.log("Refreshing");
       }
     }, refreshIntervalValue);
@@ -82,6 +87,11 @@ const Tooltip = ({
     }
 
     const rect = targetAreaElement.getBoundingClientRect(); // more reliable than using targetAreaElement directly
+    // Scroll the target element into view
+    targetAreaElement.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
 
     // Position the target area highlight
     const updateTargetAreaPosition = () => {
@@ -211,6 +221,11 @@ const Tooltip = ({
 
     const handleAction = () => {
       if (type === "action") {
+        setChangedTooltipSince(true);
+        handleTooltipChanging();
+        if (tooltipNo === totalTooltips) {
+          setProgressBarWidth(0);
+        }
         onNext();
       }
     };
@@ -423,6 +438,9 @@ const Tooltip = ({
                   onClick={() => {
                     setChangedTooltipSince(true);
                     handleTooltipChanging();
+                    if (tooltipNo === totalTooltips) {
+                      setProgressBarWidth(0);
+                    }
                     onNext();
                   }}
                   sx={{
@@ -506,7 +524,7 @@ const Tooltip = ({
               <Box
                 id="tooltip-progressbar"
                 height="100%"
-                width={`${(tooltipNo / totalTooltips) * 100}%`}
+                width={`${progressBarWidth}%`}
                 sx={{
                   backgroundColor: "#3F15B1",
                   position: "absolute",
@@ -514,6 +532,7 @@ const Tooltip = ({
                   margin: 0,
                   borderTopRightRadius: "10px",
                   borderBottomRightRadius: "10px",
+                  transition: "width 0.2s 0s ease",
                 }}
               ></Box>
             </Box>

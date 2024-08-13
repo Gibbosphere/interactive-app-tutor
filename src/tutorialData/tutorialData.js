@@ -307,6 +307,14 @@ const tutorialData = [
       },
       {
         type: "informative",
+        page: "/page2",
+        targetElement: "#nav-page7",
+        targetAreaElement: "#nav-page7",
+        title: "Sidebar 7",
+        content: "This is Feature 4. It is one of my favorite features ever.",
+      },
+      {
+        type: "informative",
         targetElement: "#create-device-button",
         targetAreaElement: "#create-device-button",
         title: "Feature 4",

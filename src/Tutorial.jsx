@@ -12,9 +12,14 @@ import { BrowserRouter as Router, useNavigate, useLocation } from "react-router-
 import TutorialCompleteTile from "./TutorialCompleteTile";
 import TutorialMenu from "./TutorialMenu";
 
-const Tutorial = ({ logoSrc, tutorialContent = [], onExit }) => {
+const Tutorial = ({
+  logoSrc,
+  tutorialName = "iNethi Manager Tutorial",
+  tutorialDescription,
+  tutorialContent = [],
+  onExit,
+}) => {
   const tutorial = tutorialContent;
-  const tutorialName = "iNethi Manager Tutorial";
   const [startingScreen1, setStartingScreen1] = useState(true);
   const [startingScreen2, setStartingScreen2] = useState(false);
 
@@ -257,10 +262,8 @@ const Tutorial = ({ logoSrc, tutorialContent = [], onExit }) => {
             focusElement={
               <IntroTile1
                 logoSrc={logoSrc}
-                tutorialName={"CommuNethi"}
-                description={
-                  "This interactive tutorial will walk you through the application, helping you to gain a clear understanding of how it works."
-                }
+                tutorialName={tutorialName}
+                description={tutorialDescription}
                 onNext={handleStartScreen1Next}
               />
             }
