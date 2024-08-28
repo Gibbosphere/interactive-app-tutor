@@ -45,6 +45,25 @@ const Page2 = () => {
         <TextField id="mac-address-inputbox" label="Standard" variant="standard" />
         <TextField id="device-type-inputbox" label="Standard" variant="standard" />
       </Box>
+      <Box sx={{ mt: 2, height: "400px", width: "400px", position: "relative" }}>
+        <Typography id="textPoo">Some more random text.</Typography>
+        <Box sx={{ mt: 2, height: "120px", width: "400px", overflow: "auto" }}>
+          <Typography id="text2">Some more random text.</Typography>
+          <Typography id="text2">Some more random text.</Typography>
+          <Typography id="text2">Some more random text.</Typography>
+          <Typography id="text2">Some more random text.</Typography>
+          <Typography id="text2focus">Some more random text.</Typography>
+          <Box sx={{ mt: 2, height: "80px", width: "250px", overflow: "auto" }}>
+            <Typography id="text2">Some more random text.</Typography>
+            <Typography id="text2">Some more random text.</Typography>
+            <Typography id="text2">Some more random text.</Typography>
+            <Typography id="text2">Some more random text.</Typography>
+            <Typography id="text3focus">Some more random text.</Typography>
+            <Typography id="text2">Some more random text.</Typography>
+          </Box>
+          <Typography id="text2">Some more random text.</Typography>
+        </Box>
+      </Box>
     </Box>
   );
 };
