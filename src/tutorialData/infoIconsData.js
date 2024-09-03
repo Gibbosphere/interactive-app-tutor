@@ -1,11 +1,11 @@
 // infoIconsData.js
 
 const infoIconsData = [
-  {
-    targetElement: "#el-move-test-button",
-    title: "Dashboard",
-    body: "This is where you find all the good info",
-  },
+  // {
+  //   targetElement: "#el-move-test-button",
+  //   title: "Dashboard",
+  //   body: "This is where you find all the good info",
+  // },
   // {
   //   targetElement: "#nav-page1",
   //   title: "Dashboard",
@@ -16,21 +16,21 @@ const infoIconsData = [
   //   title: "Dashboard",
   //   body: "This is where you find all the good info",
   // },
-  {
-    targetElement: "#text2focus",
-    title: "Dashboard",
-    body: "This is where you find all the good info",
-  },
-  {
-    targetElement: "#text3focus",
-    title: "Dashboard",
-    body: "This is where you find all the good info",
-  },
-  {
-    targetElement: "#nav-page5",
-    title: "Dashboard",
-    body: "This is where you find all the good info",
-  },
+  // {
+  //   targetElement: "#text2focus",
+  //   title: "Dashboard",
+  //   body: "This is where you find all the good info",
+  // },
+  // {
+  //   targetElement: "#text3focus",
+  //   title: "Dashboard",
+  //   body: "This is where you find all the good info",
+  // },
+  // {
+  //   targetElement: "#nav-page5",
+  //   title: "Dashboard",
+  //   body: "This is where you find all the good info",
+  // },
   // {
   //   targetElement: "#el-remove-test-button",
   //   title: "Reports",
@@ -61,16 +61,16 @@ const infoIconsData = [
     title: "Help",
     body: "Find help articles and contact support here.",
   },
-  {
-    targetElement: "#element7",
-    title: "Activity",
-    body: "Review your recent activities and actions.",
-  },
-  {
-    targetElement: "#element8",
-    title: "Log Out",
-    body: "Sign out of your account safely.",
-  },
+  // {
+  //   targetElement: "#element7",
+  //   title: "Activity",
+  //   body: "Review your recent activities and actions.",
+  // },
+  // {
+  //   targetElement: "#element8",
+  //   title: "Log Out",
+  //   body: "Sign out of your account safely.",
+  // },
 ];
 
 export default infoIconsData;

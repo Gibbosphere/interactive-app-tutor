@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect"; // for the "toBeInTheDocument" matcher
-import BasicBackgroundOverlay from "../BasicBackgroundOverlay"; // Adjust the path as needed
+import BasicBackgroundOverlay from "../../BasicBackgroundOverlay"; // Adjust the path as needed
 
 describe("BasicBackgroundOverlay", () => {
   it("renders correctly and displays the focus element", () => {

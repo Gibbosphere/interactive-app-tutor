@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect"; // For custom matchers
-import ConfirmationPopup from "../ConfirmationPopup"; // Adjust path as needed
+import ConfirmationPopup from "../../ConfirmationPopup"; // Adjust path as needed
 
 describe("ConfirmationPopup", () => {
   const mockOnCancel = jest.fn();

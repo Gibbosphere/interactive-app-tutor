@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import DocumentationMarkdownRenderer from "../DocumentationMarkdownRenderer"; // Adjust path as needed
+import DocumentationMarkdownRenderer from "../../DocumentationMarkdownRenderer"; // Adjust path as needed
 
 describe("DocumentationMarkdownRenderer", () => {
   it("renders a heading1 correctly", () => {

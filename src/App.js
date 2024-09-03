@@ -10,10 +10,27 @@ import ResourceCircle from "./ResourceCircle";
 import tutorialData from "./tutorialData/tutorialData";
 import infoIconsData from "./tutorialData/infoIconsData";
 import guidesData from "./tutorialData/interactiveGuidesData";
+import documentationData from "./tutorialData/documentationData";
+import InfoIcon from "./InfoIcon";
+import Documentation from "./Documentation";
+import { usePersistantState } from "./hooks";
 
 // onActivte will handle the turning on and off of a tutorial
 const App = () => {
-  const [tutorialActive, setTutorialActive] = useState(false);
+  const [tutorialActive, setTutorialActive] = React.useState(false);
+  const [documentationOpen, setDocumentationOpen] = React.useState(false);
+  const [documentationSideToolEnabled, setDocumentationSideToolEnabled] = React.useState(true);
+  const [resourceCircleEnabled, setResourceCircleEnabled] = React.useState(true);
+  const [resourceCirclePos, setResourceCirclePos] = usePersistantState("resourceCirclePosition", {
+    positionY: "bottom",
+    positionX: "right",
+  });
+  let resourceCircleInNavbar =
+    resourceCirclePos.positionY === "top" && resourceCirclePos.positionX === "right";
+
+  const toggleDocumentationOpen = () => {
+    setDocumentationOpen(!documentationOpen);
+  };
 
   const handleExitTutorial = () => {
     setTutorialActive(false);
@@ -25,14 +42,13 @@ const App = () => {
     <>
       {/* {tutorialActive && <div style={{ height: "29.5px" }}></div>} */}
       <Router>
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", height: "100vh", width: "100%" }}>
           <Sidebar />
           <Box
             component="main"
             sx={{
               position: "relative",
               p: 3,
-              marginLeft: "100px",
               transition: "margin-left 0.3s", // Matches the sidebar transition
             }}
           >
@@ -43,6 +59,11 @@ const App = () => {
                 <Route path="/page3" element={<Page3 />} />
               </Routes>
             </Container>
+            {!tutorialActive && (
+              <Button id="start-tutorial-button" onClick={() => setTutorialActive(true)}>
+                Start Tutorial
+              </Button>
+            )}
           </Box>
         </Box>
         {/* <Box p={2}>
@@ -146,23 +167,32 @@ const App = () => {
       <Box id="element8" mt={2} p={2} border={1}>
         Feature 8
       </Box> */}
-        {!tutorialActive && (
-          <ResourceCircle
-            positionX="right"
-            positionY="bottom"
-            guides={guidesData}
-            infoIcons={infoIconsData}
-          ></ResourceCircle>
-        )}
         {tutorialActive && (
           <Tutorial
-            tutorialName="CommuNethi"
-            tutorialDescription="This interactive tutorial will walk you through the application, helping you to gain a clear understanding of how it works."
+            logoSrc={"/images/iNethiLogoWhite.png"}
             tutorialContent={tutorialData}
             onExit={handleExitTutorial}
           ></Tutorial>
         )}
-        {!tutorialActive && <Button onClick={() => setTutorialActive(true)}>Start Tutorial</Button>}
+        <Documentation
+          documentationData={documentationData}
+          isOpen={documentationOpen}
+          toggleIsOpen={toggleDocumentationOpen}
+          canSlideOut={documentationSideToolEnabled}
+        ></Documentation>
+        {!tutorialActive && resourceCircleEnabled && (
+          <ResourceCircle
+            circleIconName={"/images/iNethiLogoWhite.png"}
+            positionY={resourceCirclePos.positionY}
+            positionX={resourceCirclePos.positionX}
+            circleSize={resourceCircleInNavbar ? 55 : 60}
+            circleDistFromOuter={resourceCircleInNavbar ? 5 : 20}
+            circleBorder={resourceCircleInNavbar ? "2px solid white" : "none"}
+            guides={guidesData}
+            infoIcons={infoIconsData}
+            openDocumentation={() => setDocumentationOpen(true)}
+          ></ResourceCircle>
+        )}
       </Router>
     </>
   );

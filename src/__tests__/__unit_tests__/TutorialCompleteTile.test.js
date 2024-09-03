@@ -1,11 +1,11 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import TutorialCompleteTile from "../TutorialCompleteTile";
-import ConfirmationPopup from "../ConfirmationPopup";
+import TutorialCompleteTile from "../../TutorialCompleteTile";
+import ConfirmationPopup from "../../ConfirmationPopup";
 
 // Mock ConfirmationPopup component
-jest.mock("../ConfirmationPopup", () => ({ title, description, onCancel, onConfirm }) => (
+jest.mock("../../ConfirmationPopup", () => ({ title, description, onCancel, onConfirm }) => (
   <div>
     <p>{title}</p>
     <p>{description}</p>

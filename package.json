@@ -12,7 +12,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.5.2",
-    "jest": "^27.5.1",
+    "jsdom": "^25.0.0",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -24,6 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:e2e": "npx jest ----runInBand --config jest.e2e.config.js",
+    "test:unit": "npm test -- --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -46,7 +48,12 @@
   },
   "jest": {
     "testMatch": [
-      "<rootDir>/src/tests/**/*.test.js"
+      "<rootDir>/src/__tests__/__unit_tests__/**/*.test.js"
     ]
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-puppeteer": "^10.1.0",
+    "puppeteer": "^23.2.1"
   }
 }

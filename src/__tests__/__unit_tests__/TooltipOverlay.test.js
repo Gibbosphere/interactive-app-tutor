@@ -1,9 +1,8 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import TooltipOverlay from "../TooltipOverlay";
+import TooltipOverlay from "../../TooltipOverlay";
 import "@testing-library/jest-dom";
-import { width } from "@mui/system";
 
 describe("TooltipOverlay Component", () => {
   let targetElement;

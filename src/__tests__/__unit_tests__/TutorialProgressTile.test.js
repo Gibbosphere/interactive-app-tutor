@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import TutorialProgressTile from "../TutorialProgressTile";
+import TutorialProgressTile from "../../TutorialProgressTile";
 
 // Mock ConfirmationPopup component
-jest.mock("../ConfirmationPopup", () => ({ title, description, onCancel, onConfirm }) => (
+jest.mock("../../ConfirmationPopup", () => ({ title, description, onCancel, onConfirm }) => (
   <div>
     <p>{title}</p>
     <p>{description}</p>

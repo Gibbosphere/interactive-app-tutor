@@ -15,9 +15,9 @@ const Sidebar = () => {
     <Box
       id="sidebar"
       sx={{
-        width: open ? "200px" : "100px",
-        bgcolor: "background.paper",
-        position: "fixed",
+        width: open ? "200px" : "50px",
+        backgroundColor: "blanchedalmond",
+        position: "relative",
         left: 0,
         top: 0,
         height: "100%",
@@ -28,7 +28,10 @@ const Sidebar = () => {
         alignItems: "flex-start",
       }}
     >
-      <IconButton onClick={toggleSidebar} sx={{ position: "absolute", top: 4, right: 50 }}>
+      <IconButton
+        onClick={toggleSidebar}
+        sx={{ position: "relative", marginLeft: "5px", zIndex: 1000 }}
+      >
         {open ? <CloseIcon /> : <MenuIcon />}
       </IconButton>
       <List sx={{ overflowY: "scroll", position: "relative", height: "200px" }}>

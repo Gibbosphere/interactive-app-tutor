@@ -71,9 +71,10 @@ const SearchResults = ({
   return (
     <Box>
       {guideResults &&
-        guideResults.map((guide) => {
+        guideResults.map((guide, index) => {
           return (
             <Box
+              id={`search-result-guide-item${index}`}
               onClick={() => handleGuideSelect(guide)}
               sx={{
                 display: "flex",
@@ -125,9 +126,10 @@ const SearchResults = ({
           );
         })}
       {docResults &&
-        docResults.map((result) => {
+        docResults.map((result, index) => {
           return (
             <Box
+              id={`search-result-doc-item${index}`}
               onClick={() => setFocusDocumentation(result)}
               sx={{
                 display: "flex",

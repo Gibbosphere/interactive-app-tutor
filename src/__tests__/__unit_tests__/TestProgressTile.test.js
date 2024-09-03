@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import TestProgressTile from "../TestProgressTile";
+import TestProgressTile from "../../TestProgressTile";
 
 const mockOnNext = jest.fn();
 const mockOnSkipTest = jest.fn();

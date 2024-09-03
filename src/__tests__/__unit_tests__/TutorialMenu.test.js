@@ -2,11 +2,11 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
-import TutorialMenu from "../TutorialMenu";
+import TutorialMenu from "../../TutorialMenu";
 
 // Mock the ConfirmationPopup component
 jest.mock(
-  "../ConfirmationPopup",
+  "../../ConfirmationPopup",
   () =>
     ({ onClose, open, title, description }) =>
       open ? (

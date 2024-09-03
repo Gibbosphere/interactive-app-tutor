@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
-import IntroTile2 from "../IntroTile2";
+import IntroTile2 from "../../IntroTile2";
 
 describe("IntroTile2", () => {
   const logoSrc = "logo.png";

@@ -135,6 +135,7 @@ const Documentation = ({ documentationData, isOpen, toggleIsOpen, canSlideOut = 
           }}
         >
           <CloseIcon
+            id="documentation-close-icon"
             size="extra-large"
             onClick={() => {
               toggleIsOpen();
@@ -171,7 +172,7 @@ const Documentation = ({ documentationData, isOpen, toggleIsOpen, canSlideOut = 
             {selectedPage !== null ? loadedDocPages[selectedPage].data.pageName : "Pages"}
           </Typography>
           <TextField
-            id="search-input-field"
+            id="doc-search-input-field"
             placeholder="Search"
             InputProps={{
               startAdornment: (
@@ -190,7 +191,7 @@ const Documentation = ({ documentationData, isOpen, toggleIsOpen, canSlideOut = 
           />
         </Box>
         <Box
-          id="search-results-container"
+          id="document-search-results-container"
           zIndex={1000000001}
           sx={{
             position: "absolute",

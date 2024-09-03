@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import WalkthroughCompleteTile from "../WalkthroughCompleteTile";
-import ConfirmationPopup from "../ConfirmationPopup";
+import WalkthroughCompleteTile from "../../WalkthroughCompleteTile";
+import ConfirmationPopup from "../../ConfirmationPopup";
 
 describe("WalkthroughCompleteTile", () => {
   const props = {

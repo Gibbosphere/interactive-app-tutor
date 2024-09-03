@@ -3,7 +3,7 @@ import { Box, Button, Typography, TextField } from "@mui/material";
 
 const Page1 = () => {
   return (
-    <Box id="page1">
+    <Box id="page1" sx={{ height: "100%", width: "100%", overflow: "auto" }}>
       <Typography variant="h4" id="page1-title">
         Page 1
       </Typography>

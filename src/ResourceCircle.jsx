@@ -746,6 +746,7 @@ const ResourceCircle = ({
                   }}
                 >
                   <Button
+                    id="open-full-docs-button"
                     variant="text"
                     size="small"
                     endIcon={<ArrowForwardIcon sx={{ fontSize: "small" }} />}

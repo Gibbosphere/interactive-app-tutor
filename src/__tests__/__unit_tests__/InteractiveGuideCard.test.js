@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
-import InteractiveGuideCard from "../InteractiveGuideCard";
+import InteractiveGuideCard from "../../InteractiveGuideCard";
 
 describe("InteractiveGuideCard", () => {
   const guideNo = 1;

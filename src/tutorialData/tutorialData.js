@@ -363,278 +363,278 @@ const tutorialData = [
       },
     ],
   },
-  {
-    stageName: "Navigate to Page 1",
-    startingPage: "/page1",
-    tooltips: [
-      {
-        type: "informative",
-        page: "/page1",
-        targetElement: "#sidebar",
-        targetAreaElement: "#sidebar",
-        title: "Sidebar Menu",
-        content:
-          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
-      },
-      {
-        type: "action",
-        page: "/page1",
-        targetElement: "#nav-page1",
-        targetAreaElement: "#nav-page1",
-        title: "Page 1 Navigation",
-        content: "Click here to navigate to Page 1.",
-      },
-    ],
-    test: [
-      {
-        text: "Open the sidebar menu and navigate to Page 1",
-        clickElements: [
-          {
-            elementId: "#nav-page1",
-            textInputElements: [],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stageName: "Navigate to Page 1",
-    startingPage: "/page1",
-    tooltips: [
-      {
-        type: "informative",
-        page: "/page1",
-        targetElement: "#sidebar",
-        targetAreaElement: "#sidebar",
-        title: "Sidebar Menu",
-        content:
-          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
-      },
-      {
-        type: "action",
-        page: "/page1",
-        targetElement: "#nav-page1",
-        targetAreaElement: "#nav-page1",
-        title: "Page 1 Navigation",
-        content: "Click here to navigate to Page 1.",
-      },
-    ],
-    test: [
-      {
-        text: "Open the sidebar menu and navigate to Page 1",
-        clickElements: [
-          {
-            elementId: "#nav-page1",
-            textInputElements: [],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stageName: "Navigate to Page 1 pleeeesss",
-    startingPage: "/page1",
-    tooltips: [
-      {
-        type: "informative",
-        page: "/page1",
-        targetElement: "#sidebar",
-        targetAreaElement: "#sidebar",
-        title: "Sidebar Menu",
-        content:
-          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
-      },
-      {
-        type: "action",
-        page: "/page1",
-        targetElement: "#nav-page1",
-        targetAreaElement: "#nav-page1",
-        title: "Page 1 Navigation",
-        content: "Click here to navigate to Page 1.",
-      },
-    ],
-    test: [
-      {
-        text: "Open the sidebar menu and navigate to Page 1",
-        clickElements: [
-          {
-            elementId: "#nav-page1",
-            textInputElements: [],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stageName: "Navigate to Page 1",
-    startingPage: "/page1",
-    tooltips: [
-      {
-        type: "informative",
-        page: "/page1",
-        targetElement: "#sidebar",
-        targetAreaElement: "#sidebar",
-        title: "Sidebar Menu",
-        content:
-          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
-      },
-      {
-        type: "action",
-        page: "/page1",
-        targetElement: "#nav-page1",
-        targetAreaElement: "#nav-page1",
-        title: "Page 1 Navigation",
-        content: "Click here to navigate to Page 1.",
-      },
-    ],
-    test: [
-      {
-        text: "Open the sidebar menu and navigate to Page 1",
-        clickElements: [
-          {
-            elementId: "#nav-page1",
-            textInputElements: [],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stageName: "Navigate to Page 1",
-    startingPage: "/page1",
-    tooltips: [
-      {
-        type: "informative",
-        page: "/page1",
-        targetElement: "#sidebar",
-        targetAreaElement: "#sidebar",
-        title: "Sidebar Menu",
-        content:
-          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
-      },
-      {
-        type: "action",
-        page: "/page1",
-        targetElement: "#nav-page1",
-        targetAreaElement: "#nav-page1",
-        title: "Page 1 Navigation",
-        content: "Click here to navigate to Page 1.",
-      },
-    ],
-    test: [
-      {
-        text: "Open the sidebar menu and navigate to Page 1",
-        clickElements: [
-          {
-            elementId: "#nav-page1",
-            textInputElements: [],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stageName: "Navigate to Page 1",
-    startingPage: "/page1",
-    tooltips: [
-      {
-        type: "informative",
-        page: "/page1",
-        targetElement: "#sidebar",
-        targetAreaElement: "#sidebar",
-        title: "Sidebar Menu",
-        content:
-          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
-      },
-      {
-        type: "action",
-        page: "/page1",
-        targetElement: "#nav-page1",
-        targetAreaElement: "#nav-page1",
-        title: "Page 1 Navigation",
-        content: "Click here to navigate to Page 1.",
-      },
-    ],
-    test: [
-      {
-        text: "Open the sidebar menu and navigate to Page 1",
-        clickElements: [
-          {
-            elementId: "#nav-page1",
-            textInputElements: [],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stageName: "Navigate to Page 1",
-    startingPage: "/page1",
-    tooltips: [
-      {
-        type: "informative",
-        page: "/page1",
-        targetElement: "#sidebar",
-        targetAreaElement: "#sidebar",
-        title: "Sidebar Menu",
-        content:
-          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
-      },
-      {
-        type: "action",
-        page: "/page1",
-        targetElement: "#nav-page1",
-        targetAreaElement: "#nav-page1",
-        title: "Page 1 Navigation",
-        content: "Click here to navigate to Page 1.",
-      },
-    ],
-    test: [
-      {
-        text: "Open the sidebar menu and navigate to Page 1",
-        clickElements: [
-          {
-            elementId: "#nav-page1",
-            textInputElements: [],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    stageName: "Navigate to Page 1",
-    startingPage: "/page1",
-    tooltips: [
-      {
-        type: "informative",
-        page: "/page1",
-        targetElement: "#sidebar",
-        targetAreaElement: "#sidebar",
-        title: "Sidebar Menu",
-        content:
-          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
-      },
-      {
-        type: "action",
-        page: "/page1",
-        targetElement: "#nav-page1",
-        targetAreaElement: "#nav-page1",
-        title: "Page 1 Navigation",
-        content: "Click here to navigate to Page 1.",
-      },
-    ],
-    test: [
-      {
-        text: "Open the sidebar menu and navigate to Page 1",
-        clickElements: [
-          {
-            elementId: "#nav-page1",
-            textInputElements: [],
-          },
-        ],
-      },
-    ],
-  },
+  // {
+  //   stageName: "Navigate to Page 1",
+  //   startingPage: "/page1",
+  //   tooltips: [
+  //     {
+  //       type: "informative",
+  //       page: "/page1",
+  //       targetElement: "#sidebar",
+  //       targetAreaElement: "#sidebar",
+  //       title: "Sidebar Menu",
+  //       content:
+  //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+  //     },
+  //     {
+  //       type: "action",
+  //       page: "/page1",
+  //       targetElement: "#nav-page1",
+  //       targetAreaElement: "#nav-page1",
+  //       title: "Page 1 Navigation",
+  //       content: "Click here to navigate to Page 1.",
+  //     },
+  //   ],
+  //   test: [
+  //     {
+  //       text: "Open the sidebar menu and navigate to Page 1",
+  //       clickElements: [
+  //         {
+  //           elementId: "#nav-page1",
+  //           textInputElements: [],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   stageName: "Navigate to Page 1",
+  //   startingPage: "/page1",
+  //   tooltips: [
+  //     {
+  //       type: "informative",
+  //       page: "/page1",
+  //       targetElement: "#sidebar",
+  //       targetAreaElement: "#sidebar",
+  //       title: "Sidebar Menu",
+  //       content:
+  //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+  //     },
+  //     {
+  //       type: "action",
+  //       page: "/page1",
+  //       targetElement: "#nav-page1",
+  //       targetAreaElement: "#nav-page1",
+  //       title: "Page 1 Navigation",
+  //       content: "Click here to navigate to Page 1.",
+  //     },
+  //   ],
+  //   test: [
+  //     {
+  //       text: "Open the sidebar menu and navigate to Page 1",
+  //       clickElements: [
+  //         {
+  //           elementId: "#nav-page1",
+  //           textInputElements: [],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   stageName: "Navigate to Page 1 pleeeesss",
+  //   startingPage: "/page1",
+  //   tooltips: [
+  //     {
+  //       type: "informative",
+  //       page: "/page1",
+  //       targetElement: "#sidebar",
+  //       targetAreaElement: "#sidebar",
+  //       title: "Sidebar Menu",
+  //       content:
+  //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+  //     },
+  //     {
+  //       type: "action",
+  //       page: "/page1",
+  //       targetElement: "#nav-page1",
+  //       targetAreaElement: "#nav-page1",
+  //       title: "Page 1 Navigation",
+  //       content: "Click here to navigate to Page 1.",
+  //     },
+  //   ],
+  //   test: [
+  //     {
+  //       text: "Open the sidebar menu and navigate to Page 1",
+  //       clickElements: [
+  //         {
+  //           elementId: "#nav-page1",
+  //           textInputElements: [],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   stageName: "Navigate to Page 1",
+  //   startingPage: "/page1",
+  //   tooltips: [
+  //     {
+  //       type: "informative",
+  //       page: "/page1",
+  //       targetElement: "#sidebar",
+  //       targetAreaElement: "#sidebar",
+  //       title: "Sidebar Menu",
+  //       content:
+  //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+  //     },
+  //     {
+  //       type: "action",
+  //       page: "/page1",
+  //       targetElement: "#nav-page1",
+  //       targetAreaElement: "#nav-page1",
+  //       title: "Page 1 Navigation",
+  //       content: "Click here to navigate to Page 1.",
+  //     },
+  //   ],
+  //   test: [
+  //     {
+  //       text: "Open the sidebar menu and navigate to Page 1",
+  //       clickElements: [
+  //         {
+  //           elementId: "#nav-page1",
+  //           textInputElements: [],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   stageName: "Navigate to Page 1",
+  //   startingPage: "/page1",
+  //   tooltips: [
+  //     {
+  //       type: "informative",
+  //       page: "/page1",
+  //       targetElement: "#sidebar",
+  //       targetAreaElement: "#sidebar",
+  //       title: "Sidebar Menu",
+  //       content:
+  //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+  //     },
+  //     {
+  //       type: "action",
+  //       page: "/page1",
+  //       targetElement: "#nav-page1",
+  //       targetAreaElement: "#nav-page1",
+  //       title: "Page 1 Navigation",
+  //       content: "Click here to navigate to Page 1.",
+  //     },
+  //   ],
+  //   test: [
+  //     {
+  //       text: "Open the sidebar menu and navigate to Page 1",
+  //       clickElements: [
+  //         {
+  //           elementId: "#nav-page1",
+  //           textInputElements: [],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   stageName: "Navigate to Page 1",
+  //   startingPage: "/page1",
+  //   tooltips: [
+  //     {
+  //       type: "informative",
+  //       page: "/page1",
+  //       targetElement: "#sidebar",
+  //       targetAreaElement: "#sidebar",
+  //       title: "Sidebar Menu",
+  //       content:
+  //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+  //     },
+  //     {
+  //       type: "action",
+  //       page: "/page1",
+  //       targetElement: "#nav-page1",
+  //       targetAreaElement: "#nav-page1",
+  //       title: "Page 1 Navigation",
+  //       content: "Click here to navigate to Page 1.",
+  //     },
+  //   ],
+  //   test: [
+  //     {
+  //       text: "Open the sidebar menu and navigate to Page 1",
+  //       clickElements: [
+  //         {
+  //           elementId: "#nav-page1",
+  //           textInputElements: [],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   stageName: "Navigate to Page 1",
+  //   startingPage: "/page1",
+  //   tooltips: [
+  //     {
+  //       type: "informative",
+  //       page: "/page1",
+  //       targetElement: "#sidebar",
+  //       targetAreaElement: "#sidebar",
+  //       title: "Sidebar Menu",
+  //       content:
+  //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+  //     },
+  //     {
+  //       type: "action",
+  //       page: "/page1",
+  //       targetElement: "#nav-page1",
+  //       targetAreaElement: "#nav-page1",
+  //       title: "Page 1 Navigation",
+  //       content: "Click here to navigate to Page 1.",
+  //     },
+  //   ],
+  //   test: [
+  //     {
+  //       text: "Open the sidebar menu and navigate to Page 1",
+  //       clickElements: [
+  //         {
+  //           elementId: "#nav-page1",
+  //           textInputElements: [],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // {
+  //   stageName: "Navigate to Page 1",
+  //   startingPage: "/page1",
+  //   tooltips: [
+  //     {
+  //       type: "informative",
+  //       page: "/page1",
+  //       targetElement: "#sidebar",
+  //       targetAreaElement: "#sidebar",
+  //       title: "Sidebar Menu",
+  //       content:
+  //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+  //     },
+  //     {
+  //       type: "action",
+  //       page: "/page1",
+  //       targetElement: "#nav-page1",
+  //       targetAreaElement: "#nav-page1",
+  //       title: "Page 1 Navigation",
+  //       content: "Click here to navigate to Page 1.",
+  //     },
+  //   ],
+  //   test: [
+  //     {
+  //       text: "Open the sidebar menu and navigate to Page 1",
+  //       clickElements: [
+  //         {
+  //           elementId: "#nav-page1",
+  //           textInputElements: [],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
 ];
 
 export default tutorialData;
