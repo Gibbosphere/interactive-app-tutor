@@ -27,7 +27,7 @@ const searchDocumentation = (searchValue, documentationData) => {
   }
 
   documentationData.forEach((page) => {
-    const { pageName, pageId, content } = page;
+    const { page_name, page_id, content } = page;
 
     // Regex to match all heading elements
     const regex = /\$(pageHeading|heading1|heading2|heading3)\{([^}]*)\}\{([^}]*)\}/g;
@@ -45,8 +45,8 @@ const searchDocumentation = (searchValue, documentationData) => {
         bodyMatch = bodyRegex.exec(content.slice(regex.lastIndex));
 
         results.push({
-          pageName: pageName,
-          pageId: pageId,
+          pageName: page_name,
+          pageId: page_id,
           headingName: headingName,
           headingId: headingId,
           content: fullMatch + (bodyMatch ? bodyMatch[0] : ""),
@@ -101,7 +101,7 @@ const SearchResults = ({
                   }}
                 ></ExploreIcon>
                 <Box
-                  key={`${guide.page}-${guide.name}`}
+                  key={`${guide.starting_page}-${guide.name}`}
                   sx={{
                     textTransform: "none",
                     color: "grey",

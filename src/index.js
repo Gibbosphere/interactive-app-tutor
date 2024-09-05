@@ -6,8 +6,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <App tut={[]} onExit={console.log("EXITED")} />
-  </React.StrictMode>
+    <App />
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

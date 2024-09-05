@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, CssBaseline, Container, Typography, TextField } from "@mui/material";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
@@ -7,13 +7,10 @@ import Page2 from "./pages/Page2";
 import Page3 from "./pages/Page3";
 import Tutorial from "./Tutorial";
 import ResourceCircle from "./ResourceCircle";
-import tutorialData from "./tutorialData/tutorialData";
-import infoIconsData from "./tutorialData/infoIconsData";
-import guidesData from "./tutorialData/interactiveGuidesData";
-import documentationData from "./tutorialData/documentationData";
-import InfoIcon from "./InfoIcon";
 import Documentation from "./Documentation";
 import { usePersistantState } from "./hooks";
+import axios from "axios";
+import InteractiveAppTutor from "./InteractiveAppTutor";
 
 // onActivte will handle the turning on and off of a tutorial
 const App = () => {
@@ -25,6 +22,7 @@ const App = () => {
     positionY: "bottom",
     positionX: "right",
   });
+
   let resourceCircleInNavbar =
     resourceCirclePos.positionY === "top" && resourceCirclePos.positionX === "right";
 
@@ -36,11 +34,52 @@ const App = () => {
     setTutorialActive(false);
   };
 
-  const [onOffTest, setOnOffTest] = useState(true);
+  // API calls - should not have to be done in App.js, but rather in one big InteractiveAppTutor component
+  const [tutorialData, setTutorialData] = useState([]);
+  const [infoIconsData, setInfoIconsData] = useState([]);
+  const [guidesData, setGuidesData] = useState([]);
+  const [documentationData, setDocumentationData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8085/api/tutorial/")
+      .then((response) => {
+        setTutorialData(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the tutorial data!", error);
+      });
+
+    axios
+      .get("http://127.0.0.1:8085/api/info-icons/")
+      .then((response) => {
+        setInfoIconsData(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the info icons data!", error);
+      });
+
+    axios
+      .get("http://127.0.0.1:8085/api/interactive-guides/")
+      .then((response) => {
+        setGuidesData(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the interactive guides!", error);
+      });
+
+    axios
+      .get("http://127.0.0.1:8085/api/documentation/")
+      .then((response) => {
+        setDocumentationData(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the documentation!", error);
+      });
+  }, []);
 
   return (
     <>
-      {/* {tutorialActive && <div style={{ height: "29.5px" }}></div>} */}
       <Router>
         <Box sx={{ display: "flex", height: "100vh", width: "100%" }}>
           <Sidebar />
@@ -167,7 +206,22 @@ const App = () => {
       <Box id="element8" mt={2} p={2} border={1}>
         Feature 8
       </Box> */}
-        {tutorialActive && (
+        <InteractiveAppTutor
+          tutorialActive={tutorialActive}
+          exitTutorial={() => setTutorialActive(false)}
+          tutorialLogoSrc="/images/iNethiLogoWhite.png"
+          documentationOpen={documentationOpen}
+          toggleDocumentationOpen={toggleDocumentationOpen}
+          documentationSideToolEnabled={documentationSideToolEnabled}
+          resourceCircleEnabled={resourceCircleEnabled}
+          resourceCircleIconSrc="/images/iNethiLogoWhite.png"
+          resourceCirclePos={resourceCirclePos}
+          resourceCircleSize={resourceCircleInNavbar ? 55 : 60}
+          resourceCircleDistFromOuter={resourceCircleInNavbar ? 5 : 20}
+          resourceCircleBorder={resourceCircleInNavbar ? "2px solid white" : "none"}
+          openDocumentation={() => setDocumentationOpen(true)}
+        />
+        {/* {tutorialActive && (
           <Tutorial
             logoSrc={"/images/iNethiLogoWhite.png"}
             tutorialContent={tutorialData}
@@ -190,9 +244,10 @@ const App = () => {
             circleBorder={resourceCircleInNavbar ? "2px solid white" : "none"}
             guides={guidesData}
             infoIcons={infoIconsData}
+            documentationData={documentationData}
             openDocumentation={() => setDocumentationOpen(true)}
           ></ResourceCircle>
-        )}
+        )} */}
       </Router>
     </>
   );

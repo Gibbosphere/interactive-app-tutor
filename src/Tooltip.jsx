@@ -169,8 +169,8 @@ const Tooltip = ({
 
   // Positioning the tooltip
   useEffect(() => {
-    const targetElement = document.querySelector(targetEl);
-    const targetAreaElement = document.querySelector(targetAreaEl);
+    const targetElement = document.getElementById(targetEl);
+    const targetAreaElement = document.getElementById(targetAreaEl);
 
     if (!tooltipRef.current) {
       return;

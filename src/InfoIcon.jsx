@@ -1,6 +1,6 @@
 import { CssBaseline, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const InfoIcon = ({ targetEl, title, body }) => {
   const infoIconSize = 15;
@@ -160,7 +160,7 @@ const InfoIcon = ({ targetEl, title, body }) => {
   // Logic for when to update icon positions
   useEffect(() => {
     const handleUpdateInfoIcon = () => {
-      const targetElement = document.querySelector(targetEl);
+      const targetElement = document.getElementById(targetEl);
 
       // If target element not found
       if (!targetElement) {
@@ -223,7 +223,6 @@ const InfoIcon = ({ targetEl, title, body }) => {
   if (targetElementFound) {
     return (
       <Box ref={fullIconRef} zIndex={999999999} sx={{ pointerEvents: "all" }}>
-        {console.log(infoIconPos.top)}
         <CssBaseline />
         <Box
           zIndex={999999999}
