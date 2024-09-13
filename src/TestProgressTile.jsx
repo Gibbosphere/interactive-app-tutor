@@ -120,31 +120,8 @@ const TestProgressTile = ({
     };
   }, [currentTaskNo, clickElementNo, windowClickCount]);
 
-  const textRef = useRef(null);
-  const [lineCount, setLineCount] = useState(0);
-
-  // Some formatting logic
+  // Tile positioning
   useEffect(() => {
-    const measureLines = () => {
-      if (textRef.current) {
-        const textElement = textRef.current;
-        const lineHeight = parseFloat(getComputedStyle(textElement).lineHeight);
-        const totalHeight = textElement.offsetHeight;
-        const lines = Math.round(totalHeight / lineHeight);
-        setLineCount(lines);
-        // console.log(
-        //   "Single line height for " +
-        //     textElement.textContent +
-        //     ": " +
-        //     lineHeight
-        // );
-        // console.log("Total line height: " + totalHeight);
-        // console.log("Therefore line count is " + lines);
-      }
-    };
-    measureLines();
-    window.addEventListener("resize", measureLines); // Re-measure on window resize if need be
-
     const updateTilePosition = () => {
       setTilePosition({
         top: isExpanded
@@ -158,7 +135,6 @@ const TestProgressTile = ({
     window.addEventListener("click", updateTilePosition);
 
     return () => {
-      window.removeEventListener("resize", measureLines);
       window.removeEventListener("resize", updateTilePosition);
       window.removeEventListener("click", updateTilePosition);
     };
@@ -218,7 +194,6 @@ const TestProgressTile = ({
           sx={{ overflow: "hidden" }}
           primary={
             <Typography
-              ref={index === currentTaskNo - 1 ? textRef : null}
               sx={{
                 fontSize: "0.95rem",
                 color: index < currentTaskNo ? "rgba(0, 0, 0, 0.54)" : "inherit",

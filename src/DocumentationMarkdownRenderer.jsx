@@ -103,7 +103,6 @@ const parseDocumentation = (text) => {
   });
 };
 
-// Component using the parser
 const DocumentationMarkdownRenderer = ({ text }) => {
   return <>{parseDocumentation(text)}</>;
 };

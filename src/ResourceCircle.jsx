@@ -1,7 +1,6 @@
 import {
   Button,
   CssBaseline,
-  Icon,
   IconButton,
   InputAdornment,
   Switch,
@@ -89,10 +88,10 @@ const ResourceCircle = ({
   };
 
   // Are there guides on other pages
-  let isGuidesOnOtherPages;
+  const [isGuidesOnOtherPages, setIsGuidesOnOtherPage] = useState(false);
   useEffect(() => {
     setInteractiveGuides(guides);
-    isGuidesOnOtherPages = guides.some((guide) => guide.starting_page !== currentPath);
+    setIsGuidesOnOtherPage(guides.some((guide) => guide.starting_page !== currentPath));
   }, [guides]);
 
   // Get the width of the circle menu

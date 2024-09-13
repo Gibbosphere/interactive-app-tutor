@@ -34,50 +34,6 @@ const App = () => {
     setTutorialActive(false);
   };
 
-  // API calls - should not have to be done in App.js, but rather in one big InteractiveAppTutor component
-  const [tutorialData, setTutorialData] = useState([]);
-  const [infoIconsData, setInfoIconsData] = useState([]);
-  const [guidesData, setGuidesData] = useState([]);
-  const [documentationData, setDocumentationData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8085/api/tutorial/")
-      .then((response) => {
-        setTutorialData(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the tutorial data!", error);
-      });
-
-    axios
-      .get("http://127.0.0.1:8085/api/info-icons/")
-      .then((response) => {
-        setInfoIconsData(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the info icons data!", error);
-      });
-
-    axios
-      .get("http://127.0.0.1:8085/api/interactive-guides/")
-      .then((response) => {
-        setGuidesData(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the interactive guides!", error);
-      });
-
-    axios
-      .get("http://127.0.0.1:8085/api/documentation/")
-      .then((response) => {
-        setDocumentationData(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the documentation!", error);
-      });
-  }, []);
-
   return (
     <>
       <Router>
