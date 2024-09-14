@@ -2,72 +2,72 @@
 
 const demoInfoIconsData = [
   {
-    targetElement: "#el-move-test-button",
+    target_element_id: "el-move-test-button",
     title: "Dashboard",
     body: "This is where you find all the good info",
   },
   {
-    targetElement: "#nav-page1",
+    target_element_id: "nav-page1",
     title: "Dashboard",
     body: "This is where you find all the good info",
   },
   {
-    targetElement: "#nav-page3",
+    target_element_id: "nav-page3",
     title: "Dashboard",
     body: "This is where you find all the good info",
   },
   {
-    targetElement: "#text2focus",
+    target_element_id: "text2focus",
     title: "Dashboard",
     body: "This is where you find all the good info",
   },
   {
-    targetElement: "#text3focus",
+    target_element_id: "text3focus",
     title: "Dashboard",
     body: "This is where you find all the good info",
   },
   {
-    targetElement: "#nav-page5",
+    target_element_id: "nav-page5",
     title: "Dashboard",
     body: "This is where you find all the good info",
   },
   {
-    targetElement: "#el-remove-test-button",
+    target_element_id: "el-remove-test-button",
     title: "Reports",
     body: "Here you can view various reports and analytics.",
   },
   {
-    targetElement: "#element2",
+    target_element_id: "element2",
     title: "Settings",
     body: "Customize your preferences and system settings here.",
   },
   {
-    targetElement: "#element3",
+    target_element_id: "element3",
     title: "Notifications",
     body: "Check your notifications and alerts in this section.",
   },
   {
-    targetElement: "#menu-sidebar",
+    target_element_id: "menu-sidebar",
     title: "User Profile",
     body: "View and edit your personal profile information.",
   },
   {
-    targetElement: "#sidebar-dashboard-page",
+    target_element_id: "sidebar-dashboard-page",
     title: "Messages",
     body: "Send and receive messages from this area.",
   },
   {
-    targetElement: "#mac-address-inputbox",
+    target_element_id: "mac-address-inputbox",
     title: "Help",
     body: "Find help articles and contact support here.",
   },
   {
-    targetElement: "#element7",
+    target_element_id: "element7",
     title: "Activity",
     body: "Review your recent activities and actions.",
   },
   {
-    targetElement: "#element8",
+    target_element_id: "element8",
     title: "Log Out",
     body: "Sign out of your account safely.",
   },

@@ -1,4 +1,4 @@
-# interactive-app-tutor
+# Interactive App Tutor - Frontend
 
 An in-app tutorial system designed to guide users through your software application using a variety of UI elements such as tooltips, modals, progress bars, and checklists. Set up your own step-by-step tutorials with tests and other interactive elements for your application to help your users understand and navigate your software quickly and effectively.
 
@@ -55,4 +55,4 @@ const App = () => {
 
 5. Add your own tutorial and resource data using the [interactive-app-tutor-backend](https://github.com/Gibbosphere/interactive-app-tutor-backend). Ensure you have it running.
 
-6. For more details, view the User Manual.
+6. For more details, view the [User Manual](./User_Manual.pdf).

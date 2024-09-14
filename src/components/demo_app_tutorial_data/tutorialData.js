@@ -3,83 +3,83 @@
 // tutorial information 1
 // const tutorialData = [
 //   {
-//     stageName: "Basic Navigation",
+//     name: "Basic Navigation",
 //     tooltips: [
 //       {
 //         type: "informative",
-//         targetElement: "#element0",
-//         targetAreaElement: "#element0",
+//         target_element_id: "element0",
+//         target_area_element_id: "element0",
 //         title: "Sidebar menu",
 //         content:
 //           "This is your side bar menu. From here, you can navigate to all the main pages in the application.\nYou can also access the application settings and your account details.",
 //       },
 //       {
 //         type: "informative",
-//         targetElement: "#element1",
-//         targetAreaElement: "#element1",
+//         target_element_id: "element1",
+//         target_area_element_id: "element1",
 //         title: "Feature 2",
 //         content: "This is the second feature of Stage 1.",
 //       },
 //       {
 //         type: "action",
-//         targetElement: "#element2",
-//         targetAreaElement: "#element2",
+//         target_element_id: "element2",
+//         target_area_element_id: "element2",
 //         title: "Feature 3",
 //         content: "Click on feature 2",
 //       },
 //       {
 //         type: "informative",
-//         targetElement: "#element4",
-//         targetAreaElement: "#element4",
+//         target_element_id: "element4",
+//         target_area_element_id: "element4",
 //         title: "Take a look",
 //         content: "Investigate all the search options by using this feature.",
 //       },
 //     ],
-//     test: [
+//     test_tasks: [
 //       {
 //         text: "Open the menu sidebar",
-//         clickElements: [
+//         click_elements: [
 //           {
-//             elementId: "#menu-sidebar",
-//             textInputElements: [],
+//             element_id: "menu-sidebar",
+//             text_input_elements: [],
 //           },
 //         ],
 //       },
 //       {
 //         text: "Navigate to the devices and dashboard page please",
-//         clickElements: [
+//         click_elements: [
 //           {
-//             elementId: "#sidebar-devices-page",
-//             textInputElements: [],
+//             element_id: "sidebar-devices-page",
+//             text_input_elements: [],
 //           },
 //           {
-//             elementId: "#sidebar-dashboard-page",
-//             textInputElements: [],
+//             element_id: "sidebar-dashboard-page",
+//             text_input_elements: [],
 //           },
 //         ],
 //       },
 //       {
 //         text: "Click the testing remove button",
-//         clickElements: [
+//         click_elements: [
 //           {
-//             elementId: "#el-remove-test-button",
-//             textInputElements: [],
+//             element_id: "el-remove-test-button",
+//             text_input_elements: [],
 //           },
 //         ],
 //       },
 //       {
 //         text: "Create a new Mesh device with a MAC of 127:69:0:1",
-//         clickElements: [
+//         click_elements: [
 //           {
-//             elementId: "#create-device-button",
-//             textInputElements: [
+//             element_id: "create-device-button",
+//             text_input_elements: [
 //               {
-//                 elementId: "#mac-address-inputbox",
-//                 requiredInput: "127:69:0:1",
+//                 element_id: "mac-address-inputbox",
+//                 required_input: "127:69:0:1",
 //               },
 //               {
-//                 elementId: "#device-type-inputbox",
-//                 requiredInput: "Mesh type",
+//                 element_id: "device-type-inputbox",
+//                 required_input: "Mesh type",
 //               },
 //             ],
 //           },
@@ -88,84 +88,84 @@
 //     ],
 //   },
 //   {
-//     stageName: "Mapping Nodes",
+//     name: "Mapping Nodes",
 //     tooltips: [
 //       {
 //         type: "informative",
-//         targetElement: "#create-device-button",
-//         targetAreaElement: "#create-device-button",
+//         target_element_id: "create-device-button",
+//         target_area_element_id: "create-device-button",
 //         title: "Feature 4",
 //         content: "This is the first feature of Stage 2.",
 //       },
 //       {
 //         type: "informative",
-//         targetElement: "#device-type-inputbox",
-//         targetAreaElement: "#device-type-inputbox",
+//         target_element_id: "device-type-inputbox",
+//         target_area_element_id: "device-type-inputbox",
 //         title: "Feature 5",
 //         content: "This is the second feature of Stage 2.",
 //       },
 //     ],
-//     test: [],
+//     test_tasks: [],
 //   },
 //   {
-//     stageName: "Device Basics",
+//     name: "Device Basics",
 //     tooltips: [
 //       {
 //         type: "informative",
-//         targetElement: "#element5",
-//         targetAreaElement: "#element5",
+//         target_element_id: "element5",
+//         target_area_element_id: "element5",
 //         title: "Feature 6",
 //         content: "This is the first feature of Stage 3.",
 //       },
 //       {
 //         type: "informative",
-//         targetElement: "#element6",
-//         targetAreaElement: "#element6",
+//         target_element_id: "element6",
+//         target_area_element_id: "element6",
 //         title: "Feature 7",
 //         content: "This is the second feature of Stage 3.",
 //       },
 //     ],
-//     test: [],
+//     test_tasks: [],
 //   },
 //   {
-//     stageName: "Deleting Devices",
+//     name: "Deleting Devices",
 //     tooltips: [
 //       {
 //         type: "informative",
-//         targetElement: "#element7",
-//         targetAreaElement: "#element7",
+//         target_element_id: "element7",
+//         target_area_element_id: "element7",
 //         title: "Feature 8",
 //         content: "This is the first feature of Stage 4.",
 //       },
 //       {
 //         type: "informative",
-//         targetElement: "#element0",
-//         targetAreaElement: "#element0",
+//         target_element_id: "element0",
+//         target_area_element_id: "element0",
 //         title: "Feature 9",
 //         content: "This is the second feature of Stage 4.",
 //       },
 //     ],
-//     test: [],
+//     test_tasks: [],
 //   },
 //   {
-//     stageName: "Dealing with Alerts",
+//     name: "Dealing with Alerts",
 //     tooltips: [
 //       {
 //         type: "informative",
-//         targetElement: "#element8",
-//         targetAreaElement: "#element8",
+//         target_element_id: "element8",
+//         target_area_element_id: "element8",
 //         title: "Feature 10",
 //         content: "This is the first feature of Stage 4.",
 //       },
 //       {
 //         type: "informative",
-//         targetElement: "#element7",
-//         targetAreaElement: "#element7",
+//         target_element_id: "element7",
+//         target_area_element_id: "element7",
 //         title: "Feature 11",
 //         content: "This is the second feature of Stage 4.",
 //       },
 //     ],
-//     test: [],
+//     test_tasks: [],
 //   },
 //   // Add more stages as needed
 // ];
@@ -173,14 +173,14 @@
 // tutorial information 2
 const demoTutorialData = [
   {
-    stageName: "Navigate to Page 1",
-    startingPage: "/page1",
+    name: "Navigate to Page 1",
+    starting_page: "/page1",
     tooltips: [
       {
         type: "informative",
         page: "/page1",
-        targetElement: "#sidebar",
-        targetAreaElement: "#sidebar",
+        target_element_id: "sidebar",
+        target_area_element_id: "sidebar",
         title: "Sidebar Menu",
         content:
           "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
@@ -188,72 +188,72 @@ const demoTutorialData = [
       {
         type: "action",
         page: "/page1",
-        targetElement: "#nav-page1",
-        targetAreaElement: "#nav-page1",
+        target_element_id: "nav-page1",
+        target_area_element_id: "nav-page1",
         title: "Page 1 Navigation",
         content: "Click here to navigate to Page 1.",
       },
     ],
-    test: [
+    test_tasks: [
       {
-        text: "Open the sidebar menu and navigate to Page 1",
-        clickElements: [
+        description: "Open the sidebar menu and navigate to Page 1",
+        click_elements: [
           {
-            elementId: "#nav-page1",
-            textInputElements: [],
+            element_id: "nav-page1",
+            text_input_elements: [],
           },
         ],
       },
     ],
   },
   {
-    stageName: "Interact with Page 1",
-    startingPage: "/page1",
+    name: "Interact with Page 1",
+    starting_page: "/page1",
     tooltips: [
       {
         type: "informative",
         page: "/page1",
-        targetElement: "#page1-title",
-        targetAreaElement: "#page1-title",
+        target_element_id: "page1-title",
+        target_area_element_id: "page1-title",
         title: "Page 1 Title",
         content: "This is the title of Page 1.",
       },
       {
         type: "informative",
         page: "/page1",
-        targetElement: "#button1",
-        targetAreaElement: "#button1",
+        target_element_id: "button1",
+        target_area_element_id: "button1",
         title: "Button 1",
         content: "This is Button 1. Click on it to interact with it.",
       },
       {
         type: "informative",
         page: "/page1",
-        targetElement: "#input1",
-        targetAreaElement: "#input1",
+        target_element_id: "input1",
+        target_area_element_id: "input1",
         title: "Input 1",
         content: "This is Input 1. Enter some text to interact with it.",
       },
     ],
-    test: [
+    test_tasks: [
       {
-        text: "Click on Button 1",
-        clickElements: [
+        description: "Click on Button 1",
+        click_elements: [
           {
-            elementId: "#button1",
-            textInputElements: [],
+            element_id: "button1",
+            text_input_elements: [],
           },
         ],
       },
       {
-        text: 'Enter "Sample text" into Input 1, then click button 1',
-        clickElements: [
+        description: 'Enter "Sample text" into Input 1, then click button 1',
+        click_elements: [
           {
-            elementId: "#button1",
-            textInputElements: [
+            element_id: "button1",
+            text_input_elements: [
               {
-                elementId: "#input1",
-                requiredInput: "Sample text",
+                element_id: "input1",
+                required_input: "Sample text",
               },
             ],
           },
@@ -262,100 +262,100 @@ const demoTutorialData = [
     ],
   },
   {
-    stageName: "Interact with Page 2",
-    startingPage: "/page2",
+    name: "Interact with Page 2",
+    starting_page: "/page2",
     tooltips: [
       {
         type: "informative",
         page: "/page1",
-        targetElement: "#nav-page2",
-        targetAreaElement: "#nav-page2",
+        target_element_id: "nav-page2",
+        target_area_element_id: "nav-page2",
         title: "Page 2 Navigation",
         content: "Click here to navigate to Page 2.",
       },
       {
         type: "informative",
         page: "/page2",
-        targetElement: "#page2-title",
-        targetAreaElement: "#page2-title",
+        target_element_id: "page2-title",
+        target_area_element_id: "page2-title",
         title: "Page 2 Title",
         content: "This is the title of Page 2.",
       },
       {
-        type: "informative",
+        type: "action",
         page: "/page2",
-        targetElement: "#button2",
-        targetAreaElement: "#button2",
+        target_element_id: "button2",
+        target_area_element_id: "button2",
         title: "Button 2",
         content: "This is Button 2. Click on it to interact with it.",
       },
       {
         type: "informative",
         page: "/page2",
-        targetElement: "#input2",
-        targetAreaElement: "#input2",
+        target_element_id: "input2",
+        target_area_element_id: "input2",
         title: "Input 2",
         content: "This is Input 2. Enter some text to interact with it.",
       },
       {
         type: "informative",
         page: "/page2",
-        targetElement: "#element4",
-        targetAreaElement: "#element4",
+        target_element_id: "element4",
+        target_area_element_id: "element4",
         title: "Feature4",
         content: "This is Feature 4.\nIt is one of my favorite features ever.",
       },
       {
         type: "informative",
         page: "/page2",
-        targetElement: "#nav-page7",
-        targetAreaElement: "#nav-page7",
+        target_element_id: "nav-page7",
+        target_area_element_id: "nav-page7",
         title: "Sidebar 7",
         content: "This is Feature 4. It is one of my favorite features ever.",
       },
       {
         type: "informative",
-        targetElement: "#create-device-button",
-        targetAreaElement: "#create-device-button",
+        target_element_id: "create-device-button",
+        target_area_element_id: "create-device-button",
         title: "Feature 4",
         content: "This is the first feature of Stage 2.",
       },
       {
         type: "informative",
-        targetElement: "#device-type-inputbox",
-        targetAreaElement: "#device-type-inputbox",
+        target_element_id: "device-type-inputbox",
+        target_area_element_id: "device-type-inputbox",
         title: "Feature 5",
         content: "This is the second feature of Stage 2.",
       },
     ],
-    test: [
+    test_tasks: [
       {
-        text: "Open the sidebar menu and navigate to Page 2",
-        clickElements: [
+        description: "Open the sidebar menu and navigate to Page 2",
+        click_elements: [
           {
-            elementId: "#nav-page2",
-            textInputElements: [],
+            element_id: "nav-page2",
+            text_input_elements: [],
           },
         ],
       },
       {
-        text: "Click on Button 2",
-        clickElements: [
+        description: "Click on Button 2",
+        click_elements: [
           {
-            elementId: "#button2",
-            textInputElements: [],
+            element_id: "button2",
+            text_input_elements: [],
           },
         ],
       },
       {
-        text: "Enter text into Input 2",
-        clickElements: [
+        description: 'Enter "Another sample text" into Input 2, and click on button 2',
+        click_elements: [
           {
-            elementId: "#input2",
-            textInputElements: [
+            element_id: "button2",
+            text_input_elements: [
               {
-                elementId: "#input2",
-                requiredInput: "Another sample text",
+                element_id: "input2",
+                required_input: "Another sample text",
               },
             ],
           },
@@ -364,14 +364,14 @@ const demoTutorialData = [
     ],
   },
   // {
-  //   stageName: "Navigate to Page 1",
-  //   startingPage: "/page1",
+  //   name: "Navigate to Page 1",
+  //   starting_page: "/page1",
   //   tooltips: [
   //     {
   //       type: "informative",
   //       page: "/page1",
-  //       targetElement: "#sidebar",
-  //       targetAreaElement: "#sidebar",
+  //       target_element_id: "sidebar",
+  //       target_area_element_id: "sidebar",
   //       title: "Sidebar Menu",
   //       content:
   //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
@@ -379,33 +379,33 @@ const demoTutorialData = [
   //     {
   //       type: "action",
   //       page: "/page1",
-  //       targetElement: "#nav-page1",
-  //       targetAreaElement: "#nav-page1",
+  //       target_element_id: "nav-page1",
+  //       target_area_element_id: "nav-page1",
   //       title: "Page 1 Navigation",
   //       content: "Click here to navigate to Page 1.",
   //     },
   //   ],
-  //   test: [
+  //   test_tasks: [
   //     {
   //       text: "Open the sidebar menu and navigate to Page 1",
-  //       clickElements: [
+  //       click_elements: [
   //         {
-  //           elementId: "#nav-page1",
-  //           textInputElements: [],
+  //           element_id: "nav-page1",
+  //           text_input_elements: [],
   //         },
   //       ],
   //     },
   //   ],
   // },
   // {
-  //   stageName: "Navigate to Page 1",
-  //   startingPage: "/page1",
+  //   name: "Navigate to Page 1",
+  //   starting_page: "/page1",
   //   tooltips: [
   //     {
   //       type: "informative",
   //       page: "/page1",
-  //       targetElement: "#sidebar",
-  //       targetAreaElement: "#sidebar",
+  //       target_element_id: "sidebar",
+  //       target_area_element_id: "sidebar",
   //       title: "Sidebar Menu",
   //       content:
   //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
@@ -413,33 +413,33 @@ const demoTutorialData = [
   //     {
   //       type: "action",
   //       page: "/page1",
-  //       targetElement: "#nav-page1",
-  //       targetAreaElement: "#nav-page1",
+  //       target_element_id: "nav-page1",
+  //       target_area_element_id: "nav-page1",
   //       title: "Page 1 Navigation",
   //       content: "Click here to navigate to Page 1.",
   //     },
   //   ],
-  //   test: [
+  //   test_tasks: [
   //     {
   //       text: "Open the sidebar menu and navigate to Page 1",
-  //       clickElements: [
+  //       click_elements: [
   //         {
-  //           elementId: "#nav-page1",
-  //           textInputElements: [],
+  //           element_id: "nav-page1",
+  //           text_input_elements: [],
   //         },
   //       ],
   //     },
   //   ],
   // },
   // {
-  //   stageName: "Navigate to Page 1 pleeeesss",
-  //   startingPage: "/page1",
+  //   name: "Navigate to Page 1 pleeeesss",
+  //   starting_page: "/page1",
   //   tooltips: [
   //     {
   //       type: "informative",
   //       page: "/page1",
-  //       targetElement: "#sidebar",
-  //       targetAreaElement: "#sidebar",
+  //       target_element_id: "sidebar",
+  //       target_area_element_id: "sidebar",
   //       title: "Sidebar Menu",
   //       content:
   //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
@@ -447,33 +447,33 @@ const demoTutorialData = [
   //     {
   //       type: "action",
   //       page: "/page1",
-  //       targetElement: "#nav-page1",
-  //       targetAreaElement: "#nav-page1",
+  //       target_element_id: "nav-page1",
+  //       target_area_element_id: "nav-page1",
   //       title: "Page 1 Navigation",
   //       content: "Click here to navigate to Page 1.",
   //     },
   //   ],
-  //   test: [
+  //   test_tasks: [
   //     {
   //       text: "Open the sidebar menu and navigate to Page 1",
-  //       clickElements: [
+  //       click_elements: [
   //         {
-  //           elementId: "#nav-page1",
-  //           textInputElements: [],
+  //           element_id: "nav-page1",
+  //           text_input_elements: [],
   //         },
   //       ],
   //     },
   //   ],
   // },
   // {
-  //   stageName: "Navigate to Page 1",
-  //   startingPage: "/page1",
+  //   name: "Navigate to Page 1",
+  //   starting_page: "/page1",
   //   tooltips: [
   //     {
   //       type: "informative",
   //       page: "/page1",
-  //       targetElement: "#sidebar",
-  //       targetAreaElement: "#sidebar",
+  //       target_element_id: "sidebar",
+  //       target_area_element_id: "sidebar",
   //       title: "Sidebar Menu",
   //       content:
   //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
@@ -481,33 +481,33 @@ const demoTutorialData = [
   //     {
   //       type: "action",
   //       page: "/page1",
-  //       targetElement: "#nav-page1",
-  //       targetAreaElement: "#nav-page1",
+  //       target_element_id: "nav-page1",
+  //       target_area_element_id: "nav-page1",
   //       title: "Page 1 Navigation",
   //       content: "Click here to navigate to Page 1.",
   //     },
   //   ],
-  //   test: [
+  //   test_tasks: [
   //     {
   //       text: "Open the sidebar menu and navigate to Page 1",
-  //       clickElements: [
+  //       click_elements: [
   //         {
-  //           elementId: "#nav-page1",
-  //           textInputElements: [],
+  //           element_id: "nav-page1",
+  //           text_input_elements: [],
   //         },
   //       ],
   //     },
   //   ],
   // },
   // {
-  //   stageName: "Navigate to Page 1",
-  //   startingPage: "/page1",
+  //   name: "Navigate to Page 1",
+  //   starting_page: "/page1",
   //   tooltips: [
   //     {
   //       type: "informative",
   //       page: "/page1",
-  //       targetElement: "#sidebar",
-  //       targetAreaElement: "#sidebar",
+  //       target_element_id: "sidebar",
+  //       target_area_element_id: "sidebar",
   //       title: "Sidebar Menu",
   //       content:
   //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
@@ -515,33 +515,33 @@ const demoTutorialData = [
   //     {
   //       type: "action",
   //       page: "/page1",
-  //       targetElement: "#nav-page1",
-  //       targetAreaElement: "#nav-page1",
+  //       target_element_id: "nav-page1",
+  //       target_area_element_id: "nav-page1",
   //       title: "Page 1 Navigation",
   //       content: "Click here to navigate to Page 1.",
   //     },
   //   ],
-  //   test: [
+  //   test_tasks: [
   //     {
   //       text: "Open the sidebar menu and navigate to Page 1",
-  //       clickElements: [
+  //       click_elements: [
   //         {
-  //           elementId: "#nav-page1",
-  //           textInputElements: [],
+  //           element_id: "nav-page1",
+  //           text_input_elements: [],
   //         },
   //       ],
   //     },
   //   ],
   // },
   // {
-  //   stageName: "Navigate to Page 1",
-  //   startingPage: "/page1",
+  //   name: "Navigate to Page 1",
+  //   starting_page: "/page1",
   //   tooltips: [
   //     {
   //       type: "informative",
   //       page: "/page1",
-  //       targetElement: "#sidebar",
-  //       targetAreaElement: "#sidebar",
+  //       target_element_id: "sidebar",
+  //       target_area_element_id: "sidebar",
   //       title: "Sidebar Menu",
   //       content:
   //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
@@ -549,33 +549,33 @@ const demoTutorialData = [
   //     {
   //       type: "action",
   //       page: "/page1",
-  //       targetElement: "#nav-page1",
-  //       targetAreaElement: "#nav-page1",
+  //       target_element_id: "nav-page1",
+  //       target_area_element_id: "nav-page1",
   //       title: "Page 1 Navigation",
   //       content: "Click here to navigate to Page 1.",
   //     },
   //   ],
-  //   test: [
+  //   test_tasks: [
   //     {
   //       text: "Open the sidebar menu and navigate to Page 1",
-  //       clickElements: [
+  //       click_elements: [
   //         {
-  //           elementId: "#nav-page1",
-  //           textInputElements: [],
+  //           element_id: "nav-page1",
+  //           text_input_elements: [],
   //         },
   //       ],
   //     },
   //   ],
   // },
   // {
-  //   stageName: "Navigate to Page 1",
-  //   startingPage: "/page1",
+  //   name: "Navigate to Page 1",
+  //   starting_page: "/page1",
   //   tooltips: [
   //     {
   //       type: "informative",
   //       page: "/page1",
-  //       targetElement: "#sidebar",
-  //       targetAreaElement: "#sidebar",
+  //       target_element_id: "sidebar",
+  //       target_area_element_id: "sidebar",
   //       title: "Sidebar Menu",
   //       content:
   //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
@@ -583,33 +583,33 @@ const demoTutorialData = [
   //     {
   //       type: "action",
   //       page: "/page1",
-  //       targetElement: "#nav-page1",
-  //       targetAreaElement: "#nav-page1",
+  //       target_element_id: "nav-page1",
+  //       target_area_element_id: "nav-page1",
   //       title: "Page 1 Navigation",
   //       content: "Click here to navigate to Page 1.",
   //     },
   //   ],
-  //   test: [
+  //   test_tasks: [
   //     {
   //       text: "Open the sidebar menu and navigate to Page 1",
-  //       clickElements: [
+  //       click_elements: [
   //         {
-  //           elementId: "#nav-page1",
-  //           textInputElements: [],
+  //           element_id: "nav-page1",
+  //           text_input_elements: [],
   //         },
   //       ],
   //     },
   //   ],
   // },
   // {
-  //   stageName: "Navigate to Page 1",
-  //   startingPage: "/page1",
+  //   name: "Navigate to Page 1",
+  //   starting_page: "/page1",
   //   tooltips: [
   //     {
   //       type: "informative",
   //       page: "/page1",
-  //       targetElement: "#sidebar",
-  //       targetAreaElement: "#sidebar",
+  //       target_element_id: "sidebar",
+  //       target_area_element_id: "sidebar",
   //       title: "Sidebar Menu",
   //       content:
   //         "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
@@ -617,19 +617,19 @@ const demoTutorialData = [
   //     {
   //       type: "action",
   //       page: "/page1",
-  //       targetElement: "#nav-page1",
-  //       targetAreaElement: "#nav-page1",
+  //       target_element_id: "nav-page1",
+  //       target_area_element_id: "nav-page1",
   //       title: "Page 1 Navigation",
   //       content: "Click here to navigate to Page 1.",
   //     },
   //   ],
-  //   test: [
+  //   test_tasks: [
   //     {
   //       text: "Open the sidebar menu and navigate to Page 1",
-  //       clickElements: [
+  //       click_elements: [
   //         {
-  //           elementId: "#nav-page1",
-  //           textInputElements: [],
+  //           element_id: "nav-page1",
+  //           text_input_elements: [],
   //         },
   //       ],
   //     },

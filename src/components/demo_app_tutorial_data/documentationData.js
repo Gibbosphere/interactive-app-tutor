@@ -1,7 +1,7 @@
 const demoDocumentationData = [
   {
-    pageName: "Introduction to the Application",
-    pageId: "intro",
+    page_name: "Introduction to the Application",
+    page_id: "intro",
     content: `
     $pageHeading{introduction}{Introduction to the Application}
     $heading1{intro}{Welcome to the Documentation}
@@ -30,8 +30,8 @@ const demoDocumentationData = [
     `,
   },
   {
-    pageName: "Advanced Application Features",
-    pageId: "advanced-features",
+    page_name: "Advanced Application Features",
+    page_id: "advanced-features",
     content: `
     $pageHeading{introduction}{Advanced Application Features}
     $heading1{intro}{Welcome to the Documentation}

@@ -254,7 +254,7 @@ const InfoIcon = ({ targetEl, title, body }) => {
         >
           ?
         </Box>
-        {isOpen && (
+        {isOpen && visible && (
           <Box
             zIndex={999999999}
             id="info-box"

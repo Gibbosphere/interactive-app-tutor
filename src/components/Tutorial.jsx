@@ -278,7 +278,6 @@ const Tutorial = ({
           totalTooltips={tutorial[currentStage].tooltips.length}
         />
       )}
-
       {testActive && (
         <TestProgressTile
           stageName={tutorial[currentStage].name}

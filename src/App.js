@@ -161,12 +161,12 @@ const App = () => {
         <InteractiveAppTutor
           tutorialActive={tutorialActive}
           exitTutorial={() => setTutorialActive(false)}
-          tutorialLogoSrc="/images/iNethiLogoWhite.png"
+          tutorialLogoSrc={null}
           documentationOpen={documentationOpen}
           toggleDocumentationOpen={toggleDocumentationOpen}
           documentationSideToolEnabled={documentationSideToolEnabled}
           resourceCircleEnabled={resourceCircleEnabled}
-          resourceCircleIconSrc="/images/iNethiLogoWhite.png"
+          resourceCircleIconSrc={null}
           resourceCirclePos={resourceCirclePos}
           resourceCircleSize={resourceCircleInNavbar ? 55 : 60}
           resourceCircleDistFromOuter={resourceCircleInNavbar ? 5 : 20}
