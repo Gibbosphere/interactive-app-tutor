@@ -171,7 +171,7 @@
 // ];
 
 // tutorial information 2
-const tutorialData = [
+const demoTutorialData = [
   {
     stageName: "Navigate to Page 1",
     startingPage: "/page1",
@@ -637,4 +637,4 @@ const tutorialData = [
   // },
 ];
 
-export default tutorialData;
+export default demoTutorialData;

@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, CssBaseline, Container, Typography, TextField } from "@mui/material";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Sidebar from "./components/Sidebar";
-import Page1 from "./pages/Page1";
-import Page2 from "./pages/Page2";
-import Page3 from "./pages/Page3";
-import Tutorial from "./Tutorial";
-import ResourceCircle from "./ResourceCircle";
-import Documentation from "./Documentation";
-import { usePersistantState } from "./hooks";
-import axios from "axios";
-import InteractiveAppTutor from "./InteractiveAppTutor";
+import Sidebar from "./demo_app_components/Sidebar";
+import Page1 from "./demo_app_pages/Page1";
+import Page2 from "./demo_app_pages/Page2";
+import Page3 from "./demo_app_pages/Page3";
+import { usePersistantState } from "./components/hooks";
+import InteractiveAppTutor from "./components/InteractiveAppTutor";
 
 // onActivte will handle the turning on and off of a tutorial
 const App = () => {
@@ -176,34 +172,8 @@ const App = () => {
           resourceCircleDistFromOuter={resourceCircleInNavbar ? 5 : 20}
           resourceCircleBorder={resourceCircleInNavbar ? "2px solid white" : "none"}
           openDocumentation={() => setDocumentationOpen(true)}
+          demoMode={true}
         />
-        {/* {tutorialActive && (
-          <Tutorial
-            logoSrc={"/images/iNethiLogoWhite.png"}
-            tutorialContent={tutorialData}
-            onExit={handleExitTutorial}
-          ></Tutorial>
-        )}
-        <Documentation
-          documentationData={documentationData}
-          isOpen={documentationOpen}
-          toggleIsOpen={toggleDocumentationOpen}
-          canSlideOut={documentationSideToolEnabled}
-        ></Documentation>
-        {!tutorialActive && resourceCircleEnabled && (
-          <ResourceCircle
-            circleIconName={"/images/iNethiLogoWhite.png"}
-            positionY={resourceCirclePos.positionY}
-            positionX={resourceCirclePos.positionX}
-            circleSize={resourceCircleInNavbar ? 55 : 60}
-            circleDistFromOuter={resourceCircleInNavbar ? 5 : 20}
-            circleBorder={resourceCircleInNavbar ? "2px solid white" : "none"}
-            guides={guidesData}
-            infoIcons={infoIconsData}
-            documentationData={documentationData}
-            openDocumentation={() => setDocumentationOpen(true)}
-          ></ResourceCircle>
-        )} */}
       </Router>
     </>
   );

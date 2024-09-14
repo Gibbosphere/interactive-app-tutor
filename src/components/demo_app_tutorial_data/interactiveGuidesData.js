@@ -1,6 +1,6 @@
 // interactiveGuidesData.js
 
-const guidesData = [
+const demoGuidesData = [
   {
     name: "Navigate to Page 1",
     page: "/page1",
@@ -144,4 +144,4 @@ const guidesData = [
 //   // add more guides
 // ];
 
-export default guidesData;
+export default demoGuidesData;
