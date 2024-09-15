@@ -12,7 +12,7 @@ const demoGuidesData = [
         target_area_element_id: "sidebar",
         title: "Sidebar Menu",
         content:
-          "This is your sidebar menu. From here, you can navigate to all the main pages in the application.",
+          "This is your sidebar menu. \\nFrom here, you can navigate to all the main pages in the application.",
       },
       {
         type: "action",
